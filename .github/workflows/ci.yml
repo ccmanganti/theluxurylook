@@ -1,0 +1,32 @@
+name: Laravel and URL inventory checks
+on:
+  push:
+  pull_request:
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: PHP 8.3 with required extensions
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.3'
+          extensions: mbstring, pdo_sqlite, sqlite3, fileinfo, gd, intl, dom, xml, curl, zip
+          coverage: none
+      - name: Setup Composer dependencies
+        run: composer install --no-interaction --prefer-dist --no-progress
+      - name: Verify JSON route inventory and project mapping
+        run: python3 scripts/check_manifest.py
+      - name: Prepare app
+        run: |
+          cp .env.example .env
+          php artisan key:generate
+      - name: PHP feature tests
+        run: php artisan test
+        env:
+          APP_ENV: testing
+          DB_CONNECTION: sqlite
+          DB_DATABASE: ':memory:'
+          SITE_LAUNCH_READY: 'false'

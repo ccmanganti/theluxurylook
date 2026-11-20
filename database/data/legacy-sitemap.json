@@ -1,0 +1,386 @@
+[
+  {
+    "path": "/",
+    "source": "https://www.theluxurylook.com"
+  },
+  {
+    "path": "/about",
+    "source": "https://www.theluxurylook.com/about"
+  },
+  {
+    "path": "/blog",
+    "source": "https://www.theluxurylook.com/blog"
+  },
+  {
+    "path": "/template-info/changelog",
+    "source": "https://www.theluxurylook.com/template-info/changelog"
+  },
+  {
+    "path": "/contact",
+    "source": "https://www.theluxurylook.com/contact"
+  },
+  {
+    "path": "/template-info/licenses",
+    "source": "https://www.theluxurylook.com/template-info/licenses"
+  },
+  {
+    "path": "/services",
+    "source": "https://www.theluxurylook.com/services"
+  },
+  {
+    "path": "/template-info/style-guide",
+    "source": "https://www.theluxurylook.com/template-info/style-guide"
+  },
+  {
+    "path": "/awards",
+    "source": "https://www.theluxurylook.com/awards"
+  },
+  {
+    "path": "/the-studio",
+    "source": "https://www.theluxurylook.com/the-studio"
+  },
+  {
+    "path": "/business-planning-workshops",
+    "source": "https://www.theluxurylook.com/business-planning-workshops"
+  },
+  {
+    "path": "/checkout",
+    "source": "https://www.theluxurylook.com/checkout"
+  },
+  {
+    "path": "/paypal-checkout",
+    "source": "https://www.theluxurylook.com/paypal-checkout"
+  },
+  {
+    "path": "/order-confirmation",
+    "source": "https://www.theluxurylook.com/order-confirmation"
+  },
+  {
+    "path": "/digital-products",
+    "source": "https://www.theluxurylook.com/digital-products"
+  },
+  {
+    "path": "/search",
+    "source": "https://www.theluxurylook.com/search"
+  },
+  {
+    "path": "/portfolio/interior-design-projects",
+    "source": "https://www.theluxurylook.com/portfolio/interior-design-projects"
+  },
+  {
+    "path": "/portfolio/home-staging-projects-the-luxury-look",
+    "source": "https://www.theluxurylook.com/portfolio/home-staging-projects-the-luxury-look"
+  },
+  {
+    "path": "/portfolio/interior-styling-projects-the-luxury-look",
+    "source": "https://www.theluxurylook.com/portfolio/interior-styling-projects-the-luxury-look"
+  },
+  {
+    "path": "/portfolio/airbnb-staging-the-luxury-look",
+    "source": "https://www.theluxurylook.com/portfolio/airbnb-staging-the-luxury-look"
+  },
+  {
+    "path": "/portfolio/commercial-staging-projects-the-luxury-look",
+    "source": "https://www.theluxurylook.com/portfolio/commercial-staging-projects-the-luxury-look"
+  },
+  {
+    "path": "/portfolio/corporate-brandding-projects-the-luxury-look",
+    "source": "https://www.theluxurylook.com/portfolio/corporate-brandding-projects-the-luxury-look"
+  },
+  {
+    "path": "/yacht-interior-design-outfitting",
+    "source": "https://www.theluxurylook.com/yacht-interior-design-outfitting"
+  },
+  {
+    "path": "/the-luxury-look-business-planning-workshop",
+    "source": "https://www.theluxurylook.com/the-luxury-look-business-planning-workshop"
+  },
+  {
+    "path": "/blog/4-profit-killing-mistakes-made-by-new-house-flippers",
+    "source": "https://www.theluxurylook.com/blog/4-profit-killing-mistakes-made-by-new-house-flippers"
+  },
+  {
+    "path": "/blog/7-tips-for-selling-your-home-during-the-holidays",
+    "source": "https://www.theluxurylook.com/blog/7-tips-for-selling-your-home-during-the-holidays"
+  },
+  {
+    "path": "/blog/create-multifunctional-spaces-in-your-own-home",
+    "source": "https://www.theluxurylook.com/blog/create-multifunctional-spaces-in-your-own-home"
+  },
+  {
+    "path": "/blog/from-drab-to-market-ready---a-living-room-reinvented",
+    "source": "https://www.theluxurylook.com/blog/from-drab-to-market-ready---a-living-room-reinvented"
+  },
+  {
+    "path": "/blog/home-renovations-to-complete-before-you-sell-your-home",
+    "source": "https://www.theluxurylook.com/blog/home-renovations-to-complete-before-you-sell-your-home"
+  },
+  {
+    "path": "/blog/how-to-create-a-cozy-outdoor-seating-area-on-a-small-patio-even-if-youre-a-space-saving-ninja",
+    "source": "https://www.theluxurylook.com/blog/how-to-create-a-cozy-outdoor-seating-area-on-a-small-patio-even-if-youre-a-space-saving-ninja"
+  },
+  {
+    "path": "/blog/how-to-create-multifunctional-spaces-inside-your-own-home",
+    "source": "https://www.theluxurylook.com/blog/how-to-create-multifunctional-spaces-inside-your-own-home"
+  },
+  {
+    "path": "/blog/how-to-design-a-balcony-garden-in-a-tiny-urban-apartment",
+    "source": "https://www.theluxurylook.com/blog/how-to-design-a-balcony-garden-in-a-tiny-urban-apartment"
+  },
+  {
+    "path": "/blog/live-the-look-a-soulful-escape-to-ambergris-caye-belize",
+    "source": "https://www.theluxurylook.com/blog/live-the-look-a-soulful-escape-to-ambergris-caye-belize"
+  },
+  {
+    "path": "/blog/own-well-designing-under-the-sun-outdoor-living-looks-we-love",
+    "source": "https://www.theluxurylook.com/blog/own-well-designing-under-the-sun-outdoor-living-looks-we-love"
+  },
+  {
+    "path": "/blog/simple-tips-for-fall-decorating",
+    "source": "https://www.theluxurylook.com/blog/simple-tips-for-fall-decorating"
+  },
+  {
+    "path": "/blog/style-your-home-with-secondhand-finds-for-a-unique-personal-touch",
+    "source": "https://www.theluxurylook.com/blog/style-your-home-with-secondhand-finds-for-a-unique-personal-touch"
+  },
+  {
+    "path": "/blog/the-ultimate-closet-design-and-organizing-guide",
+    "source": "https://www.theluxurylook.com/blog/the-ultimate-closet-design-and-organizing-guide"
+  },
+  {
+    "path": "/blog/top-design-element-of-professional-home-stagers",
+    "source": "https://www.theluxurylook.com/blog/top-design-element-of-professional-home-stagers"
+  },
+  {
+    "path": "/product/handcrafted-cotton-car",
+    "source": "https://www.theluxurylook.com/product/handcrafted-cotton-car"
+  },
+  {
+    "path": "/product/handmade-bronze-table",
+    "source": "https://www.theluxurylook.com/product/handmade-bronze-table"
+  },
+  {
+    "path": "/product/handmade-fresh-shirt",
+    "source": "https://www.theluxurylook.com/product/handmade-fresh-shirt"
+  },
+  {
+    "path": "/product/practical-concrete-tuna",
+    "source": "https://www.theluxurylook.com/product/practical-concrete-tuna"
+  },
+  {
+    "path": "/product/tasty-fresh-shirt",
+    "source": "https://www.theluxurylook.com/product/tasty-fresh-shirt"
+  },
+  {
+    "path": "/portfolios/12271-n-74th-st",
+    "source": "https://www.theluxurylook.com/portfolios/12271-n-74th-st"
+  },
+  {
+    "path": "/portfolios/13-5-million-dollar-property",
+    "source": "https://www.theluxurylook.com/portfolios/13-5-million-dollar-property"
+  },
+  {
+    "path": "/portfolios/28336-n-112th-way",
+    "source": "https://www.theluxurylook.com/portfolios/28336-n-112th-way"
+  },
+  {
+    "path": "/portfolios/3030-calle-del-montana",
+    "source": "https://www.theluxurylook.com/portfolios/3030-calle-del-montana"
+  },
+  {
+    "path": "/portfolios/3508-n-rose-circle",
+    "source": "https://www.theluxurylook.com/portfolios/3508-n-rose-circle"
+  },
+  {
+    "path": "/portfolios/4437-n-granite-reef",
+    "source": "https://www.theluxurylook.com/portfolios/4437-n-granite-reef"
+  },
+  {
+    "path": "/portfolios/67th-avenue",
+    "source": "https://www.theluxurylook.com/portfolios/67th-avenue"
+  },
+  {
+    "path": "/portfolios/alta-hacienda",
+    "source": "https://www.theluxurylook.com/portfolios/alta-hacienda"
+  },
+  {
+    "path": "/portfolios/ancala-country-club",
+    "source": "https://www.theluxurylook.com/portfolios/ancala-country-club"
+  },
+  {
+    "path": "/portfolios/bed-and-breakfast",
+    "source": "https://www.theluxurylook.com/portfolios/bed-and-breakfast"
+  },
+  {
+    "path": "/portfolios/creative-successful-entrepreneur-event",
+    "source": "https://www.theluxurylook.com/portfolios/creative-successful-entrepreneur-event"
+  },
+  {
+    "path": "/portfolios/desert-vista-luxury-design",
+    "source": "https://www.theluxurylook.com/portfolios/desert-vista-luxury-design"
+  },
+  {
+    "path": "/portfolios/design-and-style-renders",
+    "source": "https://www.theluxurylook.com/portfolios/design-and-style-renders"
+  },
+  {
+    "path": "/portfolios/downtown-mesa",
+    "source": "https://www.theluxurylook.com/portfolios/downtown-mesa"
+  },
+  {
+    "path": "/portfolios/downtown-phoenix",
+    "source": "https://www.theluxurylook.com/portfolios/downtown-phoenix"
+  },
+  {
+    "path": "/portfolios/e-vermont",
+    "source": "https://www.theluxurylook.com/portfolios/e-vermont"
+  },
+  {
+    "path": "/portfolios/femargent-speaking-event",
+    "source": "https://www.theluxurylook.com/portfolios/femargent-speaking-event"
+  },
+  {
+    "path": "/portfolios/femboss-branding-photoshoot-event",
+    "source": "https://www.theluxurylook.com/portfolios/femboss-branding-photoshoot-event"
+  },
+  {
+    "path": "/portfolios/foothills-majestic-heights-tatum-hills-estate",
+    "source": "https://www.theluxurylook.com/portfolios/foothills-majestic-heights-tatum-hills-estate"
+  },
+  {
+    "path": "/portfolios/gated-annecy",
+    "source": "https://www.theluxurylook.com/portfolios/gated-annecy"
+  },
+  {
+    "path": "/portfolios/investment-renovation-project",
+    "source": "https://www.theluxurylook.com/portfolios/investment-renovation-project"
+  },
+  {
+    "path": "/portfolios/la-junta-road-scottsdale",
+    "source": "https://www.theluxurylook.com/portfolios/la-junta-road-scottsdale"
+  },
+  {
+    "path": "/portfolios/laurel-lane",
+    "source": "https://www.theluxurylook.com/portfolios/laurel-lane"
+  },
+  {
+    "path": "/portfolios/lone-cactus-drive",
+    "source": "https://www.theluxurylook.com/portfolios/lone-cactus-drive"
+  },
+  {
+    "path": "/portfolios/luxury-sedona-airbnb",
+    "source": "https://www.theluxurylook.com/portfolios/luxury-sedona-airbnb"
+  },
+  {
+    "path": "/portfolios/luxury-wickenburg-estate",
+    "source": "https://www.theluxurylook.com/portfolios/luxury-wickenburg-estate"
+  },
+  {
+    "path": "/portfolios/manzanita-sedona-retreat",
+    "source": "https://www.theluxurylook.com/portfolios/manzanita-sedona-retreat"
+  },
+  {
+    "path": "/portfolios/mockingbird-paradise-valley",
+    "source": "https://www.theluxurylook.com/portfolios/mockingbird-paradise-valley"
+  },
+  {
+    "path": "/portfolios/montebello",
+    "source": "https://www.theluxurylook.com/portfolios/montebello"
+  },
+  {
+    "path": "/portfolios/mor-furniture-line-launch",
+    "source": "https://www.theluxurylook.com/portfolios/mor-furniture-line-launch"
+  },
+  {
+    "path": "/portfolios/moroccan-inspired-design",
+    "source": "https://www.theluxurylook.com/portfolios/moroccan-inspired-design"
+  },
+  {
+    "path": "/portfolios/new-york-fashion-week",
+    "source": "https://www.theluxurylook.com/portfolios/new-york-fashion-week"
+  },
+  {
+    "path": "/portfolios/nutall-stacey-rd-residence",
+    "source": "https://www.theluxurylook.com/portfolios/nutall-stacey-rd-residence"
+  },
+  {
+    "path": "/portfolios/occupied-home-staging",
+    "source": "https://www.theluxurylook.com/portfolios/occupied-home-staging"
+  },
+  {
+    "path": "/portfolios/old-town-scottsdale",
+    "source": "https://www.theluxurylook.com/portfolios/old-town-scottsdale"
+  },
+  {
+    "path": "/portfolios/old-town-scottsdale-airbnb",
+    "source": "https://www.theluxurylook.com/portfolios/old-town-scottsdale-airbnb"
+  },
+  {
+    "path": "/portfolios/optima-camelback-loft",
+    "source": "https://www.theluxurylook.com/portfolios/optima-camelback-loft"
+  },
+  {
+    "path": "/portfolios/outdoor-seating-and-dining",
+    "source": "https://www.theluxurylook.com/portfolios/outdoor-seating-and-dining"
+  },
+  {
+    "path": "/portfolios/petersen-residence",
+    "source": "https://www.theluxurylook.com/portfolios/petersen-residence"
+  },
+  {
+    "path": "/portfolios/phoenix-airbnb-1",
+    "source": "https://www.theluxurylook.com/portfolios/phoenix-airbnb-1"
+  },
+  {
+    "path": "/portfolios/phoenix-airbnb-2",
+    "source": "https://www.theluxurylook.com/portfolios/phoenix-airbnb-2"
+  },
+  {
+    "path": "/portfolios/plaza-loft-luxury-high-rise-i",
+    "source": "https://www.theluxurylook.com/portfolios/plaza-loft-luxury-high-rise-i"
+  },
+  {
+    "path": "/portfolios/plaza-loft-luxury-high-rise-ii",
+    "source": "https://www.theluxurylook.com/portfolios/plaza-loft-luxury-high-rise-ii"
+  },
+  {
+    "path": "/portfolios/prof-sports-client-featured-on-nbc",
+    "source": "https://www.theluxurylook.com/portfolios/prof-sports-client-featured-on-nbc"
+  },
+  {
+    "path": "/portfolios/professional-architecture-and-styling-photoshoot",
+    "source": "https://www.theluxurylook.com/portfolios/professional-architecture-and-styling-photoshoot"
+  },
+  {
+    "path": "/portfolios/rio-verde-staging",
+    "source": "https://www.theluxurylook.com/portfolios/rio-verde-staging"
+  },
+  {
+    "path": "/portfolios/san-miguel-ave-luxury-residence",
+    "source": "https://www.theluxurylook.com/portfolios/san-miguel-ave-luxury-residence"
+  },
+  {
+    "path": "/portfolios/studio-3125",
+    "source": "https://www.theluxurylook.com/portfolios/studio-3125"
+  },
+  {
+    "path": "/portfolios/sunny-slope-phoenix",
+    "source": "https://www.theluxurylook.com/portfolios/sunny-slope-phoenix"
+  },
+  {
+    "path": "/portfolios/td-ameritide-tv-commercial-and-event",
+    "source": "https://www.theluxurylook.com/portfolios/td-ameritide-tv-commercial-and-event"
+  },
+  {
+    "path": "/portfolios/tranquil-staging-in-the-heart-of-scottsdale",
+    "source": "https://www.theluxurylook.com/portfolios/tranquil-staging-in-the-heart-of-scottsdale"
+  },
+  {
+    "path": "/portfolios/troon-boulders",
+    "source": "https://www.theluxurylook.com/portfolios/troon-boulders"
+  },
+  {
+    "path": "/portfolios/vacant-and-occupied-stagings",
+    "source": "https://www.theluxurylook.com/portfolios/vacant-and-occupied-stagings"
+  }
+]

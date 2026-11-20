@@ -1,0 +1,50 @@
+[
+  {
+    "slug": "interior-design",
+    "title": "Interior Design",
+    "summary": "Full-service interior design for new builds, remodels and thoughtful refreshes.",
+    "body": "Design for a life well lived.\n\nExplore our portfolio or contact our Scottsdale studio to discuss your project.",
+    "sort_order": 0,
+    "is_published": true
+  },
+  {
+    "slug": "interior-styling",
+    "title": "Interior Styling",
+    "summary": "An elevated refresh with furniture, objects and details, without major construction.",
+    "body": "Every detail has a purpose.\n\nExplore our portfolio or contact our Scottsdale studio to discuss your project.",
+    "sort_order": 1,
+    "is_published": true
+  },
+  {
+    "slug": "luxury-residential-staging",
+    "title": "Luxury Residential Staging",
+    "summary": "Distinctive occupied and vacant home staging that helps buyers imagine what is possible.",
+    "body": "Inspire the next chapter.\n\nExplore our portfolio or contact our Scottsdale studio to discuss your project.",
+    "sort_order": 2,
+    "is_published": true
+  },
+  {
+    "slug": "commercial-staging",
+    "title": "Commercial Staging",
+    "summary": "Thoughtfully transform commercial properties into environments people connect with.",
+    "body": "Designed for impact.\n\nExplore our portfolio or contact our Scottsdale studio to discuss your project.",
+    "sort_order": 3,
+    "is_published": true
+  },
+  {
+    "slug": "airbnb-staging",
+    "title": "Airbnb Staging",
+    "summary": "Guest-focused property transformation and styling for memorable stays.",
+    "body": "Spaces guests remember.\n\nExplore our portfolio or contact our Scottsdale studio to discuss your project.",
+    "sort_order": 4,
+    "is_published": true
+  },
+  {
+    "slug": "corporate-branding",
+    "title": "Corporate Branding",
+    "summary": "Branded settings, events and photo-ready environments with a strong visual identity.",
+    "body": "Make the experience unmistakably yours.\n\nExplore our portfolio or contact our Scottsdale studio to discuss your project.",
+    "sort_order": 5,
+    "is_published": true
+  }
+]
