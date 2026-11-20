@@ -10,17 +10,12 @@ on:
   workflow_dispatch:
 permissions:
   contents: write
-  pages: write
-  id-token: write
 concurrency:
   group: 'pages'
   cancel-in-progress: true
 jobs:
   preview:
     runs-on: ubuntu-latest
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
@@ -41,13 +36,3 @@ jobs:
             git commit -m "build(preview): add site pages for temporary Pages preview [skip ci]"
             git push origin HEAD:main
           fi
-      # GitHub's GITHUB_TOKEN cannot enable Pages for the first time.
-      # Repository owner must select Settings > Pages > Source: GitHub Actions once.
-      - name: Read GitHub Pages configuration
-        uses: actions/configure-pages@v5
-      - uses: actions/upload-pages-artifact@v3
-        with:
-          path: preview-dist
-      - name: Deploy preview
-        id: deployment
-        uses: actions/deploy-pages@v4
