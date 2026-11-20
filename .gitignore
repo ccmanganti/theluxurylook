@@ -22,3 +22,4 @@
 /database/database.sqlite
 .phpunit.result.cache
 /.phpunit.cache/
+/preview-dist/
