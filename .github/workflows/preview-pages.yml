@@ -6,7 +6,6 @@ on:
       - 'scripts/build_static_preview.py'
       - 'database/data/portfolio-seed.json'
       - 'public/assets/**'
-      - '.github/workflows/preview-pages.yml'
   workflow_dispatch:
 permissions:
   contents: read
@@ -28,10 +27,10 @@ jobs:
           python-version: '3.12'
       - name: Generate SEO-safe static design preview
         run: python3 scripts/build_static_preview.py
-      - name: Configure GitHub Pages
+      # GitHub's GITHUB_TOKEN cannot enable Pages for the first time.
+      # Repository owner must select Settings > Pages > Source: GitHub Actions once.
+      - name: Read GitHub Pages configuration
         uses: actions/configure-pages@v5
-        with:
-          enablement: true
       - uses: actions/upload-pages-artifact@v3
         with:
           path: preview-dist
