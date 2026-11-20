@@ -6,9 +6,10 @@ on:
       - 'scripts/build_static_preview.py'
       - 'database/data/portfolio-seed.json'
       - 'public/assets/**'
+      - '.github/workflows/preview-pages.yml'
   workflow_dispatch:
 permissions:
-  contents: read
+  contents: write
   pages: write
   id-token: write
 concurrency:
@@ -27,6 +28,19 @@ jobs:
           python-version: '3.12'
       - name: Generate SEO-safe static design preview
         run: python3 scripts/build_static_preview.py
+      # Mirror the review-only HTML into main's root because this Pages site
+      # is also configured to serve / (branch) using Jekyll.
+      # No production app files in public/ or Laravel internals are modified.
+      - name: Publish preview pages to root for branch-based GitHub Pages
+        run: |
+          cp -a preview-dist/. .
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A -- .nojekyll index.html robots.txt assets portfolio portfolios services about blog contact
+          if ! git diff --cached --quiet; then
+            git commit -m "build(preview): add site pages for temporary Pages preview [skip ci]"
+            git push origin HEAD:main
+          fi
       # GitHub's GITHUB_TOKEN cannot enable Pages for the first time.
       # Repository owner must select Settings > Pages > Source: GitHub Actions once.
       - name: Read GitHub Pages configuration
