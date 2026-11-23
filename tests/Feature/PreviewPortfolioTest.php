@@ -20,7 +20,7 @@ class PreviewPortfolioTest extends TestCase
     public function test_archive_has_all_projects_and_legacy_category_routes(): void
     {
         $this->assertSame(54, Project::count());
-        $this->get('/portfolio')->assertOk()->assertSee('Our projects')->assertSee('Mockingbird Paradise Valley');
+        $this->get('/portfolio')->assertOk()->assertSee('Spaces worth')->assertSee('Mockingbird Paradise Valley');
         $this->get('/portfolio/corporate-brandding-projects-the-luxury-look')->assertOk()->assertSee('Corporate Branding');
     }
 
@@ -29,7 +29,7 @@ class PreviewPortfolioTest extends TestCase
         $project=Project::where('slug','mockingbird-paradise-valley')->firstOrFail();
         $this->assertNotEmpty($project->preview_cover_image);
         $this->assertCount(8,$project->gallery_items);
-        $this->get('/portfolios/mockingbird-paradise-valley')->assertOk()->assertSee('LAYOUT IMAGE')->assertSee('PROJECT GALLERY');
+        $this->get('/portfolios/mockingbird-paradise-valley')->assertOk()->assertSee('IMAGE PLACEHOLDER')->assertSee('Explore every angle');
         // An approved gallery URL overrides *all* sample photos on preview.
         $project->gallery=[['url'=>'https://example.com/real-client-photo.jpg','alt'=>'Approved photo']];
         $project->save();
