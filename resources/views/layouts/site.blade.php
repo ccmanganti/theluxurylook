@@ -25,6 +25,8 @@
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Cormorant+Garamond:wght@400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('assets/site.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/editorial.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/revamp.css') }}">
+    <script defer src="{{ asset('assets/revamp.js') }}"></script>
     <script defer src="{{ asset('assets/site.js') }}"></script>
     @if (config('site.ga4_id') && config('site.launch_ready'))
         <script async src="https://www.googletagmanager.com/gtag/js?id={{ config('site.ga4_id') }}"></script>
@@ -45,11 +47,13 @@
             <a href="{{ route('home') }}" class="brand" aria-label="The Luxury Look Home"><span class="brand-overline">THE</span><span class="brand-name">LUXURY LOOK</span><span class="brand-subline">DESIGN STUDIO</span></a>
             <button type="button" class="nav-toggle" aria-label="Open navigation" aria-expanded="false" aria-controls="primary-nav"><span></span><span></span></button>
             <nav id="primary-nav" class="primary-nav" aria-label="Main navigation">
-                <a href="{{ route('portfolio.index') }}" @if(request()->is('portfolio*')) aria-current="page" @endif>Portfolio</a>
-                <a href="{{ route('services') }}" @if(request()->is('services*')) aria-current="page" @endif>Services</a>
-                <a href="{{ url('/about') }}">Studio</a>
+                <a href="{{ route('design') }}">Design</a>
+                <a href="{{ route('portfolio.index') }}">Portfolio</a>
+                <a href="{{ route('collection') }}">The Collection</a>
                 <a href="{{ route('blog') }}">Journal</a>
-                <a class="nav-outline" href="{{ route('contact') }}">Let's Talk <span aria-hidden="true">↗</span></a>
+                <a href="{{ route('circle') }}">The Curated Circle</a>
+                <a href="{{ url('/about') }}">About</a>
+                <a class="nav-outline" href="{{ route('contact') }}">Work With Us <span aria-hidden="true">↗</span></a>
             </nav>
         </div>
     </header>

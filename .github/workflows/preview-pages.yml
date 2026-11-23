@@ -4,6 +4,8 @@ on:
     branches: [main]
     paths:
       - 'scripts/build_static_preview.py'
+      - 'scripts/editorial_preview.py'
+      - 'scripts/revamp_preview.py'
       - 'database/data/portfolio-seed.json'
       - 'public/assets/**'
       - '.github/workflows/preview-pages.yml'
@@ -31,7 +33,7 @@ jobs:
           cp -a preview-dist/. .
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add -A -- .nojekyll index.html robots.txt assets portfolio portfolios services about blog contact
+          git add -A -- .nojekyll index.html robots.txt assets portfolio portfolios services about blog contact design builders-and-agents collection curated-circle
           if ! git diff --cached --quiet; then
             git commit -m "build(preview): add site pages for temporary Pages preview [skip ci]"
             git push origin HEAD:main

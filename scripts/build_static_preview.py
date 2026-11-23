@@ -92,7 +92,7 @@ def shell(title,body,description='The Luxury Look design review: temporary image
 
 def work_card(p):
     c=CATEGORY_MAP.get(p.get('category_slug',''),{})
-    return f'''<a class="work-card" data-category-slug="{e(p.get('category_slug',''))}" href="{url('portfolios/'+p['slug'])}" aria-label="View {e(p['title'])} portfolio project">
+    return f'''<a class="work-card" data-category-slug="{e(p.get('category_slug',''))}" href="{url('portfolios/'+p['slug'])}" aria-label="View {e(p.get('preview_title') or p['title'])} portfolio project">
 <figure class="work-card-photo media-frame">{image(cover(p),p['title']+' — temporary portfolio layout photograph')}<span class="work-card-view">VIEW PROJECT <span aria-hidden="true">↗</span></span></figure>
 <div class="work-card-caption"><div><span class="caption-discipline">{e(c.get('title','Selected Work'))}</span><h3>{e(p['title'])}</h3></div><span class="caption-arrow" aria-hidden="true">↗</span></div></a>'''
 
@@ -186,15 +186,16 @@ def main():
     write('.nojekyll','')
     write('robots.txt','User-agent: *\nDisallow: /\n')
     write('index.html',shell('Home',home()))
+    _revamp.extra_pages(globals())
     write('portfolio/index.html',shell('Selected Work',portfolio_index()))
     for c in CATEGORIES:write('portfolio/'+c['slug']+'/index.html',shell(c['title']+' Projects',category_page(c),c['description']))
-    for p in PROJECTS:write('portfolios/'+p['slug']+'/index.html',shell(p['title'],project_page(p)))
+    for p in PROJECTS:write('portfolios/'+p['slug']+'/index.html',shell(p.get('preview_title') or p['title'],project_page(p)))
     write('services/index.html',shell('Our Services',services_index()))
     for s in SERVICES:write('services/'+s['slug']+'/index.html',shell(s['title']+' Service',service_page(s),s['summary']))
     for page in PAGES:
         if page['path'] in ('/contact',):continue
         write(page['path'].strip('/')+'/index.html',shell(page['title'],about_page(page),page.get('intro','')))
-    write('contact/index.html',shell('Contact the Studio',contact()))
+    write('contact/index.html',shell('Contact the Studio',_revamp.contact(contact())))
     write('blog/index.html',shell('Journal',journal()))
     for x in LEGACY:
         if x['path'].startswith('/blog/'):write(x['path'].strip('/')+'/index.html',shell(slug_title(x['path'].split('/')[-1]),journal_post(x)))
@@ -206,6 +207,7 @@ def main():
 # Internal pages share an editorial design system with the Laravel templates.
 # Keep all existing legacy paths while giving individual pages conversion-focused layouts.
 import editorial_preview as _editorial
+import revamp_preview as _revamp
 EDITORIAL = json.loads((ROOT / 'database/data/editorial-content.json').read_text(encoding='utf-8'))
 def portfolio_index(): return _editorial.portfolio_index(globals())
 def category_page(c): return _editorial.category_page(c,globals())
@@ -216,5 +218,9 @@ def about_page(p): return _editorial.about_page(p,globals())
 def journal(): return _editorial.journal(globals())
 def journal_post(x): return _editorial.journal_post(x,globals())
 def contact(): return _editorial.contact(globals())
+
+_legacy_shell = shell
+def shell(title, body, description='The Luxury Look design review: temporary photography and editable portfolio layout.'):
+    return _revamp.shell(_legacy_shell(title,body,description),url)
 
 if __name__=='__main__':main()
