@@ -28,8 +28,8 @@ class SiteController extends Controller
     public function home()
     {
         return $this->view('site.home', [
-            'projects' => Project::visibleOnSite()->with('category')->where('featured', true)->orderBy('sort_order')->take(9)->get(),
-            'categories' => PortfolioCategory::visibleOnSite()->withCount('projects')->orderBy('sort_order')->get(),
+            'projects' => Project::visibleOnSite()->where('featured', true)->orderBy('sort_order')->take(6)->get(),
+            'categories' => PortfolioCategory::visibleOnSite()->orderBy('sort_order')->get(),
             'services' => Service::visibleOnSite()->orderBy('sort_order')->get(),
         ], ['path'=>'/', 'description'=>'The Luxury Look is an award-winning interior design and home staging firm in Scottsdale, Arizona. Explore our projects and services.']);
     }
@@ -41,8 +41,45 @@ class SiteController extends Controller
             'categories' => PortfolioCategory::visibleOnSite()->withCount('projects')->orderBy('sort_order')->get(),
         ], [
             'title' => 'Projects | The Luxury Look',
-            'description' => 'Browse residential interiors, home staging, Airbnb styling, commercial projects and more from The Luxury Look.',
+            'description' => 'Browse luxury interior design, home staging, hospitality and select commercial work.',
             'noindex' => !config('site.index_new_pages'),
+        ]);
+    }
+
+    public function design()
+    {
+        return $this->view('site.design', [], [
+            'title'=>'Luxury Interior Design | The Luxury Look',
+            'description'=>'Full-service luxury residential design, renovation and second-home interiors led by Kristine Vowles.',
+            'noindex'=>true,
+        ]);
+    }
+
+    public function builders()
+    {
+        $projects=Project::visibleOnSite()->with('category')->orderBy('sort_order')->take(6)->get();
+        return $this->view('site.builders',compact('projects'),[
+            'title'=>'For Builders & Agents | The Luxury Look',
+            'description'=>'Luxury specifications, market-ready design and premium home staging for builders and real estate professionals.',
+            'noindex'=>true,
+        ]);
+    }
+
+    public function collection()
+    {
+        return $this->view('site.collection', [], [
+            'title'=>'The Collection | The Luxury Look',
+            'description'=>'Furniture and housewares lookbook curated by The Luxury Look.',
+            'noindex'=>true,
+        ]);
+    }
+
+    public function circle()
+    {
+        return $this->view('site.circle', [], [
+            'title'=>'The Curated Circle | The Luxury Look',
+            'description'=>'Discover The Curated Circle, a forthcoming design and lifestyle community.',
+            'noindex'=>true,
         ]);
     }
 
@@ -56,17 +93,7 @@ class SiteController extends Controller
     public function service(string $slug)
     {
         $service = Service::visibleOnSite()->where('slug',$slug)->firstOrFail();
-        $map = [
-            'interior-design'=>'interior-design-projects',
-            'interior-styling'=>'interior-styling-projects-the-luxury-look',
-            'luxury-residential-staging'=>'home-staging-projects-the-luxury-look',
-            'commercial-staging'=>'commercial-staging-projects-the-luxury-look',
-            'airbnb-staging'=>'airbnb-staging-the-luxury-look',
-            'corporate-branding'=>'corporate-brandding-projects-the-luxury-look',
-        ];
-        $category = PortfolioCategory::where('slug',$map[$slug] ?? '')->first();
-        $projects = $category ? $category->projects()->visibleOnSite()->with('category')->orderBy('sort_order')->take(3)->get() : collect();
-        return $this->view('site.service',compact('service','projects'),[
+        return $this->view('site.service',compact('service'),[
             'title'=>$service->meta_title ?: $service->title.' | The Luxury Look',
             'description'=>$service->meta_description ?: $service->summary,
             'image'=>$service->hero_url,
@@ -79,12 +106,12 @@ class SiteController extends Controller
         $category = PortfolioCategory::visibleOnSite()->where('slug',$slug)->firstOrFail();
         return $this->view('site.category',[
             'category'=>$category,
-            'projects'=>$category->projects()->visibleOnSite()->with('category')->orderBy('sort_order')->paginate(30),
+            'projects'=>$category->projects()->visibleOnSite()->orderBy('sort_order')->paginate(18),
             'categories'=>PortfolioCategory::visibleOnSite()->orderBy('sort_order')->get(),
         ], [
             'title'=>$category->meta_title ?: $category->title.' Portfolio | The Luxury Look',
             'description'=>$category->meta_description ?: $category->description,
-            'image'=>$category->hero_url,
+            'image'=>$category->hero_image,
         ]);
     }
 
@@ -153,8 +180,19 @@ class SiteController extends Controller
             'email'=>['required','email','max:255'],
             'phone'=>['nullable','string','max:50'],
             'service'=>['nullable','string','max:120'],
+            'property_location'=>['nullable','string','max:255'],
+            'project_timing'=>['nullable','string','max:180'],
+            'investment_range'=>['nullable','string','max:180'],
+            'project_stage'=>['nullable','string','max:120'],
+            'staging_occupancy'=>['nullable','string','max:120'],
+            'listing_date'=>['nullable','string','max:120'],
+            'construction_status'=>['nullable','string','max:120'],
+            'property_count'=>['nullable','integer','between:1,999'],
             'message'=>['required','string','min:10','max:5000'],
         ]);
+        $details=array_intersect_key($data,array_flip(['property_location','project_timing','investment_range','project_stage','staging_occupancy','listing_date','construction_status','property_count']));
+        foreach(array_keys($details) as $key) unset($data[$key]);
+        $data['project_details']=$details;
         $inquiry = Inquiry::create($data);
         if (config('mail.default') !== 'log' && config('site.contact_email')) {
             try {

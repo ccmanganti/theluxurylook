@@ -6,8 +6,15 @@ use Illuminate\Database\Eloquent\Model;
 class Project extends Model
 {
     protected $table = 'projects';
-    protected $fillable = ['portfolio_category_id', 'slug', 'title', 'location', 'summary', 'story', 'cover_image', 'cover_upload', 'preview_cover_image', 'gallery', 'gallery_uploads', 'preview_gallery', 'meta_title', 'meta_description', 'featured', 'is_published', 'content_verified', 'sort_order'];
-    protected function casts(): array { return ['featured' => 'boolean', 'is_published' => 'boolean', 'content_verified' => 'boolean', 'gallery' => 'array', 'gallery_uploads' => 'array', 'preview_gallery' => 'array']; }
+    protected $fillable = ['portfolio_category_id', 'slug', 'title', 'preview_title', 'location', 'summary', 'story', 'cover_image', 'cover_upload', 'preview_cover_image', 'gallery', 'gallery_uploads', 'preview_gallery', 'meta_title', 'meta_description', 'project_brief', 'design_approach', 'scope_of_work', 'result_statement', 'results_verified', 'metrics', 'before_gallery', 'client_quote', 'quote_attribution', 'featured', 'is_published', 'content_verified', 'sort_order'];
+    protected function casts(): array { return ['featured' => 'boolean', 'is_published' => 'boolean', 'content_verified' => 'boolean', 'gallery' => 'array', 'gallery_uploads' => 'array', 'preview_gallery' => 'array', 'metrics' => 'array', 'before_gallery' => 'array', 'results_verified' => 'boolean']; }
+
+    public function getDisplayTitleAttribute(): string
+    {
+        // Working titles are design-review labels. Live URLs always use approved titles.
+        return (!config('site.launch_ready') && !$this->content_verified && $this->preview_title)
+            ? $this->preview_title : $this->title;
+    }
 
     public function getHeroUrlAttribute(): ?string
     {
@@ -26,10 +33,7 @@ class Project extends Model
         foreach ($this->gallery_uploads ?? [] as $path) {
             $items[] = ['url' => \Illuminate\Support\Facades\Storage::disk('public')->url($path), 'alt' => $this->title];
         }
-        // Temporary imagery is visible only in development, never after public launch.
-        if (!$items && !config('site.launch_ready') && !$this->content_verified) {
-            return $this->preview_gallery ?? [];
-        }
+        if (!$items && !config('site.launch_ready') && !$this->content_verified) return $this->preview_gallery ?? [];
         return $items;
     }
 

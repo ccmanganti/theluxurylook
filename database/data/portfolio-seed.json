@@ -78,7 +78,8 @@
       "featured": true,
       "is_published": true,
       "content_verified": false,
-      "meta_title": "Nichols Project - 9 Gold Awards | The Luxury Look"
+      "meta_title": "Nichols Project - 9 Gold Awards | The Luxury Look",
+      "preview_title": "The Ardent Residence"
     },
     {
       "slug": "petersen-residence",
@@ -90,7 +91,8 @@
       "featured": true,
       "is_published": true,
       "content_verified": false,
-      "meta_title": "Petersen Residence | The Luxury Look"
+      "meta_title": "Petersen Residence | The Luxury Look",
+      "preview_title": "The Rowan Residence"
     },
     {
       "slug": "la-junta-road-scottsdale",
@@ -102,7 +104,8 @@
       "featured": false,
       "is_published": true,
       "content_verified": false,
-      "meta_title": "La Junta Road Scottsdale | The Luxury Look"
+      "meta_title": "La Junta Road Scottsdale | The Luxury Look",
+      "preview_title": "The Laurel House"
     },
     {
       "slug": "desert-vista-luxury-design",
@@ -114,7 +117,8 @@
       "featured": false,
       "is_published": true,
       "content_verified": false,
-      "meta_title": "Desert Vista Luxury Design | The Luxury Look"
+      "meta_title": "Desert Vista Luxury Design | The Luxury Look",
+      "preview_title": "The Sienna Residence"
     },
     {
       "slug": "nutall-stacey-rd-residence",
@@ -126,7 +130,8 @@
       "featured": false,
       "is_published": true,
       "content_verified": false,
-      "meta_title": "Nutall Stacey Rd. Residence | The Luxury Look"
+      "meta_title": "Nutall Stacey Rd. Residence | The Luxury Look",
+      "preview_title": "The Westhaven Residence"
     },
     {
       "slug": "optima-camelback-loft",
@@ -138,7 +143,8 @@
       "featured": false,
       "is_published": true,
       "content_verified": false,
-      "meta_title": "Optima Camelback Loft | The Luxury Look"
+      "meta_title": "Optima Camelback Loft | The Luxury Look",
+      "preview_title": "The Camelot Loft"
     },
     {
       "slug": "13-5-million-dollar-property",
@@ -150,7 +156,8 @@
       "featured": false,
       "is_published": true,
       "content_verified": false,
-      "meta_title": "13.5 Million Dollar Property | The Luxury Look"
+      "meta_title": "13.5 Million Dollar Property | The Luxury Look",
+      "preview_title": "The Grandview Estate"
     },
     {
       "slug": "mockingbird-paradise-valley",
@@ -162,7 +169,8 @@
       "featured": true,
       "is_published": true,
       "content_verified": false,
-      "meta_title": "Mockingbird Paradise Valley | The Luxury Look"
+      "meta_title": "Mockingbird Paradise Valley | The Luxury Look",
+      "preview_title": "The Veranda Estate"
     },
     {
       "slug": "prof-sports-client-featured-on-nbc",
@@ -174,7 +182,8 @@
       "featured": true,
       "is_published": true,
       "content_verified": false,
-      "meta_title": "Professional Sports Client Featured on NBC | The Luxury Look"
+      "meta_title": "Professional Sports Client Featured on NBC | The Luxury Look",
+      "preview_title": "The Sterling House"
     },
     {
       "slug": "occupied-home-staging",
@@ -186,7 +195,8 @@
       "featured": false,
       "is_published": true,
       "content_verified": false,
-      "meta_title": "Occupied Home Staging | The Luxury Look"
+      "meta_title": "Occupied Home Staging | The Luxury Look",
+      "preview_title": "The Hearth Residence"
     },
     {
       "slug": "manzanita-sedona-retreat",
@@ -198,7 +208,8 @@
       "featured": false,
       "is_published": true,
       "content_verified": false,
-      "meta_title": "Manzanita Sedona Retreat | The Luxury Look"
+      "meta_title": "Manzanita Sedona Retreat | The Luxury Look",
+      "preview_title": "The Cinder Retreat"
     },
     {
       "slug": "lone-cactus-drive",
@@ -210,7 +221,8 @@
       "featured": false,
       "is_published": true,
       "content_verified": false,
-      "meta_title": "Lone Cactus Drive | The Luxury Look"
+      "meta_title": "Lone Cactus Drive | The Luxury Look",
+      "preview_title": "The Dune House"
     },
     {
       "slug": "3508-n-rose-circle",
@@ -222,7 +234,8 @@
       "featured": false,
       "is_published": true,
       "content_verified": false,
-      "meta_title": "3508 N Rose Circle | The Luxury Look"
+      "meta_title": "3508 N Rose Circle | The Luxury Look",
+      "preview_title": "The Rosewood Residence"
     },
     {
       "slug": "3030-calle-del-montana",
@@ -234,7 +247,8 @@
       "featured": false,
       "is_published": true,
       "content_verified": false,
-      "meta_title": "3030 Calle del Montana | The Luxury Look"
+      "meta_title": "3030 Calle del Montana | The Luxury Look",
+      "preview_title": "The Copper Mesa House"
     },
     {
       "slug": "12271-n-74th-st",
@@ -246,7 +260,8 @@
       "featured": false,
       "is_published": true,
       "content_verified": false,
-      "meta_title": "12271 N 74th St | The Luxury Look"
+      "meta_title": "12271 N 74th St | The Luxury Look",
+      "preview_title": "The Ocotillo Residence"
     },
     {
       "slug": "4437-n-granite-reef",
@@ -258,7 +273,8 @@
       "featured": false,
       "is_published": true,
       "content_verified": false,
-      "meta_title": "4437 N Granite Reef | The Luxury Look"
+      "meta_title": "4437 N Granite Reef | The Luxury Look",
+      "preview_title": "The Granite Residence"
     },
     {
       "slug": "laurel-lane",
@@ -270,7 +286,8 @@
       "featured": false,
       "is_published": true,
       "content_verified": false,
-      "meta_title": "Laurel Lane | The Luxury Look"
+      "meta_title": "Laurel Lane | The Luxury Look",
+      "preview_title": "The Laurel Retreat"
     },
     {
       "slug": "tranquil-staging-in-the-heart-of-scottsdale",
@@ -282,7 +299,8 @@
       "featured": false,
       "is_published": true,
       "content_verified": false,
-      "meta_title": "Tranquil Staging In The Heart Of Scottsdale | The Luxury Look"
+      "meta_title": "Tranquil Staging In The Heart Of Scottsdale | The Luxury Look",
+      "preview_title": "The Stillwater House"
     },
     {
       "slug": "rio-verde-staging",
@@ -294,7 +312,8 @@
       "featured": false,
       "is_published": true,
       "content_verified": false,
-      "meta_title": "Rio Verde Staging | The Luxury Look"
+      "meta_title": "Rio Verde Staging | The Luxury Look",
+      "preview_title": "The Mesa Vista Estate"
     },
     {
       "slug": "vacant-and-occupied-stagings",
@@ -306,7 +325,8 @@
       "featured": false,
       "is_published": true,
       "content_verified": false,
-      "meta_title": "Vacant And Occupied Stagings | The Luxury Look"
+      "meta_title": "Vacant And Occupied Stagings | The Luxury Look",
+      "preview_title": "The Gallery Residence"
     },
     {
       "slug": "plaza-loft-luxury-high-rise-ii",
@@ -318,7 +338,8 @@
       "featured": false,
       "is_published": true,
       "content_verified": false,
-      "meta_title": "Plaza Loft Luxury High Rise Ii | The Luxury Look"
+      "meta_title": "Plaza Loft Luxury High Rise Ii | The Luxury Look",
+      "preview_title": "The Meridian Loft"
     },
     {
       "slug": "investment-renovation-project",
@@ -330,7 +351,8 @@
       "featured": false,
       "is_published": true,
       "content_verified": false,
-      "meta_title": "Investment Renovation Project | The Luxury Look"
+      "meta_title": "Investment Renovation Project | The Luxury Look",
+      "preview_title": "The Heritage Revival"
     },
     {
       "slug": "ancala-country-club",
@@ -342,7 +364,8 @@
       "featured": false,
       "is_published": true,
       "content_verified": false,
-      "meta_title": "Ancala Country Club | The Luxury Look"
+      "meta_title": "Ancala Country Club | The Luxury Look",
+      "preview_title": "The Ridge House"
     },
     {
       "slug": "troon-boulders",
@@ -354,7 +377,8 @@
       "featured": false,
       "is_published": true,
       "content_verified": false,
-      "meta_title": "Troon Boulders | The Luxury Look"
+      "meta_title": "Troon Boulders | The Luxury Look",
+      "preview_title": "The Palisade Estate"
     },
     {
       "slug": "plaza-loft-luxury-high-rise-i",
@@ -366,7 +390,8 @@
       "featured": false,
       "is_published": true,
       "content_verified": false,
-      "meta_title": "Plaza Loft Luxury High Rise I | The Luxury Look"
+      "meta_title": "Plaza Loft Luxury High Rise I | The Luxury Look",
+      "preview_title": "The Summit Loft"
     },
     {
       "slug": "moroccan-inspired-design",
@@ -378,7 +403,8 @@
       "featured": false,
       "is_published": true,
       "content_verified": false,
-      "meta_title": "Moroccan Inspired Design | The Luxury Look"
+      "meta_title": "Moroccan Inspired Design | The Luxury Look",
+      "preview_title": "The Atlas House"
     },
     {
       "slug": "foothills-majestic-heights-tatum-hills-estate",
@@ -390,7 +416,8 @@
       "featured": false,
       "is_published": true,
       "content_verified": false,
-      "meta_title": "Foothills Majestic Heights Tatum Hills Estate | The Luxury Look"
+      "meta_title": "Foothills Majestic Heights Tatum Hills Estate | The Luxury Look",
+      "preview_title": "The Majestic Estate"
     },
     {
       "slug": "gated-annecy",
@@ -402,7 +429,8 @@
       "featured": false,
       "is_published": true,
       "content_verified": false,
-      "meta_title": "Gated Annecy | The Luxury Look"
+      "meta_title": "Gated Annecy | The Luxury Look",
+      "preview_title": "The Ivory Study"
     },
     {
       "slug": "28336-n-112th-way",
@@ -414,7 +442,8 @@
       "featured": false,
       "is_published": true,
       "content_verified": false,
-      "meta_title": "28336 N 112th Way | The Luxury Look"
+      "meta_title": "28336 N 112th Way | The Luxury Look",
+      "preview_title": "The Atelier Residence"
     },
     {
       "slug": "luxury-wickenburg-estate",
@@ -426,7 +455,8 @@
       "featured": false,
       "is_published": true,
       "content_verified": false,
-      "meta_title": "Luxury Wickenburg Estate | The Luxury Look"
+      "meta_title": "Luxury Wickenburg Estate | The Luxury Look",
+      "preview_title": "The Wickenburg House"
     },
     {
       "slug": "design-and-style-renders",
@@ -438,7 +468,8 @@
       "featured": false,
       "is_published": true,
       "content_verified": false,
-      "meta_title": "Design And Style Renders | The Luxury Look"
+      "meta_title": "Design And Style Renders | The Luxury Look",
+      "preview_title": "The Canvas House"
     },
     {
       "slug": "bed-and-breakfast",
@@ -450,7 +481,8 @@
       "featured": true,
       "is_published": true,
       "content_verified": false,
-      "meta_title": "Bed And Breakfast | The Luxury Look"
+      "meta_title": "Bed And Breakfast | The Luxury Look",
+      "preview_title": "The Juniper Stay"
     },
     {
       "slug": "phoenix-airbnb-2",
@@ -462,7 +494,8 @@
       "featured": true,
       "is_published": true,
       "content_verified": false,
-      "meta_title": "Phoenix Airbnb 2 | The Luxury Look"
+      "meta_title": "Phoenix Airbnb 2 | The Luxury Look",
+      "preview_title": "The Marigold Guesthouse"
     },
     {
       "slug": "luxury-sedona-airbnb",
@@ -474,7 +507,8 @@
       "featured": false,
       "is_published": true,
       "content_verified": false,
-      "meta_title": "Luxury Sedona Airbnb | The Luxury Look"
+      "meta_title": "Luxury Sedona Airbnb | The Luxury Look",
+      "preview_title": "The Sedona Hideaway"
     },
     {
       "slug": "old-town-scottsdale-airbnb",
@@ -486,7 +520,8 @@
       "featured": false,
       "is_published": true,
       "content_verified": false,
-      "meta_title": "Old Town Scottsdale Airbnb | The Luxury Look"
+      "meta_title": "Old Town Scottsdale Airbnb | The Luxury Look",
+      "preview_title": "The Old Town Retreat"
     },
     {
       "slug": "phoenix-airbnb-1",
@@ -498,7 +533,8 @@
       "featured": false,
       "is_published": true,
       "content_verified": false,
-      "meta_title": "Phoenix Airbnb 1 | The Luxury Look"
+      "meta_title": "Phoenix Airbnb 1 | The Luxury Look",
+      "preview_title": "The Palm House"
     },
     {
       "slug": "e-vermont",
@@ -510,7 +546,8 @@
       "featured": false,
       "is_published": true,
       "content_verified": false,
-      "meta_title": "E. Vermont | The Luxury Look"
+      "meta_title": "E. Vermont | The Luxury Look",
+      "preview_title": "The Vermont Stay"
     },
     {
       "slug": "montebello",
@@ -522,7 +559,8 @@
       "featured": false,
       "is_published": true,
       "content_verified": false,
-      "meta_title": "Montebello | The Luxury Look"
+      "meta_title": "Montebello | The Luxury Look",
+      "preview_title": "The Montebello Retreat"
     },
     {
       "slug": "sunny-slope-phoenix",
@@ -534,7 +572,8 @@
       "featured": false,
       "is_published": true,
       "content_verified": false,
-      "meta_title": "Sunny Slope Phoenix | The Luxury Look"
+      "meta_title": "Sunny Slope Phoenix | The Luxury Look",
+      "preview_title": "The Suncrest Residence"
     },
     {
       "slug": "old-town-scottsdale",
@@ -546,7 +585,8 @@
       "featured": false,
       "is_published": true,
       "content_verified": false,
-      "meta_title": "Old Town Scottsdale | The Luxury Look"
+      "meta_title": "Old Town Scottsdale | The Luxury Look",
+      "preview_title": "The Courtyard Stay"
     },
     {
       "slug": "downtown-phoenix",
@@ -558,7 +598,8 @@
       "featured": false,
       "is_published": true,
       "content_verified": false,
-      "meta_title": "Downtown Phoenix | The Luxury Look"
+      "meta_title": "Downtown Phoenix | The Luxury Look",
+      "preview_title": "The Downtown Nest"
     },
     {
       "slug": "downtown-mesa",
@@ -570,7 +611,8 @@
       "featured": false,
       "is_published": true,
       "content_verified": false,
-      "meta_title": "Downtown Mesa | The Luxury Look"
+      "meta_title": "Downtown Mesa | The Luxury Look",
+      "preview_title": "The Garden Flat"
     },
     {
       "slug": "67th-avenue",
@@ -582,7 +624,8 @@
       "featured": false,
       "is_published": true,
       "content_verified": false,
-      "meta_title": "67Th Avenue | The Luxury Look"
+      "meta_title": "67Th Avenue | The Luxury Look",
+      "preview_title": "The Sixty-Seven House"
     },
     {
       "slug": "studio-3125",
@@ -594,7 +637,8 @@
       "featured": false,
       "is_published": true,
       "content_verified": false,
-      "meta_title": "Studio 3125 | The Luxury Look"
+      "meta_title": "Studio 3125 | The Luxury Look",
+      "preview_title": "Studio North"
     },
     {
       "slug": "outdoor-seating-and-dining",
@@ -606,7 +650,8 @@
       "featured": false,
       "is_published": true,
       "content_verified": false,
-      "meta_title": "Outdoor Seating And Dining | The Luxury Look"
+      "meta_title": "Outdoor Seating And Dining | The Luxury Look",
+      "preview_title": "The Courtyard Edit"
     },
     {
       "slug": "alta-hacienda",
@@ -618,7 +663,8 @@
       "featured": false,
       "is_published": true,
       "content_verified": false,
-      "meta_title": "Alta Hacienda | The Luxury Look"
+      "meta_title": "Alta Hacienda | The Luxury Look",
+      "preview_title": "The Hacienda Collective"
     },
     {
       "slug": "td-ameritide-tv-commercial-and-event",
@@ -630,7 +676,8 @@
       "featured": false,
       "is_published": true,
       "content_verified": false,
-      "meta_title": "TD Ameritrade TV Commercial & Event | The Luxury Look"
+      "meta_title": "TD Ameritrade TV Commercial & Event | The Luxury Look",
+      "preview_title": "The Exchange Set"
     },
     {
       "slug": "new-york-fashion-week",
@@ -642,7 +689,8 @@
       "featured": false,
       "is_published": true,
       "content_verified": false,
-      "meta_title": "New York Fashion Week | The Luxury Look"
+      "meta_title": "New York Fashion Week | The Luxury Look",
+      "preview_title": "The Runway Edit"
     },
     {
       "slug": "professional-architecture-and-styling-photoshoot",
@@ -654,7 +702,8 @@
       "featured": false,
       "is_published": true,
       "content_verified": false,
-      "meta_title": "Professional Architecture And Styling Photoshoot | The Luxury Look"
+      "meta_title": "Professional Architecture And Styling Photoshoot | The Luxury Look",
+      "preview_title": "The Architectural Study"
     },
     {
       "slug": "femargent-speaking-event",
@@ -666,7 +715,8 @@
       "featured": false,
       "is_published": true,
       "content_verified": false,
-      "meta_title": "Femargent Speaking Event | The Luxury Look"
+      "meta_title": "Femargent Speaking Event | The Luxury Look",
+      "preview_title": "The Women in Design Forum"
     },
     {
       "slug": "mor-furniture-line-launch",
@@ -678,7 +728,8 @@
       "featured": false,
       "is_published": true,
       "content_verified": false,
-      "meta_title": "Mor Furniture Line Launch | The Luxury Look"
+      "meta_title": "Mor Furniture Line Launch | The Luxury Look",
+      "preview_title": "The Furniture Edit"
     },
     {
       "slug": "creative-successful-entrepreneur-event",
@@ -690,7 +741,8 @@
       "featured": false,
       "is_published": true,
       "content_verified": false,
-      "meta_title": "Creative Successful Entrepreneur Event | The Luxury Look"
+      "meta_title": "Creative Successful Entrepreneur Event | The Luxury Look",
+      "preview_title": "The Founder Series"
     },
     {
       "slug": "femboss-branding-photoshoot-event",
@@ -702,7 +754,8 @@
       "featured": false,
       "is_published": true,
       "content_verified": false,
-      "meta_title": "Femboss Branding Photoshoot Event | The Luxury Look"
+      "meta_title": "Femboss Branding Photoshoot Event | The Luxury Look",
+      "preview_title": "The Signature Studio"
     },
     {
       "slug": "san-miguel-ave-luxury-residence",
@@ -713,7 +766,8 @@
       "sort_order": 999,
       "featured": false,
       "is_published": true,
-      "content_verified": false
+      "content_verified": false,
+      "preview_title": "The Solstice House"
     }
   ]
 }

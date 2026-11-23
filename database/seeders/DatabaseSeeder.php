@@ -55,9 +55,9 @@ class DatabaseSeeder extends Seeder
                 'body'=>null,'is_published'=>true,'content_verified'=>false,
             ]);
         }
-        // Backfill only empty demo photo slots, even when a database was seeded earlier.
-        // Approved uploads, legacy source photography, and verified content stay unchanged.
+        // Staging-only photo and working-title backfill is non-destructive.
         $this->call(PreviewPhotographySeeder::class);
+        $this->call(PreviewTitlesSeeder::class);
         // Every original path requires an explicit content and SEO review.
         // This migration preview deliberately approves no URL automatically.
     }
