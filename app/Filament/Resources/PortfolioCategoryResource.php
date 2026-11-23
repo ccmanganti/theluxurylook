@@ -21,9 +21,10 @@ class PortfolioCategoryResource extends Resource
 
     Section::make('Portfolio category')->schema([
         TextInput::make('title')->required(),TextInput::make('slug')->required()->unique(ignoreRecord: true),
-        TextInput::make('tagline'),Textarea::make('description')->rows(3),TextInput::make('hero_image')->label('Photography URL'),
+        TextInput::make('tagline'),Textarea::make('description')->rows(3),TextInput::make('hero_image')->label('Original photography URL'),FileUpload::make('hero_upload')->disk('public')->directory('portfolio/categories')->image()->label('Final category cover upload'),
         TextInput::make('sort_order')->numeric()->default(0),Toggle::make('is_published'),Toggle::make('content_verified')->helperText('Confirm category imagery, copy, titles and every linked project.'),
     ])->columns(2),
+    Section::make('Temporary staging hero')->description('Staging image only; never displayed after launch.')->schema([TextInput::make('preview_hero_image')->url()->label('Temporary cover URL')])->collapsed(),
     Section::make('SEO')->schema([TextInput::make('meta_title'),Textarea::make('meta_description')]),
 
         ]);

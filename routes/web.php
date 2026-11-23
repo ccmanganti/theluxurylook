@@ -7,6 +7,7 @@ Route::get('/robots.txt',[SiteController::class,'robots']);
 Route::get('/sitemap.xml',[SiteController::class,'sitemap']);
 Route::get('/services',[SiteController::class,'services'])->name('services');
 Route::get('/services/{slug}',[SiteController::class,'service'])->where('slug','[a-z0-9-]+')->name('service.show');
+Route::get('/portfolio',[SiteController::class,'portfolioIndex'])->name('portfolio.index');
 Route::get('/portfolio/{slug}',[SiteController::class,'category'])->where('slug','[a-z0-9-]+')->name('category.show');
 Route::get('/portfolios/{slug}',[SiteController::class,'project'])->where('slug','[a-z0-9-]+')->name('project.show');
 Route::get('/blog',[SiteController::class,'blog'])->name('blog');

@@ -6,14 +6,14 @@ use Illuminate\Database\Eloquent\Model;
 class Service extends Model
 {
     protected $table = 'services';
-    protected $fillable = ['slug', 'title', 'summary', 'body', 'cover_image', 'cover_upload', 'meta_title', 'meta_description', 'sort_order', 'is_published', 'content_verified'];
+    protected $fillable = ['slug', 'title', 'summary', 'body', 'cover_image', 'cover_upload', 'preview_cover_image', 'meta_title', 'meta_description', 'sort_order', 'is_published', 'content_verified'];
     protected function casts(): array { return ['is_published' => 'boolean', 'content_verified' => 'boolean']; }
 
     public function getHeroUrlAttribute(): ?string
     {
-        return $this->cover_upload
-            ? \Illuminate\Support\Facades\Storage::disk('public')->url($this->cover_upload)
-            : $this->cover_image;
+        if ($this->cover_upload) return \Illuminate\Support\Facades\Storage::disk('public')->url($this->cover_upload);
+        if (!config('site.launch_ready') && !$this->content_verified && $this->preview_cover_image) return $this->preview_cover_image;
+        return $this->cover_image;
     }
 
     public function scopeVisibleOnSite($query)

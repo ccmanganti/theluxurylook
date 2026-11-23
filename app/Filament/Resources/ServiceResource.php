@@ -26,6 +26,7 @@ class ServiceResource extends Resource
         FileUpload::make('cover_upload')->disk('public')->directory('services')->image(),
         TextInput::make('sort_order')->numeric()->default(0),Toggle::make('is_published'),Toggle::make('content_verified')->helperText('Approve original service details and imagery before go-live.'),
     ])->columns(2),
+    Section::make('Temporary service image')->description('Visible only in the development preview, not after launch.')->schema([TextInput::make('preview_cover_image')->url()->label('Temporary cover URL')])->collapsed(),
     Section::make('SEO')->schema([TextInput::make('meta_title'),Textarea::make('meta_description')]),
 
         ]);

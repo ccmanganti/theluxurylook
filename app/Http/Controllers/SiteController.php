@@ -28,10 +28,22 @@ class SiteController extends Controller
     public function home()
     {
         return $this->view('site.home', [
-            'projects' => Project::visibleOnSite()->where('featured', true)->orderBy('sort_order')->take(6)->get(),
-            'categories' => PortfolioCategory::visibleOnSite()->orderBy('sort_order')->get(),
+            'projects' => Project::visibleOnSite()->with('category')->where('featured', true)->orderBy('sort_order')->take(9)->get(),
+            'categories' => PortfolioCategory::visibleOnSite()->withCount('projects')->orderBy('sort_order')->get(),
             'services' => Service::visibleOnSite()->orderBy('sort_order')->get(),
         ], ['path'=>'/', 'description'=>'The Luxury Look is an award-winning interior design and home staging firm in Scottsdale, Arizona. Explore our projects and services.']);
+    }
+
+    public function portfolioIndex()
+    {
+        return $this->view('site.portfolio-index', [
+            'projects' => Project::visibleOnSite()->with('category')->orderBy('sort_order')->get(),
+            'categories' => PortfolioCategory::visibleOnSite()->withCount('projects')->orderBy('sort_order')->get(),
+        ], [
+            'title' => 'Projects | The Luxury Look',
+            'description' => 'Browse residential interiors, home staging, Airbnb styling, commercial projects and more from The Luxury Look.',
+            'noindex' => !config('site.index_new_pages'),
+        ]);
     }
 
     public function services()
@@ -44,7 +56,17 @@ class SiteController extends Controller
     public function service(string $slug)
     {
         $service = Service::visibleOnSite()->where('slug',$slug)->firstOrFail();
-        return $this->view('site.service',compact('service'),[
+        $map = [
+            'interior-design'=>'interior-design-projects',
+            'interior-styling'=>'interior-styling-projects-the-luxury-look',
+            'luxury-residential-staging'=>'home-staging-projects-the-luxury-look',
+            'commercial-staging'=>'commercial-staging-projects-the-luxury-look',
+            'airbnb-staging'=>'airbnb-staging-the-luxury-look',
+            'corporate-branding'=>'corporate-brandding-projects-the-luxury-look',
+        ];
+        $category = PortfolioCategory::where('slug',$map[$slug] ?? '')->first();
+        $projects = $category ? $category->projects()->visibleOnSite()->with('category')->orderBy('sort_order')->take(3)->get() : collect();
+        return $this->view('site.service',compact('service','projects'),[
             'title'=>$service->meta_title ?: $service->title.' | The Luxury Look',
             'description'=>$service->meta_description ?: $service->summary,
             'image'=>$service->hero_url,
@@ -57,12 +79,12 @@ class SiteController extends Controller
         $category = PortfolioCategory::visibleOnSite()->where('slug',$slug)->firstOrFail();
         return $this->view('site.category',[
             'category'=>$category,
-            'projects'=>$category->projects()->visibleOnSite()->orderBy('sort_order')->paginate(18),
+            'projects'=>$category->projects()->visibleOnSite()->with('category')->orderBy('sort_order')->paginate(30),
             'categories'=>PortfolioCategory::visibleOnSite()->orderBy('sort_order')->get(),
         ], [
             'title'=>$category->meta_title ?: $category->title.' Portfolio | The Luxury Look',
             'description'=>$category->meta_description ?: $category->description,
-            'image'=>$category->hero_image,
+            'image'=>$category->hero_url,
         ]);
     }
 

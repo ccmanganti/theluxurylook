@@ -1,52 +1,31 @@
 @extends('layouts.site')
 @section('content')
-<section class="hero hero--home">
-    <div class="hero__visual"><img src="https://cdn.prod.website-files.com/61900fb94bdf48d160f4ffef/6930cdb203e0e2dbea07f32a_MOCKINGBIRD%20PARADISE%20VALLEY_6.png" alt="Luxury residential interior - The Luxury Look design portfolio" fetchpriority="high"></div>
-    <div class="hero__veil"></div>
-    <div class="hero__content container">
-        <p class="eyebrow eyebrow--light">THE ART OF TRANSFORMING SPACE &nbsp; / &nbsp; SCOTTSDALE, AZ</p>
-        <h1>Curated living.<br><em>Beautifully</em> imagined.</h1>
-        <p class="hero__lead">Distinguished interiors and thoughtfully styled spaces that reflect the people who live, work, and gather within them.</p>
-        <div class="hero__actions"><a href="{{ url('/portfolio/interior-design-projects') }}" class="pill-link pill-link--light">Discover Our Work <span>&nearr;</span></a><a href="{{ route('services') }}" class="subtle-link">Explore Services <span>&rarr;</span></a></div>
+@php
+$features = $projects->take(8);
+$hero = $projects->first()?->hero_url ?? ($categories->first()?->hero_url ?? '');
+$secondary = $categories->skip(2)->first()?->hero_url ?? $hero;
+@endphp
+<section class="home-hero container-wide">
+    <div class="home-hero-copy">
+        <p class="section-kicker">THE LUXURY LOOK <span>/</span> SCOTTSDALE, AZ</p>
+        <h1>Designed<br>to <span>be lived in.</span></h1>
+        <p class="home-hero-description">Interior design, home staging, and thoughtful styling for the spaces where life happens.</p>
+        <div class="home-hero-actions"><a href="{{ route('portfolio.index') }}" class="button-ink">Explore Our Portfolio <span aria-hidden="true">↗</span></a><a href="{{ route('services') }}" class="under-link">Our Services <span aria-hidden="true">↗</span></a></div>
+        <span class="hero-edge-note">EST. 2013 &nbsp; • &nbsp; FOUNDED BY KRISTINE VOWLES</span>
     </div>
-    <div class="hero__bottom container"><span>DESIGN WITH INTENTION.</span><span>SCROLL TO EXPLORE &darr;</span></div>
+    <div class="home-hero-visual media-frame"><img fetchpriority="high" src="{{ $hero }}" alt="{{ config('site.launch_ready') ? 'Featured project by The Luxury Look' : 'Temporary interior photograph for layout review' }}"><div class="hero-image-index"><span>FEATURED WORK</span><span>01 / 0{{ max(1,min($projects->count(),9)) }}</span></div></div>
 </section>
-
-<section class="intro-section section-pad container">
-    <div class="intro-section__side"><span class="eyebrow">01 / Our Philosophy</span><div class="line-accent"></div></div>
-    <div class="intro-section__main"><h2>We believe a space should be <em>experienced,</em> not just seen.</h2><div class="intro-section__bottom"><p>From luxurious residences to evocative commercial spaces, The Luxury Look brings design expertise, thoughtful collaboration, and an unmistakable attention to detail.</p><a class="text-link" href="{{ url('/about') }}">Meet The Studio <span>&nearr;</span></a></div></div>
+<section class="intro-editorial section-space container-wide">
+    <div class="intro-editorial-index"><p class="section-kicker">01 / THE STUDIO</p><div class="intro-rule"></div><span>DESIGN / STAGING / STYLING</span></div>
+    <div class="intro-editorial-content"><h2>Spaces with a<br><em>point of view.</em></h2><div class="editorial-subrow"><p>Founded by Kristine Vowles, The Luxury Look works across residential design, home staging and commercial spaces. We bring experience in real estate and design together, with equal attention to how a space looks and how it works.</p><a class="under-link" href="{{ url('/about') }}">About the Studio ↗</a></div></div>
 </section>
-
-<section class="featured-section section-pad">
-    <div class="container"><div class="section-heading"><div><span class="eyebrow">02 / The Portfolio</span><h2>Spaces with <em>a story.</em></h2></div><a class="text-link" href="{{ url('/portfolio/interior-design-projects') }}">Explore the Portfolio <span>&nearr;</span></a></div>
-    <div class="project-grid">
-    @forelse ($projects as $project)
-        @include('site.partials.project-card',['project'=>$project])
-    @empty
-        <p>Our selected portfolio is being curated. Explore our categories below.</p>
-    @endforelse
-    </div>
+<section class="homepage-work section-space section-tint">
+    <div class="container-wide"><div class="section-header"><div><p class="section-kicker">02 / SELECTED WORK</p><h2>Inside the portfolio.</h2></div><a class="under-link" href="{{ route('portfolio.index') }}">View all projects <span aria-hidden="true">↗</span></a></div>
+        <div class="work-grid work-grid--home">@foreach($features as $project)@include('site.partials.project-card',['project'=>$project])@endforeach</div>
+        <div class="section-end"><span>{{ $categories->sum('projects_count') ?: '54' }} PROJECTS ACROSS SIX DISCIPLINES</span><a class="link-with-arrow" href="{{ route('portfolio.index') }}">COMPLETE PORTFOLIO <span>↗</span></a></div>
     </div>
 </section>
-
-<section class="statements-section">
-    <div class="statement-image"><img loading="lazy" src="https://cdn.prod.website-files.com/61900fb94bdf48d160f4ffef/6930cd2e6e621902d0d5006f_OLD%20TOWN%20SCOTTSDALE%20AIRBNB_24.jpg" alt="Curated Airbnb interior by The Luxury Look"></div>
-    <div class="statement-copy"><span class="eyebrow eyebrow--light">03 / Our Expertise</span><h2>Considered design.<br><em>Extraordinary</em><br>outcomes.</h2><p>We create complete environments by looking beyond appearances. Every material, proportion, and detail contributes to a seamless experience.</p><a href="{{ route('services') }}" class="pill-link pill-link--light">What We Do <span>&nearr;</span></a></div>
-</section>
-
-<section class="services-section section-pad container"><div class="section-heading"><div><span class="eyebrow">04 / Services</span><h2>What we <em>do best.</em></h2></div><p class="section-subtitle">An integrated approach to beauty, function, and the feeling of being at home.</p></div>
-    <div class="services-list">
-    @foreach ($services as $i=>$service)
-        <a href="{{ route('service.show',$service->slug) }}"><span class="service-num">{{ str_pad((string)($i+1),2,'0',STR_PAD_LEFT) }}</span><span class="service-title">{{ $service->title }}</span><span class="service-desc">{{ $service->summary }}</span><span class="service-arrow">&nearr;</span></a>
-    @endforeach
-    </div>
-</section>
-
-<section class="category-section section-pad"><div class="container"><div class="section-heading"><div><span class="eyebrow">05 / Explore by Specialty</span><h2>One studio.<br><em>Many perspectives.</em></h2></div></div><div class="category-grid">
-    @foreach ($categories as $category)
-        <a class="category-tile" href="{{ route('category.show',$category->slug) }}"><img src="{{ $category->hero_image }}" alt="{{ $category->title }} projects" loading="lazy"><span class="category-tile__scrim"></span><span class="category-tile__content"><span class="micro-label">The Portfolio</span><strong>{{ $category->title }}</strong><small>Explore <span>&nearr;</span></small></span></a>
-    @endforeach
-    </div></div></section>
-
-<section class="about-callout section-pad container"><p class="eyebrow">The Founder</p><div><h2>Rooted in expertise.<br><em>Driven by passion.</em></h2><p>Led by founder and CEO Kristine Vowles, The Luxury Look blends decades of experience with a distinctive eye for possibilities.</p><a class="text-link" href="{{ url('/about') }}">Get to Know Us <span>&nearr;</span></a></div></section>
+<section class="image-interlude"><div class="image-interlude-photo media-frame"><img loading="lazy" src="{{ $secondary }}" alt="Interior styling sample photography"></div><div class="image-interlude-copy"><p class="section-kicker section-kicker--light">A CLOSER LOOK</p><h2>Every space<br>has its own<br><em>character.</em></h2><p>Explore our work across interiors, residential and commercial staging, short-term rentals, and brand environments.</p><a class="link-light" href="{{ route('portfolio.index') }}">EXPLORE PROJECTS <span>↗</span></a></div></section>
+<section class="discipline-section section-space container-wide"><div class="section-header"><div><p class="section-kicker">03 / DISCIPLINES</p><h2>What we work on.</h2></div><p class="header-description">Explore the portfolio by project type, from whole-home transformations to individual spaces and experiences.</p></div><div class="discipline-list">@foreach($categories as $i=>$category)<a href="{{ route('category.show',$category->slug) }}" class="discipline-row"><span class="discipline-number">{{ str_pad((string)($i+1),2,'0',STR_PAD_LEFT) }}</span><div class="discipline-thumb media-frame"><img loading="lazy" src="{{ $category->hero_url }}" alt="{{ $category->title }} sample project imagery"></div><div class="discipline-name"><h3>{{ $category->title }}</h3><span>{{ $category->tagline }}</span></div><span class="discipline-count">{{ str_pad((string)$category->projects_count,2,'0',STR_PAD_LEFT) }} PROJECTS</span><span class="discipline-arrow">↗</span></a>@endforeach</div></section>
+<section class="process-section section-space"><div class="container-wide"><div class="section-header"><div><p class="section-kicker">04 / WORKING TOGETHER</p><h2>From the first conversation.</h2></div></div><div class="process-grid"><div><span>01</span><h3>Tell us about the space</h3><p>Share the property, your goals, and how you plan to use it.</p></div><div><span>02</span><h3>Find the right service</h3><p>We'll discuss whether your project calls for design, styling, staging, or a combination.</p></div><div><span>03</span><h3>Plan what comes next</h3><p>Connect with our studio to discuss scope, timing, and the next steps.</p></div></div><a href="{{ route('contact') }}" class="button-ink">Start a Project <span aria-hidden="true">↗</span></a></div></section>
 @endsection

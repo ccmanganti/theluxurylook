@@ -1,0 +1,79 @@
+{
+  "license": "Temporary layout-use images. Do not claim these photographs depict the named projects.",
+  "photos_source": "https://unsplash.com/license",
+  "hero_home": "https://cdn.prod.website-files.com/61900fb94bdf48d160f4ffef/6930cdb203e0e2dbea07f32a_MOCKINGBIRD%20PARADISE%20VALLEY_6.png",
+  "homepage_secondary": "https://cdn.prod.website-files.com/61900fb94bdf48d160f4ffef/6930cc2f7dc491b75d68df0b_6855%20E%20Ivyglen%20Julie%20Sims_10.jpg",
+  "studio_image": "https://cdn.prod.website-files.com/61900fb94bdf48d160f4ffef/6930066cb66bb1839ae5c9fe_Ancala%20Country%20Club_84.jpg",
+  "categories": {
+    "interior-design-projects": "https://cdn.prod.website-files.com/61900fb94bdf48d160f4ffef/6a518ce503a0d87203fd242e_Screenshot%202025-04-11%20212153.png",
+    "home-staging-projects-the-luxury-look": "https://cdn.prod.website-files.com/61900fb94bdf48d160f4ffef/6930cdb203e0e2dbea07f32a_MOCKINGBIRD%20PARADISE%20VALLEY_6.png",
+    "interior-styling-projects-the-luxury-look": "https://cdn.prod.website-files.com/61900fb94bdf48d160f4ffef/6930cc2f7dc491b75d68df0b_6855%20E%20Ivyglen%20Julie%20Sims_10.jpg",
+    "airbnb-staging-the-luxury-look": "https://cdn.prod.website-files.com/61900fb94bdf48d160f4ffef/6964d6e850013a40b0de0fd3_Bed%20and%20Breakfast%20(8).png",
+    "commercial-staging-projects-the-luxury-look": "https://cdn.prod.website-files.com/61900fb94bdf48d160f4ffef/6964c9173583e12b396e1da6_Studio%203125%20(3).jpg",
+    "corporate-brandding-projects-the-luxury-look": "https://cdn.prod.website-files.com/61900fb94bdf48d160f4ffef/67761dee5086f3c806da2d76_CVM_120.remini-enhanced.webp"
+  },
+  "stock": {
+    "interior-design-projects": [
+      "https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&w=1800&q=78",
+      "https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?auto=format&fit=crop&w=1800&q=78",
+      "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=1800&q=78",
+      "https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?auto=format&fit=crop&w=1800&q=78",
+      "https://images.unsplash.com/photo-1600566752355-35792bedcfea?auto=format&fit=crop&w=1800&q=78",
+      "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1800&q=78",
+      "https://images.unsplash.com/photo-1600607687644-c7171b42498f?auto=format&fit=crop&w=1800&q=78",
+      "https://images.unsplash.com/photo-1600566753051-f0b89df2dd90?auto=format&fit=crop&w=1800&q=78",
+      "https://images.unsplash.com/photo-1600585152915-d208bec867a1?auto=format&fit=crop&w=1800&q=78",
+      "https://images.unsplash.com/photo-1600607688969-a5bfcd646154?auto=format&fit=crop&w=1800&q=78"
+    ],
+    "home-staging-projects-the-luxury-look": [
+      "https://images.unsplash.com/photo-1600566753086-00f18fb6b3ea?auto=format&fit=crop&w=1800&q=78",
+      "https://images.unsplash.com/photo-1600573472591-ee6b68d14c68?auto=format&fit=crop&w=1800&q=78",
+      "https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?auto=format&fit=crop&w=1800&q=78",
+      "https://images.unsplash.com/photo-1600573472550-8090b5e0745e?auto=format&fit=crop&w=1800&q=78",
+      "https://images.unsplash.com/photo-1615874959474-d609969a20ed?auto=format&fit=crop&w=1800&q=78",
+      "https://images.unsplash.com/photo-1600566752355-35792bedcfea?auto=format&fit=crop&w=1800&q=78",
+      "https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?auto=format&fit=crop&w=1800&q=78",
+      "https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&w=1800&q=78",
+      "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1800&q=78"
+    ],
+    "interior-styling-projects-the-luxury-look": [
+      "https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?auto=format&fit=crop&w=1800&q=78",
+      "https://images.unsplash.com/photo-1615529162924-f8605388461d?auto=format&fit=crop&w=1800&q=78",
+      "https://images.unsplash.com/photo-1600607687890-432aa0e6d61b?auto=format&fit=crop&w=1800&q=78",
+      "https://images.unsplash.com/photo-1600566752355-35792bedcfea?auto=format&fit=crop&w=1800&q=78",
+      "https://images.unsplash.com/photo-1600573472591-ee6b68d14c68?auto=format&fit=crop&w=1800&q=78",
+      "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=1800&q=78",
+      "https://images.unsplash.com/photo-1600566753086-00f18fb6b3ea?auto=format&fit=crop&w=1800&q=78",
+      "https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?auto=format&fit=crop&w=1800&q=78"
+    ],
+    "airbnb-staging-the-luxury-look": [
+      "https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?auto=format&fit=crop&w=1800&q=78",
+      "https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&w=1800&q=78",
+      "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1800&q=78",
+      "https://images.unsplash.com/photo-1600607687644-c7171b42498f?auto=format&fit=crop&w=1800&q=78",
+      "https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?auto=format&fit=crop&w=1800&q=78",
+      "https://images.unsplash.com/photo-1615529162924-f8605388461d?auto=format&fit=crop&w=1800&q=78",
+      "https://images.unsplash.com/photo-1600566752355-35792bedcfea?auto=format&fit=crop&w=1800&q=78",
+      "https://images.unsplash.com/photo-1600573472591-ee6b68d14c68?auto=format&fit=crop&w=1800&q=78"
+    ],
+    "commercial-staging-projects-the-luxury-look": [
+      "https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=1800&q=78",
+      "https://images.unsplash.com/photo-1497366811353-6870744d04b2?auto=format&fit=crop&w=1800&q=78",
+      "https://images.unsplash.com/photo-1497366858526-0766cadbe8fa?auto=format&fit=crop&w=1800&q=78",
+      "https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=1800&q=78",
+      "https://images.unsplash.com/photo-1497366412874-3415097a27e7?auto=format&fit=crop&w=1800&q=78",
+      "https://images.unsplash.com/photo-1524758631624-e2822e304c36?auto=format&fit=crop&w=1800&q=78",
+      "https://images.unsplash.com/photo-1497366724031-c1f85e8a83d1?auto=format&fit=crop&w=1800&q=78",
+      "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=1800&q=78"
+    ],
+    "corporate-brandding-projects-the-luxury-look": [
+      "https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=1800&q=78",
+      "https://images.unsplash.com/photo-1497366811353-6870744d04b2?auto=format&fit=crop&w=1800&q=78",
+      "https://images.unsplash.com/photo-1524758631624-e2822e304c36?auto=format&fit=crop&w=1800&q=78",
+      "https://images.unsplash.com/photo-1497366412874-3415097a27e7?auto=format&fit=crop&w=1800&q=78",
+      "https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=1800&q=78",
+      "https://images.unsplash.com/photo-1497366724031-c1f85e8a83d1?auto=format&fit=crop&w=1800&q=78",
+      "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=1800&q=78"
+    ]
+  }
+}

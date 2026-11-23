@@ -56,3 +56,12 @@ SEO improvement with **zero recrawl** is not possible. Google will crawl and ree
 - The repo contains no copied Webflow binary imagery or full galleries. Final imagery must be obtained through the company's own asset export, not hotlinked indefinitely.
 - Webflow template demo/shop/product links and checkout routes require business decisions before cutover.
 - This is a migration baseline, not a promise of zero SEO fluctuations.
+
+
+### November 23, 2026 design-preview controls
+
+- The static GitHub Pages preview includes **54 project route pages** and 432 temporary gallery slots to evaluate page layouts. None is approved client photography; the review site is `noindex,nofollow` and disallows crawlers.
+- `preview_cover_image`, `preview_gallery` and category/service preview image fields are **never** emitted with `SITE_LAUNCH_READY=true`. Verified uploads override temporary imagery in staging too.
+- The 54 unique original Webflow cover assets remain in `cover_image` for eventual migration/rights verification. Do not use gallery placeholders as canonical Open Graph images in production.
+- The new `/portfolio` hub is an added URL and deliberately noindex until approved. Original category and project slugs remain unchanged, including historic misspellings.
+- Before release, check every project individually, import its own real gallery (not photos from other projects), validate alt text and meta, and explicitly mark `content_verified`. Do not use demo imagery to generate original-schema or business SEO claims.

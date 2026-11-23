@@ -6,14 +6,14 @@ use Illuminate\Database\Eloquent\Model;
 class Project extends Model
 {
     protected $table = 'projects';
-    protected $fillable = ['portfolio_category_id', 'slug', 'title', 'location', 'summary', 'story', 'cover_image', 'cover_upload', 'gallery', 'gallery_uploads', 'meta_title', 'meta_description', 'featured', 'is_published', 'content_verified', 'sort_order'];
-    protected function casts(): array { return ['featured' => 'boolean', 'is_published' => 'boolean', 'content_verified' => 'boolean', 'gallery' => 'array', 'gallery_uploads' => 'array']; }
+    protected $fillable = ['portfolio_category_id', 'slug', 'title', 'location', 'summary', 'story', 'cover_image', 'cover_upload', 'preview_cover_image', 'gallery', 'gallery_uploads', 'preview_gallery', 'meta_title', 'meta_description', 'featured', 'is_published', 'content_verified', 'sort_order'];
+    protected function casts(): array { return ['featured' => 'boolean', 'is_published' => 'boolean', 'content_verified' => 'boolean', 'gallery' => 'array', 'gallery_uploads' => 'array', 'preview_gallery' => 'array']; }
 
     public function getHeroUrlAttribute(): ?string
     {
-        return $this->cover_upload
-            ? \Illuminate\Support\Facades\Storage::disk('public')->url($this->cover_upload)
-            : $this->cover_image;
+        if ($this->cover_upload) return \Illuminate\Support\Facades\Storage::disk('public')->url($this->cover_upload);
+        if (!config('site.launch_ready') && !$this->content_verified && $this->preview_cover_image) return $this->preview_cover_image;
+        return $this->cover_image;
     }
 
     public function category(): \Illuminate\Database\Eloquent\Relations\BelongsTo
@@ -25,6 +25,10 @@ class Project extends Model
         $items = $this->gallery ?? [];
         foreach ($this->gallery_uploads ?? [] as $path) {
             $items[] = ['url' => \Illuminate\Support\Facades\Storage::disk('public')->url($path), 'alt' => $this->title];
+        }
+        // Temporary imagery is visible only in development, never after public launch.
+        if (!$items && !config('site.launch_ready') && !$this->content_verified) {
+            return $this->preview_gallery ?? [];
         }
         return $items;
     }

@@ -22,4 +22,7 @@
 /database/database.sqlite
 .phpunit.result.cache
 /.phpunit.cache/
+
+# Generated visual preview is published from GitHub Actions; do not track locally.
 /preview-dist/
+/scripts/__pycache__/

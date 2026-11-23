@@ -1,5 +1,5 @@
 @extends('layouts.site')
 @section('content')
-<section class="page-hero page-hero--plain"><div class="container page-hero__inner"><p class="eyebrow">{{ $page->eyebrow ?: 'The Luxury Look' }}</p><h1>{{ $page->title }}</h1>@if($page->intro)<p>{{ $page->intro }}</p>@endif</div></section>
-<section class="container page-editorial section-pad"><div><p class="eyebrow">A Thoughtful Approach</p><div class="line-accent"></div></div><div class="prose">{!! \Illuminate\Support\Str::markdown($page->body ?? '', ['html_input'=>'strip','allow_unsafe_links'=>false]) !!}<a class="pill-link pill-link--dark" href="{{ route('contact') }}">Start a Conversation <span>&nearr;</span></a></div></section>
+<header class="page-editorial-header container-wide"><p class="section-kicker">{{ strtoupper($page->eyebrow ?: 'THE LUXURY LOOK') }}</p><h1>{{ $page->title }}<span class="period">.</span></h1>@if($page->intro)<p>{{ $page->intro }}</p>@endif</header>
+<section class="page-editorial-body section-space container-wide"><span class="section-kicker">DESIGN STUDIO / SCOTTSDALE</span><div><div class="prose">{!! \Illuminate\Support\Str::markdown($page->body ?? '', ['html_input'=>'strip','allow_unsafe_links'=>false]) !!}</div><a class="under-link" href="{{ route('contact') }}">Get in touch ↗</a></div></section>
 @endsection

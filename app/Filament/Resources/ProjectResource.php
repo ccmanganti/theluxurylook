@@ -27,12 +27,20 @@ class ProjectResource extends Resource
         Textarea::make('summary')->rows(3),
         MarkdownEditor::make('story')->columnSpanFull(),
     ])->columns(2),
-    Section::make('Photography')->schema([
+    Section::make('Final project photography — uploads take priority')->schema([
         TextInput::make('cover_image')->label('Legacy CDN image URL')->columnSpanFull(),
         FileUpload::make('cover_upload')->disk('public')->directory('projects/covers')->image()->imageEditor(),
         Repeater::make('gallery')->schema([TextInput::make('url')->required(),TextInput::make('alt')])->columns(2)->columnSpanFull(),
-        FileUpload::make('gallery_uploads')->disk('public')->directory('projects/gallery')->multiple()->image()->reorderable()->columnSpanFull(),
+        FileUpload::make('gallery_uploads')->disk('public')->directory('projects/gallery')->multiple()->image()->reorderable()->columnSpanFull()
+            ->helperText('Once even one approved image is uploaded, sample gallery images are hidden on staging. Upload the full project set before marking verified.'),
     ]),
+    Section::make('Temporary preview photography — staging only')->description('These photos show layout only and will NEVER appear when SITE_LAUNCH_READY=true. Replace via the upload fields above.')->schema([
+        TextInput::make('preview_cover_image')->label('Temporary cover URL')->url()->columnSpanFull(),
+        Repeater::make('preview_gallery')->label('Temporary gallery slots')->schema([
+            TextInput::make('url')->label('Preview image URL')->required()->url(),
+            TextInput::make('alt')->label('Placeholder description')
+        ])->columns(2)->reorderable()->columnSpanFull(),
+    ])->collapsed(),
     Section::make('SEO and launch readiness')->schema([
         TextInput::make('meta_title')->maxLength(255),Textarea::make('meta_description')->rows(2),
         Toggle::make('featured'),Toggle::make('is_published'),Toggle::make('content_verified')->helperText('Approve only after copy, gallery, OG tags, and media ownership have been reviewed.'),

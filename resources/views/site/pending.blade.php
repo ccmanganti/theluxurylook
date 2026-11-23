@@ -1,4 +1,4 @@
 @extends('layouts.site')
 @section('content')
-<section class="page-hero page-hero--plain"><div class="container page-hero__inner"><p class="eyebrow">Website Migration / URL Retained</p><h1>We're preparing <em>this space.</em></h1><p>This existing website address is reserved. Its original content, assets or functionality are being transferred and reviewed.</p><p class="micro-label">{{ $legacy->path }}</p><a class="pill-link pill-link--dark" href="{{ route('contact') }}">Contact The Studio <span>&nearr;</span></a></div></section>
+<section class="page-editorial-header container-wide"><p class="section-kicker">WEBSITE CONTENT MIGRATION</p><h1>Coming soon<span class="period">.</span></h1><p>This website address is being preserved while its original content and media are reviewed.</p><a class="under-link" href="{{ route('contact') }}">Contact the studio ↗</a></section>
 @endsection
