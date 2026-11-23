@@ -13,7 +13,7 @@
     const update=value=>{
       let visible=0;
       filters.forEach(b=>{const selected=b.dataset.portfolioFilter===value;b.classList.toggle('is-active',selected);b.setAttribute('aria-pressed',String(selected))});
-      cards.forEach(card=>{const show=value==='all'||card.dataset.categorySlug===value;card.hidden=!show;if(show)visible++});
+      cards.forEach(card=>{const show=value==='all'||card.dataset.categorySlug===value;card.hidden=!show;const tile=card.closest('.lux-editorial-grid__item');if(tile)tile.hidden=!show;if(show)visible++});
       const empty=document.querySelector('.empty-filter');if(empty)empty.hidden=visible!==0;
     };
     filters.forEach(b=>b.addEventListener('click',()=>update(b.dataset.portfolioFilter)));

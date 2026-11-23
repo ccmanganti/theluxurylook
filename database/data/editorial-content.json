@@ -1,0 +1,227 @@
+{
+  "categories": {
+    "interior-design-projects": {
+      "eyebrow": "Residential interiors / Tailored from the ground up",
+      "headline": "A home worth coming home to.",
+      "opening": "From the architecture of a room to the last considered detail, beautiful interiors begin with an understanding of the people who live in them.",
+      "promise": "Not a look applied to a space. A space shaped around the way you live.",
+      "focus": [
+        "Rooms that feel connected",
+        "Materials chosen to endure",
+        "A point of view that feels personal"
+      ],
+      "cta": "Planning a renovation or new home?"
+    },
+    "home-staging-projects-the-luxury-look": {
+      "eyebrow": "Residential staging / First impressions matter",
+      "headline": "See the possibility. Feel at home.",
+      "opening": "Staging gives buyers more than a floor plan. It lets them see how the rooms could come together and imagine a life in the space.",
+      "promise": "Give every room a reason to be remembered.",
+      "focus": [
+        "Vacant and occupied properties",
+        "Spaces with a clear purpose",
+        "Photo-ready presentation"
+      ],
+      "cta": "Getting a property ready to list?"
+    },
+    "interior-styling-projects-the-luxury-look": {
+      "eyebrow": "Styling / The final layer of character",
+      "headline": "Everything in its right place.",
+      "opening": "When the foundation is already there, the right furniture, art, lighting and objects can transform how a room feels without major construction.",
+      "promise": "Sometimes the smallest details change everything.",
+      "focus": [
+        "Furniture and object curation",
+        "Layered textures and finishes",
+        "A fresh perspective on familiar rooms"
+      ],
+      "cta": "Ready to fall in love with your space again?"
+    },
+    "airbnb-staging-the-luxury-look": {
+      "eyebrow": "Short-term rentals / The guest experience",
+      "headline": "A stay with a sense of place.",
+      "opening": "For travelers, the design becomes part of the memory. We bring together comfort, character and a considered visual identity for guest-focused spaces.",
+      "promise": "Thoughtful interiors make an arrival feel special.",
+      "focus": [
+        "Arrival and first impressions",
+        "Durable comfort and useful flow",
+        "Photography-ready guest spaces"
+      ],
+      "cta": "Creating or refreshing a guest property?"
+    },
+    "commercial-staging-projects-the-luxury-look": {
+      "eyebrow": "Commercial environments / Experience by design",
+      "headline": "Spaces with a purpose to serve.",
+      "opening": "A workplace, retail environment or public-facing property should communicate where people are, what the space offers and how they should feel in it.",
+      "promise": "Good design makes the experience feel intuitive.",
+      "focus": [
+        "A welcoming first impression",
+        "Clear movement and spatial flow",
+        "A cohesive visual environment"
+      ],
+      "cta": "Have a commercial space in mind?"
+    },
+    "corporate-brandding-projects-the-luxury-look": {
+      "eyebrow": "Corporate / Brand expression in real life",
+      "headline": "Make the room tell your story.",
+      "opening": "For campaigns, launches and branded gatherings, the environment is part of the message. We help translate a brand's visual language into memorable physical settings.",
+      "promise": "A distinctive setting begins with a clear identity.",
+      "focus": [
+        "Branded environments and events",
+        "Photo and content-ready settings",
+        "A cohesive visual story"
+      ],
+      "cta": "Planning an experience for your brand?"
+    }
+  },
+  "services": {
+    "interior-design": {
+      "eyebrow": "01 / Interior Design",
+      "headline": "More than beautiful. Made for your life.",
+      "intro": "A remarkable interior is the result of many thoughtful decisions working together: the flow of the rooms, the materials, the light and the details you live with every day.",
+      "audience": [
+        "A new build that needs a clear design direction",
+        "A remodel that should feel considered from beginning to end",
+        "A residence ready for a more personal expression"
+      ],
+      "scope": [
+        "Space planning and room flow",
+        "Material, finish and color direction",
+        "Furnishing, lighting and decorative layers",
+        "Coordination with your wider project team"
+      ],
+      "closing": "Let's design around the way you want to live.",
+      "question": "What would it feel like if your home reflected you in every detail?"
+    },
+    "interior-styling": {
+      "eyebrow": "02 / Interior Styling",
+      "headline": "The room you have. Reimagined.",
+      "intro": "Sometimes the architecture is right and the atmosphere isn't. Styling brings a fresh eye to the furniture, textures, lighting, art and objects that give a room its personality.",
+      "audience": [
+        "A furnished room that feels unfinished",
+        "A home that needs a cohesive new look",
+        "A property preparing for photography or media"
+      ],
+      "scope": [
+        "Furniture and accessory editing",
+        "Art, objects and texture selection",
+        "Lighting and finishing details",
+        "Photo-ready room composition"
+      ],
+      "closing": "The finishing touches can be the most memorable.",
+      "question": "What if you could see your existing space in a completely new way?"
+    },
+    "luxury-residential-staging": {
+      "eyebrow": "03 / Home Staging",
+      "headline": "Present the home. Reveal the potential.",
+      "intro": "A buyer needs to understand the space and imagine themselves in it. Staging brings clarity, warmth and purpose to the rooms that matter most during a property presentation.",
+      "audience": [
+        "Vacant homes preparing to enter the market",
+        "Occupied properties that need a thoughtful edit",
+        "Owners or agents planning a strong visual presentation"
+      ],
+      "scope": [
+        "Room-by-room staging direction",
+        "Furniture and accessory composition",
+        "Visual flow for in-person and online views",
+        "Final styling for listing photography"
+      ],
+      "closing": "Let's make the first impression count.",
+      "question": "Can prospective buyers picture themselves living here?"
+    },
+    "commercial-staging": {
+      "eyebrow": "04 / Commercial Staging",
+      "headline": "A space that works for your business.",
+      "intro": "Whether presenting a property, welcoming guests or shaping a work environment, commercial spaces need a deliberate sense of purpose and a strong first impression.",
+      "audience": [
+        "Commercial properties being introduced to the market",
+        "Business interiors in need of a more coherent experience",
+        "Spaces preparing for photography or presentation"
+      ],
+      "scope": [
+        "Spatial presentation and styling",
+        "Furniture and accessory direction",
+        "Arrival, circulation and visual flow",
+        "Brand-conscious finishing details"
+      ],
+      "closing": "Give your space the presence it deserves.",
+      "question": "What should people feel in the first ten seconds?"
+    },
+    "airbnb-staging": {
+      "eyebrow": "05 / Airbnb Staging",
+      "headline": "Memorable stays begin with the space.",
+      "intro": "The best guest spaces offer more than a place to sleep. We consider how a property welcomes, comforts and photographs, and how every room contributes to the experience.",
+      "audience": [
+        "A new short-term rental preparing for its first guests",
+        "An existing listing ready for a considered refresh",
+        "A property owner refining the guest experience"
+      ],
+      "scope": [
+        "Guest-centric layout and room planning",
+        "Furnishing and durable material choices",
+        "Memorable focal points and useful details",
+        "Styling for listing photography"
+      ],
+      "closing": "Create a place your guests will remember.",
+      "question": "What will a guest remember after they check out?"
+    },
+    "corporate-branding": {
+      "eyebrow": "06 / Corporate Branding",
+      "headline": "Your identity, brought into the room.",
+      "intro": "A well-designed branded setting makes an idea tangible. From launches to creative campaigns, we use environments, details and styling to help the visual story feel unmistakable.",
+      "audience": [
+        "Companies planning an event or launch",
+        "Brands creating photography-ready environments",
+        "Teams looking for a distinctive visual setting"
+      ],
+      "scope": [
+        "Visual concept and environment direction",
+        "Styling for content and photography",
+        "Coherent material and prop choices",
+        "Thoughtful brand-aligned details"
+      ],
+      "closing": "Let's give your ideas a physical presence.",
+      "question": "How should your brand feel when someone walks into the room?"
+    }
+  },
+  "steps": [
+    {
+      "number": "01",
+      "title": "Share the vision",
+      "text": "Tell us how you use the space, what you love and what isn't working."
+    },
+    {
+      "number": "02",
+      "title": "Shape the direction",
+      "text": "We explore the design approach and a scope suited to the property and your goals."
+    },
+    {
+      "number": "03",
+      "title": "Bring it together",
+      "text": "The details are considered as a whole, from the larger decisions to the finishing touches."
+    }
+  ],
+  "credibility": {
+    "founded": "2013",
+    "experience": "35+ years",
+    "label": "Real estate perspective. Design instinct.",
+    "caveat": "Experience claim reflected on the current company website; confirm wording before final production launch."
+  },
+  "pages": {
+    "about": {
+      "image": "https://cdn.prod.website-files.com/61900fb94bdf48d160f4ffef/6930cdb203e0e2dbea07f32a_MOCKINGBIRD%20PARADISE%20VALLEY_6.png",
+      "detail": "https://cdn.prod.website-files.com/61900fb94bdf48d160f4ffef/6930cc2f7dc491b75d68df0b_6855%20E%20Ivyglen%20Julie%20Sims_10.jpg"
+    },
+    "the-studio": {
+      "image": "https://cdn.prod.website-files.com/61900fb94bdf48d160f4ffef/6964c9173583e12b396e1da6_Studio%203125%20(3).jpg",
+      "detail": "https://cdn.prod.website-files.com/61900fb94bdf48d160f4ffef/6930cbc3869cc7635ce67752_OUTDOOR%20SEATING%20AND%20DINING_24.jpg"
+    },
+    "awards": {
+      "image": "https://cdn.prod.website-files.com/61900fb94bdf48d160f4ffef/692fb8cba34350c7e15f6a28_Desert%20Vista%20Luxury%20Design_32.jpg",
+      "detail": "https://cdn.prod.website-files.com/61900fb94bdf48d160f4ffef/6930cdb203e0e2dbea07f32a_MOCKINGBIRD%20PARADISE%20VALLEY_6.png"
+    },
+    "fallback": {
+      "image": "https://cdn.prod.website-files.com/61900fb94bdf48d160f4ffef/6930cc2f7dc491b75d68df0b_6855%20E%20Ivyglen%20Julie%20Sims_10.jpg",
+      "detail": "https://cdn.prod.website-files.com/61900fb94bdf48d160f4ffef/6930cdb203e0e2dbea07f32a_MOCKINGBIRD%20PARADISE%20VALLEY_6.png"
+    }
+  }
+}

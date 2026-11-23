@@ -75,7 +75,7 @@ def shell(title,body,description='The Luxury Look design review: temporary image
 <meta name="robots" content="noindex,nofollow,noarchive"><meta name="description" content="{e(description)}">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="preconnect" href="https://images.unsplash.com"><link rel="preconnect" href="https://cdn.prod.website-files.com">
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Cormorant+Garamond:wght@400;500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="{BASE}assets/site.css"><script defer src="{BASE}assets/site.js"></script></head>
+<link rel="stylesheet" href="{BASE}assets/site.css"><link rel="stylesheet" href="{BASE}assets/editorial.css"><script defer src="{BASE}assets/site.js"></script></head>
 <body><a class="skip-link" href="#main">Skip to content</a>
 <div class="preview-ribbon" role="note">DESIGN REVIEW <span aria-hidden="true">/</span> IMAGE SETS ARE TEMPORARY &amp; WILL BE REPLACED <span aria-hidden="true">/</span> NOT INDEXED</div>
 <header class="masthead" id="top"><div class="masthead-top container-wide"><span>SCOTTSDALE, ARIZONA <i aria-hidden="true"></i> INTERIOR DESIGN &amp; STAGING</span><a href="{url('contact')}">INQUIRE ABOUT A PROJECT <span aria-hidden="true">↗</span></a></div>
@@ -201,5 +201,20 @@ def main():
     write('404.html',shell('Page not found',f'<section class="page-editorial-header container-wide"><p class="section-kicker">NOT FOUND</p><h1>This page has moved<span class="period">.</span></h1><p>Some original content is still being migrated in this temporary preview.</p><a class="under-link" href="{url('portfolio')}">Browse the portfolio ↗</a></section>'))
     print(f'Generated {len(list(DEST.rglob("index.html")))} responsive portfolio-led preview pages.')
     print(f'Includes {len(PROJECTS)} project detail pages, {sum(photo_count(p) for p in PROJECTS)} replaceable gallery photo slots, {len(CATEGORIES)} portfolio category pages and {len(SERVICES)} service detail pages.')
+
+
+# Internal pages share an editorial design system with the Laravel templates.
+# Keep all existing legacy paths while giving individual pages conversion-focused layouts.
+import editorial_preview as _editorial
+EDITORIAL = json.loads((ROOT / 'database/data/editorial-content.json').read_text(encoding='utf-8'))
+def portfolio_index(): return _editorial.portfolio_index(globals())
+def category_page(c): return _editorial.category_page(c,globals())
+def project_page(p): return _editorial.project_page(p,globals())
+def services_index(): return _editorial.services_index(globals())
+def service_page(s): return _editorial.service_page(s,globals())
+def about_page(p): return _editorial.about_page(p,globals())
+def journal(): return _editorial.journal(globals())
+def journal_post(x): return _editorial.journal_post(x,globals())
+def contact(): return _editorial.contact(globals())
 
 if __name__=='__main__':main()

@@ -24,6 +24,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Cormorant+Garamond:wght@400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('assets/site.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/editorial.css') }}">
     <script defer src="{{ asset('assets/site.js') }}"></script>
     @if (config('site.ga4_id') && config('site.launch_ready'))
         <script async src="https://www.googletagmanager.com/gtag/js?id={{ config('site.ga4_id') }}"></script>
