@@ -1,46 +1,9 @@
 @extends('layouts.site')
-@php
-    $copy = config('editorial.categories.'.$category->slug, []);
-    $available = $projects->getCollection();
-    $spotlight = $available->first();
-    $supporting = $available->skip(1)->first();
-@endphp
+@php $records = $projects->getCollection(); $feature = $records->first(); @endphp
 @section('content')
-<article class="lux-category">
-    <header class="lux-category-hero">
-        <div class="lux-category-hero__image media-frame">
-            <img src="{{ $category->hero_url }}" fetchpriority="high" alt="{{ $category->title }} - {{ config('site.launch_ready') ? 'project photography' : 'temporary design reference' }}">
-        </div>
-        <div class="lux-category-hero__panel">
-            <p class="lux-overline"><a href="{{ route('portfolio.index') }}">The portfolio</a> <span>/</span> {{ $category->title }}</p>
-            <span class="lux-hero-rule"></span>
-            <h1>{{ $category->title }}</h1>
-            <p class="lux-category-hero__line">{{ $copy['headline'] ?? $category->tagline }}</p>
-            <a class="lux-text-link" href="#collection">Discover the collection <span aria-hidden="true">&darr;</span></a>
-            <div class="lux-category-hero__foot"><span>Selected work / Scottsdale & beyond</span><span>{{ sprintf('%02d', $projects->total()) }} projects</span></div>
-        </div>
-    </header>
-    <section class="lux-category-intro lux-wrap">
-        <div class="lux-vertical-index"><span>01</span><span>THE POINT OF VIEW</span></div>
-        <div><p class="lux-overline">{{ $copy['eyebrow'] ?? 'A closer look' }}</p><h2>{{ $copy['promise'] ?? $category->tagline }}</h2></div>
-        <div class="lux-category-intro__right"><p>{{ $copy['opening'] ?? $category->description }}</p><a href="{{ route('contact') }}?service={{ urlencode($category->title) }}" class="lux-line-action">Discuss your space <span aria-hidden="true">&nearr;</span></a></div>
-    </section>
-    <section class="lux-collage-intro lux-wrap" aria-label="Selected photography">
-        @if($spotlight)
-        <a class="lux-collage-intro__main media-frame" href="{{ route('project.show',$spotlight->slug) }}"><img src="{{ $spotlight->hero_url }}" loading="lazy" alt="{{ $spotlight->title }}"><span class="lux-image-caption"><b>{{ $spotlight->title }}</b> <span>View project &nearr;</span></span></a>
-        @endif
-        <div class="lux-collage-intro__aside">
-            @if($supporting)<a class="media-frame" href="{{ route('project.show',$supporting->slug) }}"><img src="{{ $supporting->hero_url }}" loading="lazy" alt="{{ $supporting->title }}"><span class="lux-image-caption">{{ $supporting->title }}</span></a>@endif
-            <div class="lux-collage-intro__note"><span class="lux-overline">Every detail matters</span><p>{{ $copy['headline'] ?? $category->tagline }}</p><span class="lux-aside-number">{{ sprintf('%02d', $projects->total()) }}</span></div>
-        </div>
-    </section>
-    <section id="collection" class="lux-collection lux-wrap">
-        <div class="lux-heading-row"><div><p class="lux-overline">02 / Explore the work</p><h2>The collection<span class="lux-dot">.</span></h2></div><p>Take a closer look at the individual spaces, settings and projects within this discipline.</p></div>
-        <nav class="lux-category-nav" aria-label="Portfolio disciplines"><a href="{{ route('portfolio.index') }}">All work</a>@foreach($categories as $item)<a href="{{ route('category.show',$item->slug) }}" @if($item->slug === $category->slug) aria-current="page" @endif>{{ $item->title }}</a>@endforeach</nav>
-        <div class="lux-editorial-grid">@forelse($projects as $i=>$project)<div class="lux-editorial-grid__item lux-editorial-grid__item--{{ $i % 7 }}">@include('site.partials.project-card',['project'=>$project])</div>@empty<p>Portfolio imagery is being prepared for this collection.</p>@endforelse</div>
-        {{ $projects->links() }}
-    </section>
-    <section class="lux-values lux-wrap"><div><p class="lux-overline">What we consider</p><h2>The details<br><em>change everything.</em></h2></div><div class="lux-values__items">@foreach(($copy['focus'] ?? []) as $i=>$value)<div><span>0{{ $i+1 }}</span><p>{{ $value }}</p></div>@endforeach</div></section>
-    <section class="lux-conversion lux-wrap"><span class="lux-overline">A space of your own</span><h2>{{ $copy['cta'] ?? 'Have something in mind?' }}</h2><p>Tell us what you're imagining. We'll talk through your goals and the next steps with the studio.</p><a href="{{ route('contact') }}?service={{ urlencode($category->title) }}" class="lux-btn">Begin a conversation <span>&nearr;</span></a></section>
-</article>
+<section class="x-category-hero"><div class="x-category-hero-photo x-media x-media--cinema"><img src="{{ $category->hero_url }}" alt="{{ $category->title }} editorial photography" width="1440" height="800" loading="eager"></div><div class="x-category-hero-title x-wrap"><span class="x-eyebrow"><a href="{{ route('portfolio.index') }}">PORTFOLIO</a> / {{ strtoupper($category->title) }}</span><h1>{{ $category->title }}</h1><p>{{ $category->tagline }}</p><a href="#gallery" class="x-pill x-pill--light">See the work <span>↓</span></a></div></section>
+<section class="x-category-manifesto x-wrap x-section"><span class="x-eyebrow">A COLLECTION WITH CHARACTER</span><div><h2>Spaces with<br><em>their own voice.</em></h2><p>{{ $category->description }}</p><a class="x-underlink" href="{{ route('contact') }}?service={{ urlencode($category->title) }}">Discuss {{ strtolower($category->title) }} ↗</a></div></section>
+@if($feature)<section class="x-category-feature x-wrap"><div class="x-category-feature-img x-media x-media--landscape"><a href="{{ route('project.show',$feature->slug) }}"><img src="{{ $feature->hero_url }}" alt="{{ $feature->display_title }}" width="1100" height="780" loading="lazy"></a></div><div><span class="x-eyebrow">FEATURED FROM THIS COLLECTION</span><h2>{{ $feature->display_title }}</h2><p>{{ $feature->summary }}</p><a class="x-underlink" href="{{ route('project.show',$feature->slug) }}">Explore the case study ↗</a></div></section>@endif
+<section class="x-category-archive x-wrap x-section" id="gallery"><div class="x-heading"><div><span class="x-eyebrow">THE SELECTED ARCHIVE</span><h2>See every<br><em>perspective.</em></h2></div><span>{{ $projects->total() }} WORKS</span></div><div class="x-mosaic x-mosaic--category">@foreach($records->skip(1) as $i=>$project)<div class="x-mosaic-cell x-mosaic-cell--{{ $i%6 }}">@include('site.partials.experience-card',['project'=>$project,'ratio'=>($i%6===0?'wide':($i%3===1?'portrait':'landscape'))])</div>@endforeach</div>{{ $projects->links() }}</section>
+<section class="x-next-cta x-wrap x-section"><div><span class="x-eyebrow">YOUR PROPERTY, REIMAGINED</span><h2>A fresh point<br><em>of view.</em></h2></div><div><p>Already have a space in mind? Share a little about it and we'll talk through the possibilities.</p><a class="x-pill" href="{{ route('contact') }}?service={{ urlencode($category->title) }}">Request a Conversation <span>↗</span></a></div></section>
 @endsection

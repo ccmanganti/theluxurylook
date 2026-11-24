@@ -57,6 +57,7 @@ class DatabaseSeeder extends Seeder
         }
         // Staging-only photo and working-title backfill is non-destructive.
         $this->call(PreviewPhotographySeeder::class);
+        $this->call(ExperienceOfferingSeeder::class);
         $this->call(PreviewTitlesSeeder::class);
         // Every original path requires an explicit content and SEO review.
         // This migration preview deliberately approves no URL automatically.

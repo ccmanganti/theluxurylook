@@ -6,8 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 class Page extends Model
 {
     protected $table = 'pages';
-    protected $fillable = ['path', 'title', 'eyebrow', 'intro', 'body', 'hero_image', 'meta_title', 'meta_description', 'is_published', 'content_verified'];
-    protected function casts(): array { return ['is_published' => 'boolean', 'content_verified' => 'boolean']; }
+    protected $fillable = ['path', 'title', 'eyebrow', 'intro', 'body', 'hero_image', 'meta_title', 'meta_description', 'is_published', 'content_verified', 'sections', 'layout_variant', 'hero_video', 'hero_video_poster', 'cta_text', 'cta_url'];
+    protected function casts(): array { return ['is_published' => 'boolean', 'content_verified' => 'boolean', 'sections' => 'array']; }
 
     public function scopeVisibleOnSite($query)
     {

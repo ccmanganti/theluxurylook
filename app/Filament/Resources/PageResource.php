@@ -25,6 +25,18 @@ class PageResource extends Resource
         Textarea::make('intro')->rows(2),MarkdownEditor::make('body')->columnSpanFull(),
         TextInput::make('hero_image')->columnSpanFull(),
     ])->columns(2),
+    Section::make('Dynamic sections & page presentation')->description('Reusable sections for editorial pages; the active public page automatically renders approved content blocks.')->schema([
+        Select::make('layout_variant')->options(['editorial'=>'Editorial','split'=>'Split introduction','gallery'=>'Gallery','feature'=>'Visual feature','journal'=>'Journal'])->default('editorial'),
+        TextInput::make('hero_video')->label('Optional background MP4 path')->helperText('Upload and optimize video before using; reduced-motion visitors see the static poster.'),
+        TextInput::make('hero_video_poster')->label('Video poster image URL'),
+        TextInput::make('cta_text')->label('Primary call to action'),TextInput::make('cta_url')->label('CTA destination'),
+        Repeater::make('sections')->label('Page sections')->schema([
+            Select::make('type')->options(['editorial'=>'Editorial story','gallery'=>'Image gallery','statement'=>'Pull quote / Statement','services'=>'Service CTA','video'=>'Video / Media','cta'=>'Inquiry CTA'])->required(),
+            TextInput::make('eyebrow'),TextInput::make('heading')->required(),Textarea::make('body')->rows(3),
+            TextInput::make('image_url')->label('Image URL')->url(),
+            TextInput::make('cta_text'),TextInput::make('cta_url'),
+        ])->reorderable()->columns(2)->columnSpanFull(),
+    ])->columns(2),
     Section::make('SEO and launch readiness')->schema([
         TextInput::make('meta_title'),Textarea::make('meta_description'),
         Toggle::make('is_published'),Toggle::make('content_verified'),

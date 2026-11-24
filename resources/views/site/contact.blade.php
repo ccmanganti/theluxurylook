@@ -10,7 +10,7 @@
     <p class="lux-overline">Tell us about your home</p>
     <label>How may we help? <span>*</span><select name="service" id="inquiry-service" required>
       <option value="">Choose the closest service</option>
-      @foreach(['Custom Home Design','Luxury Renovation','Interior Furnishings & Styling','Second-Home Furnishing & Setup','Builder or Developer Design Partnership','Luxury Home Staging','Turnkey Furniture & Housewares','The Curated Circle','I’d Appreciate Your Guidance'] as $choice)
+      @foreach(['Custom Home Design','Luxury Renovation','Interior Furnishings & Styling','Second-Home Furnishing & Setup','Builder or Developer Design Partnership','Luxury Home Staging','Turnkey Furniture & Housewares','The Curated Circle','Dallas Market','Education & Workshops','I’d Appreciate Your Guidance'] as $choice)
       <option value="{{ $choice }}" @selected(old('service',request('service'))===$choice)>{{ $choice }}</option>
       @endforeach
     </select></label>

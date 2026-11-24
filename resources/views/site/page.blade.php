@@ -20,5 +20,18 @@
 @else
 <article class="lux-generic"><header class="lux-generic-hero"><div><p class="lux-overline">{{ $page->eyebrow ?: 'The Luxury Look' }}</p><h1>{{ $page->title }}</h1><p>{{ $page->intro }}</p><a href="#details" class="lux-text-link">Explore the details &darr;</a></div><div class="media-frame"><img src="{{ $hero }}" fetchpriority="high" alt="Temporary design image for {{ $page->title }}"></div></header><section id="details" class="lux-generic-details lux-wrap"><div><span class="lux-overline">01 / The details</span><h2>A closer look.</h2></div><div class="lux-richtext">{!! \Illuminate\Support\Str::markdown($page->body ?? '',['html_input'=>'strip','allow_unsafe_links'=>false]) !!}<a href="{{ route('contact') }}" class="lux-line-action">Ask the studio &nearr;</a></div></section></article>
 @endif
+@if(count($page->sections??[]))
+<section class="x-page-modules x-wrap x-section" aria-label="More about this page">
+ @foreach($page->sections as $i=>$section)
+  @php $kind=$section['type']??'editorial'; @endphp
+  <article class="x-page-module x-page-module--{{ $kind }}">
+   <div><span class="x-eyebrow">{{ sprintf('%02d',$i+1) }} / {{ $section['eyebrow']??'THE LUXURY LOOK' }}</span><h2>{{ $section['heading']??'' }}</h2>
+     @if(!empty($section['body']))<div class="x-prose">{{ $section['body'] }}</div>@endif
+     @if(!empty($section['cta_text']) && !empty($section['cta_url']))<a class="x-underlink" href="{{ $section['cta_url'] }}">{{ $section['cta_text'] }} ↗</a>@endif</div>
+   @if(!empty($section['image_url']))<div class="x-media x-media--landscape"><img loading="lazy" width="960" height="720" src="{{ $section['image_url'] }}" alt="{{ $section['heading']??'Editorial photograph' }}"></div>@endif
+  </article>
+ @endforeach
+</section>
+@endif
 <section class="lux-conversion lux-wrap"><p class="lux-overline">Every great project begins somewhere</p><h2>Let's talk about yours.</h2><p>Whether you have a clear plan or an idea in progress, we'd love to understand the space you're considering.</p><a class="lux-btn" href="{{ route('contact') }}">Make an inquiry <span>&nearr;</span></a></section>
 @endsection
