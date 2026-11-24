@@ -1,4 +1,17 @@
 @extends('layouts.site')
 @section('content')
-<article class="lux-article"><header class="lux-article-hero lux-wrap"><p class="lux-overline"><a href="{{ route('blog') }}">The Journal</a> / {{ $post->published_at?->format('M Y') ?? 'Design perspectives' }}</p><h1>{{ $post->title }}</h1>@if($post->excerpt)<p>{{ $post->excerpt }}</p>@endif<a href="#story" class="lux-text-link">Read the story &darr;</a></header><figure class="lux-article-feature media-frame"><img src="{{ $post->hero_url ?: config('editorial.pages.about.image') }}" fetchpriority="high" alt="{{ config('site.launch_ready') ? $post->title : 'Temporary editorial image' }}"><figcaption>THE LUXURY LOOK JOURNAL / {{ $post->title }}</figcaption></figure><div class="lux-article-body lux-wrap" id="story"><aside><span class="lux-overline">Perspective / The Luxury Look</span><a href="{{ route('blog') }}">&larr; All journal stories</a></aside><div class="lux-richtext">@if($post->body){!! \Illuminate\Support\Str::markdown($post->body,['html_input'=>'strip','allow_unsafe_links'=>false]) !!}@elseif(!config('site.launch_ready'))<p>This is an editorial-layout preview. The original article and verified photography are being carried over from Webflow before publication.</p>@endif</div></div></article><section class="lux-conversion lux-wrap"><span class="lux-overline">Design it your way</span><h2>Every space has a story waiting to be told.</h2><p>Talk to our studio about your own.</p><a href="{{ route('contact') }}" class="lux-btn">Get in touch &nearr;</a></section>
+@php
+ $wordCount=str_word_count(strip_tags((string)$post->body));
+ $readMinutes=max(1,(int)round($wordCount/210));
+@endphp
+<article class="journal-article"><header class="journal-article-header x-wrap"><span class="x-eyebrow">THE LUXURY LOOK / THE JOURNAL / {{ $post->category ?: 'EDITORIAL' }}</span><h1>{{ $post->title }}</h1><p>{{ $post->excerpt }}</p><div class="journal-article-meta"><span>{{ $readMinutes }} MIN READ</span>@if($post->published_at)<span>{{ $post->published_at->format('F j, Y') }}</span>@endif<a href="{{ route('blog') }}">All Journal stories ↗</a></div></header>
+@if($post->hero_url)<figure class="journal-article-hero"><img src="{{ $post->hero_url }}" width="1600" height="850" fetchpriority="high" decoding="async" alt="Original editorial photograph for {{ $post->title }}"><figcaption>THE LUXURY LOOK JOURNAL / ORIGINAL SOURCE IMAGE</figcaption></figure>@endif
+<div class="journal-article-layout x-wrap" id="story"><aside><span class="x-eyebrow">IN THIS ARTICLE</span><nav data-article-toc aria-label="Article sections"></nav>
+<button type="button" class="journal-share" data-copy-article-link>Copy article link <span aria-hidden="true">↗</span></button>
+@if($post->source_attribution)<p>Original contribution: {{ $post->source_attribution }}</p>@endif
+@unless($post->content_verified)<p>This archived article is being reviewed for original attribution, photography and editorial accuracy before production publication.</p>@endunless
+</aside><div class="journal-article-body" data-article-body>
+@if($post->body){!! \Illuminate\Support\Str::markdown($post->body,['html_input'=>'strip','allow_unsafe_links'=>false]) !!}@else<p>The original article has not yet been imported. This legacy URL is reserved for editorial migration.</p>@endif
+</div></div>
+<section class="journal-related x-wrap x-section"><span class="x-eyebrow">THE NEXT CHAPTER</span><h2>Continue the<br><em>conversation.</em></h2><div><a href="{{ route('blog') }}">Read more from the Journal ↗</a><a href="{{ route('design') }}">Explore Interior Design ↗</a><a href="{{ route('contact') }}">Discuss Your Project ↗</a></div></section></article><div class="journal-read-progress" data-reading-progress aria-hidden="true"></div>
 @endsection
