@@ -63,7 +63,6 @@ class DatabaseSeeder extends Seeder
         $this->call(BuilderCaseStudySeeder::class);
         $this->call(StudioVideoSeeder::class);
         $this->call(FounderProfileSeeder::class);
-        $this->call(JournalArchiveSeeder::class);
         // Every original path requires an explicit content and SEO review.
         // This migration preview deliberately approves no URL automatically.
     }
