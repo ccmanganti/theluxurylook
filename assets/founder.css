@@ -6,3 +6,5 @@
 @media(prefers-reduced-motion:reduce){.x-founder-page *, .x-founder-spotlight *{animation:none!important;transition:none!important}}
 
 .x-founder-video-encore{display:grid;grid-template-columns:.75fr 1.25fr;align-items:center;gap:clamp(35px,5vw,95px);border-top:1px solid #d1c8bd}.x-founder-video-encore h2{font-size:clamp(47px,5vw,87px);line-height:.96;margin:25px 0}.x-founder-video-encore p{max-width:430px;color:#635c54}.x-founder-video-encore .x-founder-interview__visual{aspect-ratio:16/9}@media(max-width:850px){.x-founder-video-encore{grid-template-columns:1fr}}
+
+.x-founder-hero__headline{font:400 clamp(28px,2.8vw,42px)/1.12 'Cormorant Garamond',serif;color:#544639;letter-spacing:-.015em;max-width:590px;margin:22px 0 8px}
