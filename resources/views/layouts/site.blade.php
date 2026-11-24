@@ -4,7 +4,7 @@
 <title>{{ $seo['title'] ?? 'The Luxury Look | Interior Design Studio' }}</title>
 <meta name="description" content="{{ $seo['description'] ?? 'Distinctive interiors, curated sourcing and design expertise.' }}">
 <link rel="canonical" href="{{ $seo['canonical'] ?? 'https://'.config('site.canonical_host').'/' }}">
-<meta name="geo.region" content="US-AZ">@if(!empty($seo['location']))<meta name="geo.placename" content="{{ $seo['location'] }}">@endif
+@if(!empty($seo['location']))<meta name="geo.placename" content="{{ $seo['location'] }}">@if(str_contains($seo['location'],'Arizona'))<meta name="geo.region" content="US-AZ">@endif @endif
 @if(!config('site.launch_ready') || ($seo['noindex'] ?? false))<meta name="robots" content="noindex,nofollow,noarchive">@else<meta name="robots" content="index,follow,max-image-preview:large">@endif
 <meta property="og:site_name" content="The Luxury Look">
 <meta property="og:title" content="{{ $seo['title'] ?? 'The Luxury Look' }}">
