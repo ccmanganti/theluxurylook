@@ -14,6 +14,7 @@ ROOT=Path(__file__).resolve().parents[1]
 DEST=ROOT/'preview-dist'
 BASE='/theluxurylook/'
 load=lambda filename:json.loads((ROOT/'database/data'/filename).read_text('utf-8'))
+JOURNAL_ARCHIVE=load('blog-archive.json'); JOURNAL_BY_SLUG={x['slug']:x for x in JOURNAL_ARCHIVE}; LOCAL_META=load('local-seo-pages.json'); CURRENT_PATH='/'
 PORT=load('portfolio-seed.json')
 PROJECTS=PORT['projects'];CATEGORIES=PORT['categories'];SERVICES=load('services-seed.json')
 OFFERINGS=load('experience-offerings.json');PAGES=load('pages-seed.json');LEGACY=load('legacy-sitemap.json');VIDEOS=load('studio-videos.json');FOUNDER=load('founder-profile.json')
@@ -211,16 +212,63 @@ def editorial_page(p):
         return f'<section class="x-portfolio-lead x-wrap"><div>{eyebrow("PRESS / THE DESIGN HOUSE")}<h1>Work that<br><em>speaks for itself.</em></h1><p>Recognition, editorial features and awards are part of the studio story. Original links and award details are being verified before production.</p>{A("portfolio","Explore the portfolio")}</div>{media(img,"Temporary design photography","portrait")}</section>'
     return f'<section class="x-portfolio-lead x-wrap"><div>{eyebrow(p.get("eyebrow","THE LUXURY LOOK"))}<h1>{E(headline)}</h1><p>{E(intro)}</p>{A("contact","Ask the studio")}</div>{media(img,"Temporary page photography","portrait")}</section><section class="x-category-manifesto x-wrap x-section">{eyebrow("THE DETAILS")}<div>{h2("A closer look.")}<p>{E(p.get("body","Full program details are being confirmed."))}</p></div></section>'
 
+def article_markup(source):
+    """Minimal safe renderer for original Webflow markdown; no raw HTML/JS."""
+    import re
+    out=[];para=[];items=[]
+    def flush_para():
+        if para:
+            out.append('<p>'+E(' '.join(para))+'</p>');para.clear()
+    def flush_items():
+        if items:
+            out.append('<ul>'+''.join('<li>'+E(x)+'</li>' for x in items)+'</ul>');items.clear()
+    for line in str(source).splitlines():
+        stripped=line.strip()
+        if not stripped:
+            flush_para();flush_items();continue
+        if stripped.startswith(('### ','## ','# ')):
+            flush_para();flush_items()
+            level=3 if stripped.startswith('### ') else 2 if stripped.startswith('## ') else 2
+            value=stripped.lstrip('# ').strip('* ')
+            out.append(f'<h{level}>{E(value)}</h{level}>')
+        elif stripped.startswith(('- ','* ','• ')):
+            flush_para();items.append(stripped[2:].strip())
+        else:
+            flush_items();para.append(stripped)
+    flush_para();flush_items()
+    return '\n'.join(out)
+
 def journal():
-    blogs=[u for u in LEGACY if u['path'].startswith('/blog/')];cards=''
-    for i,b in enumerate(blogs):
-        slug=b['path'].rsplit('/',1)[-1];label=slug.replace('---',' — ').replace('-',' ').title();img=STOCK[i%len(STOCK)]
-        cards+=f'<a class="x-project-card" href="{U(b["path"])}"><div class="x-project-media x-media x-media--landscape"><img src="{E(img)}" alt="Temporary journal illustration" loading="lazy" width="900" height="600"></div><div class="x-project-meta"><div><span>JOURNAL / INTERIORS</span><h3>{E(label)}</h3></div>↗</div></a>'
-    return f'<section class="x-portfolio-lead x-wrap"><div>{eyebrow("THE JOURNAL / DESIGN & LIVING")}<h1>Notes on the<br><em>art of living well.</em></h1><p>Thoughts on interiors, staging, style and the places we inhabit.</p>{A("education","Explore education")}</div>{media(STOCK[5],"Illustrative design editorial image","portrait")}</section><section class="x-related x-wrap x-section"><div class="x-heading"><div>{eyebrow("THE ORIGINAL ARTICLE ARCHIVE")}{h2("The journal.")}</div></div><div class="x-related-grid">{cards}</div></section>'
+    categories=['All','Interior Design','Home Staging','Real Estate','Travel & Living','Seasonal Living']
+    buttons=''.join(f'<button type="button" data-journal-category="{E(c)}" aria-pressed="{"true" if i==0 else "false"}" class="{"is-active" if i==0 else ""}">{E(c)}</button>' for i,c in enumerate(categories))
+    cards=''
+    for i,p in enumerate(JOURNAL_ARCHIVE):
+        slug=p['slug'];pic=p.get('cover_image') or STOCK[i%len(STOCK)];category=p.get('category') or 'Design'
+        cards+=f'''<a class="journal-entry" href="{U('blog/'+slug)}" data-journal-entry data-journal-category-value="{E(category)}" data-journal-search="{E((p['title']+' '+p.get('excerpt','')).lower())}">
+          <div class="journal-entry-image"><img src="{E(pic)}" loading="lazy" decoding="async" width="900" height="620" alt="Original Journal article photography for {E(p['title'])}"></div>
+          <div class="journal-entry-caption"><span>{E(category)} / THE JOURNAL</span><h3>{E(p['title'])}</h3><p>{E(p.get('excerpt',''))}</p><b>Read the article ↗</b></div></a>'''
+    return f'''<section class="x-portfolio-lead x-wrap"><div>{eyebrow("THE JOURNAL / DESIGN & LIVING")}<h1>Notes on the<br><em>art of living well.</em></h1><p>Original stories on interiors, luxury staging, home ownership, travel and inspired living.</p>{A('contact','Work with the studio')}</div>{media(JOURNAL_ARCHIVE[0].get('cover_image') or STOCK[5],"The Luxury Look Journal cover","portrait")}</section>
+<section class="x-wrap journal-explore x-section"><div class="x-heading"><div>{eyebrow("THE ORIGINAL EDITORIAL ARCHIVE")}<h2>Explore the<br><em>Journal.</em></h2></div><p>{len(JOURNAL_ARCHIVE)} restored articles; original publication details and attribution are pending editorial approval before production.</p></div>
+<div class="journal-tools"><label for="journal-search">Search stories</label><input id="journal-search" type="search" placeholder="Try staging, design, travel…" autocomplete="off" data-journal-search-input><div class="journal-filters" role="group" aria-label="Article topics">{buttons}</div></div>
+<div class="journal-list" id="stories">{cards}</div><p class="journal-empty" data-journal-empty hidden>No stories match your search. Try another topic.</p></section>'''
 
 def journal_post(x):
-    label=x['path'].split('/')[-1].replace('-',' ').title()
-    return f'<section class="x-portfolio-lead x-wrap"><div>{eyebrow("THE LUXURY LOOK / JOURNAL")}<h1>{E(label)}</h1><p>The full original article is being transferred and verified. This page retains the original URL during the staging review.</p>{A("blog","Return to the journal")}</div>{media(STOCK[4],"Temporary journal illustration","portrait")}</section>'
+    slug=x['path'].rsplit('/',1)[-1]
+    p=JOURNAL_BY_SLUG.get(slug)
+    if not p:return f'<section class="x-wrap x-section"><h1>Article under review</h1><p>This original URL is reserved for an approved migration.</p>{A("blog","Return to the Journal")}</section>'
+    body=article_markup(p['body'])
+    image=p.get('cover_image') or STOCK[0]
+    category=p.get('category','The Journal')
+    words=len(p['body'].split());mins=max(1,round(words/210))
+    related=[z for z in JOURNAL_ARCHIVE if z['slug']!=slug and z.get('category')==category][:3]
+    relatedLinks=''.join(f'<a href="{U("blog/"+z["slug"])}">{E(z["title"])} ↗</a>' for z in related)
+    return f'''<article class="journal-article"><header class="journal-article-header x-wrap">{eyebrow("THE LUXURY LOOK / THE JOURNAL / "+category)}
+      <h1>{E(p['title'])}</h1><p>{E(p['excerpt'])}</p><div class="journal-article-meta"><span>{mins} MIN READ</span> <a href="{U('blog')}">All Journal stories ↗</a></div></header>
+      <figure class="journal-article-hero"><img src="{E(image)}" width="1600" height="850" decoding="async" fetchpriority="high" alt="Source photography from {E(p['title'])}"><figcaption>ORIGINAL JOURNAL ARCHIVE / THE LUXURY LOOK</figcaption></figure>
+      <div class="journal-article-layout x-wrap" id="story"><aside><span class="x-eyebrow">IN THIS ARTICLE</span><nav data-article-toc aria-label="Article contents"></nav><p>Restored from the existing website. Editorial copy, contributors and image permissions require final review.</p></aside>
+      <div class="journal-article-body" data-article-body>{body}</div></div>
+      <section class="journal-related x-wrap x-section"><span class="x-eyebrow">CONTINUE READING</span><h2>More from<br><em>the Journal.</em></h2><div>{relatedLinks if relatedLinks else A('blog','Browse all stories')}</div></section>
+      </article><div class="journal-read-progress" aria-hidden="true" data-reading-progress></div>'''
 
 def page_extra(path):
     if path=='design':return f'<section class="x-services-hero x-wrap"><div>{eyebrow("THE LUXURY LOOK / FULL-SERVICE DESIGN")}<h1>Design for<br><em>a life well lived.</em></h1><p>Full-service interiors for primary homes, second homes, luxury renovations and considered finishing details.</p>{pill("contact","Begin a design project")}</div>{media(STOCK[2],"Temporary interior design illustration","portrait")}</section>'+row_cta('Make the space<br><em>unmistakably yours.</em>')
