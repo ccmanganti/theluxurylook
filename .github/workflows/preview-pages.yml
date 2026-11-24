@@ -27,6 +27,8 @@ jobs:
           python-version: '3.12'
       - name: Generate SEO-safe static design preview
         run: python3 scripts/build_experience_preview.py
+      - name: Enforce fade-only motion policy
+        run: python3 scripts/check_motion_policy.py
       # Mirror the review-only HTML into main's root because this Pages site
       # is also configured to serve / (branch) using Jekyll.
       # No production app files in public/ or Laravel internals are modified.
