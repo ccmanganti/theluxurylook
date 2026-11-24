@@ -60,10 +60,10 @@ final class LocalSeo
             if (!$record)continue;
             if (!empty($record->meta_title))$seo['title']=$record->meta_title;
             if (!empty($record->meta_description))$seo['description']=$record->meta_description;
-            if (!empty($record->seo_og_image))$seo['image']=$record->seo_og_image;
-            if (!empty($record->seo_location))$seo['location']=$record->seo_location;
+            if (!empty($record->seo_og_image) || !empty($record->seo_share_image)) $seo['image']=$record->seo_og_image ?: $record->seo_share_image;
+            if (!empty($record->seo_location) || !empty($record->seo_locality) || !empty($record->seo_focus_location)) $seo['location']=$record->seo_location ?: $record->seo_locality ?: $record->seo_focus_location;
             if (!empty($record->seo_noindex))$seo['noindex']=true;
-            if ($key==='project' && empty($record->seo_location) && !empty($record->location))
+            if ($key==='project' && empty($record->seo_location) && empty($record->seo_locality) && empty($record->seo_focus_location) && !empty($record->location))
                 $seo['location']=$record->location;
         }
         $seo['title']=Str::limit(trim(strip_tags((string)($seo['title']??'The Luxury Look'))),72,'');
@@ -91,7 +91,7 @@ final class LocalSeo
         $home=self::ORIGIN.'/';
         $url=$seo['canonical'];
         $business=[
-            '@type'=>'InteriorDesignBusiness','@id'=>$home.'#studio','name'=>'The Luxury Look','url'=>$home,
+            '@type'=>'LocalBusiness','@id'=>$home.'#studio','name'=>'The Luxury Look','url'=>$home,
             'telephone'=>config('site.company.phone'),'email'=>config('site.company.email'),
             'address'=>['@type'=>'PostalAddress','streetAddress'=>'4343 N Scottsdale Rd Suite 150',
                 'addressLocality'=>'Scottsdale','addressRegion'=>'AZ','postalCode'=>'85251','addressCountry'=>'US'],
@@ -114,6 +114,8 @@ final class LocalSeo
                 'publisher'=>['@id'=>$home.'#studio']];
             if($post->published_at)$article['datePublished']=$post->published_at->toAtomString();
             if($post->updated_at)$article['dateModified']=$post->updated_at->toAtomString();
+            $author=$post->source_attribution ?: $post->author_name;
+            if($author)$article['author']=['@type'=>'Person','name'=>$author];
             if(!empty($seo['image']))$article['image']=$seo['image'];
             $graph[]=$article;
         } elseif(!empty($data['service'])) {
