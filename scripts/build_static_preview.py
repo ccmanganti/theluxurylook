@@ -48,7 +48,7 @@ for group_slug,group in BY_CATEGORY.items():
         neighbor=lambda n:others[(idx+n)%len(others)] if others else temp(n)
         photos=[temp(0),neighbor(1),temp(1),temp(2),neighbor(3),temp(3),neighbor(5),temp(4)]
         project['preview_cover_image']=project.get('cover_image','')
-        project['preview_gallery']=[{'url':src,'alt':f'Temporary photograph {i+1} — replace with approved gallery for {project["title"]}'} for i,src in enumerate(photos)]
+        project['preview_gallery']=[{'url':src,'alt':f'Temporary photograph {i+1} — replace with approved gallery for {project.get("preview_title") or project["title"]}'} for i,src in enumerate(photos)]
 CATEGORY_IMAGE={c['slug']:c['hero_image'] for c in CATEGORIES}
 for service in SERVICES:
     c=CATEGORY_SERVICE[service['slug']]
@@ -93,8 +93,8 @@ def shell(title,body,description='The Luxury Look design review: temporary image
 def work_card(p):
     c=CATEGORY_MAP.get(p.get('category_slug',''),{})
     return f'''<a class="work-card" data-category-slug="{e(p.get('category_slug',''))}" href="{url('portfolios/'+p['slug'])}" aria-label="View {e(p.get('preview_title') or p['title'])} portfolio project">
-<figure class="work-card-photo media-frame">{image(cover(p),p['title']+' — temporary portfolio layout photograph')}<span class="work-card-view">VIEW PROJECT <span aria-hidden="true">↗</span></span></figure>
-<div class="work-card-caption"><div><span class="caption-discipline">{e(c.get('title','Selected Work'))}</span><h3>{e(p['title'])}</h3></div><span class="caption-arrow" aria-hidden="true">↗</span></div></a>'''
+<figure class="work-card-photo media-frame">{image(cover(p),(p.get('preview_title') or p['title'])+' — temporary portfolio layout photograph')}<span class="work-card-view">VIEW PROJECT <span aria-hidden="true">↗</span></span></figure>
+<div class="work-card-caption"><div><span class="caption-discipline">{e(c.get('title','Selected Work'))}</span><h3>{e(p.get('preview_title') or p['title'])}</h3></div><span class="caption-arrow" aria-hidden="true">↗</span></div></a>'''
 
 def home():
     selected=['mockingbird-paradise-valley','petersen-residence','old-town-scottsdale-airbnb','desert-vista-luxury-design','gated-annecy','studio-3125','ancala-country-club','mor-furniture-line-launch']
@@ -187,7 +187,16 @@ def main():
     write('robots.txt','User-agent: *\nDisallow: /\n')
     write('index.html',shell('Home',home()))
     _revamp.extra_pages(globals())
-    write('portfolio/index.html',shell('Selected Work',portfolio_index()))
+    # Check the generated card titles: a stale display field must fail CI.
+    archive_html = portfolio_index()
+    for _project in PROJECTS:
+        working_name = e(_project.get('preview_title') or _project['title'])
+        original_name = e(_project['title'])
+        if f'<h3>{working_name}</h3>' not in archive_html:
+            raise AssertionError(f"Missing working card title for {_project['slug']}: {working_name}")
+        if working_name != original_name and f'<h3>{original_name}</h3>' in archive_html:
+            raise AssertionError(f"Stale original card title rendered for {_project['slug']}")
+    write('portfolio/index.html',shell('Selected Work',archive_html))
     for c in CATEGORIES:write('portfolio/'+c['slug']+'/index.html',shell(c['title']+' Projects',category_page(c),c['description']))
     for p in PROJECTS:write('portfolios/'+p['slug']+'/index.html',shell(p.get('preview_title') or p['title'],project_page(p)))
     write('services/index.html',shell('Our Services',services_index()))
