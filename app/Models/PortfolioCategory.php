@@ -6,8 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 class PortfolioCategory extends Model
 {
     protected $table = 'portfolio_categories';
-    protected $fillable = ['slug', 'title', 'tagline', 'description', 'hero_image', 'hero_upload', 'preview_hero_image', 'meta_title', 'meta_description', 'seo_focus_location', 'seo_image_alt', 'sort_order', 'is_published', 'content_verified'];
-    protected function casts(): array { return ['is_published' => 'boolean', 'content_verified' => 'boolean']; }
+    protected $fillable = ['slug', 'title', 'tagline', 'description', 'hero_image', 'hero_upload', 'preview_hero_image', 'meta_title', 'meta_description', 'seo_location', 'seo_og_image', 'seo_noindex', 'seo_focus_location', 'seo_image_alt', 'sort_order', 'is_published', 'content_verified'];
+    protected function casts(): array { return ['seo_noindex' => 'boolean', 'is_published' => 'boolean', 'content_verified' => 'boolean']; }
 
     public function getHeroUrlAttribute(): ?string
     {
