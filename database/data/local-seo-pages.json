@@ -1,0 +1,132 @@
+{
+  "office": {
+    "city": "Scottsdale",
+    "region": "AZ",
+    "country": "US",
+    "address": "4343 N Scottsdale Rd Suite 150",
+    "postal_code": "85251",
+    "phone": "+1-602-578-6707",
+    "email": "kristine@theluxurylook.com"
+  },
+  "approved_service_area": [
+    "Scottsdale, Arizona"
+  ],
+  "referenced_portfolio_locations": [
+    "Paradise Valley, Arizona",
+    "Phoenix, Arizona",
+    "Cave Creek, Arizona",
+    "Sedona, Arizona"
+  ],
+  "routes": {
+    "/": {
+      "title": "Luxury Interior Design in Scottsdale, AZ | The Luxury Look",
+      "description": "Discover luxury residential interior design, project galleries, thoughtful furnishings and the Scottsdale design studio led by Kristine Vowles.",
+      "section": "home"
+    },
+    "/design": {
+      "title": "Luxury Interior Design Scottsdale, AZ | The Luxury Look",
+      "description": "Explore residential interior design, renovation guidance, furniture and finishing details led by Kristine Vowles at The Luxury Look in Scottsdale.",
+      "section": "service"
+    },
+    "/home-staging": {
+      "title": "Luxury Home Staging Scottsdale, AZ | The Luxury Look",
+      "description": "Explore vacant, occupied and new-construction luxury home staging with The Luxury Look, a design studio based in Scottsdale, Arizona.",
+      "section": "service"
+    },
+    "/builders-and-agents": {
+      "title": "Design for Builders & Real Estate Agents | Scottsdale, AZ",
+      "description": "Explore builder partnerships, spec-home design and market-ready property staging with The Luxury Look in Scottsdale, Arizona.",
+      "section": "service"
+    },
+    "/portfolio": {
+      "title": "Interior Design & Home Staging Portfolio | The Luxury Look",
+      "description": "Browse residential interior design, staging, renovation and selected property transformations from The Luxury Look's portfolio.",
+      "section": "collection"
+    },
+    "/services": {
+      "title": "Interior Design & Staging Services Scottsdale | The Luxury Look",
+      "description": "Explore The Luxury Look's interior design, styling, property staging, and related services from its Scottsdale, Arizona studio.",
+      "section": "collection"
+    },
+    "/collection": {
+      "title": "Curated Furniture & Housewares | The Luxury Look",
+      "description": "Discover The Luxury Look Collection of thoughtfully selected furniture, finishing details and housewares with an inquiry-led sourcing process.",
+      "section": "service"
+    },
+    "/buying-trips": {
+      "title": "Curated Buying Trips & Furniture Sourcing | The Luxury Look",
+      "description": "Explore design-led buying and furniture-sourcing experiences, with Dallas Market as one potential destination. Inquire for availability and terms.",
+      "section": "service"
+    },
+    "/buying-trips/dallas-market": {
+      "title": "Dallas Market Buying Experiences | The Luxury Look",
+      "description": "Learn about Dallas Market sourcing experiences as part of The Luxury Look Buying Trips program. Dates and access require confirmation.",
+      "section": "service"
+    },
+    "/dallas-market": {
+      "title": "Dallas Market Design Sourcing | The Luxury Look",
+      "description": "Explore Dallas Market inspiration, furnishing selections and curated sourcing discussions with The Luxury Look.",
+      "section": "service"
+    },
+    "/education": {
+      "title": "Interior Design & Staging Education | The Luxury Look",
+      "description": "Explore design education, home staging workshops, business strategy and real estate styling learning opportunities with The Luxury Look.",
+      "section": "collection"
+    },
+    "/curated-circle": {
+      "title": "The Curated Circle | Design & Living | The Luxury Look",
+      "description": "Discover the proposed Curated Circle design and lifestyle community. Join the interest list for updates on its future launch.",
+      "section": "collection"
+    },
+    "/blog": {
+      "title": "The Journal | Interior Design, Living & Travel",
+      "description": "Read The Luxury Look Journal's original articles about interior design, staging, homeownership, travel and thoughtful living.",
+      "section": "collection"
+    },
+    "/about": {
+      "title": "Meet Kristine Vowles | The Luxury Look Scottsdale",
+      "description": "Meet Kristine Vowles, founder of The Luxury Look, and learn about the Scottsdale design studio, her background and design philosophy.",
+      "section": "page"
+    },
+    "/the-studio": {
+      "title": "Old Town Scottsdale Design Studio | The Luxury Look",
+      "description": "Visit The Luxury Look's interior design studio in Old Town Scottsdale by appointment to discuss residential design and furnishing projects.",
+      "section": "page"
+    },
+    "/contact": {
+      "title": "Contact The Luxury Look | Scottsdale Design Studio",
+      "description": "Start a design or staging consultation with The Luxury Look at its Old Town Scottsdale studio. Share your property, plans and priorities.",
+      "section": "page"
+    },
+    "/awards": {
+      "title": "Awards & Press | The Luxury Look",
+      "description": "Explore professional recognition, media appearances and selected design and staging coverage relating to The Luxury Look.",
+      "section": "page"
+    },
+    "/search": {
+      "title": "Search Projects & Journal | The Luxury Look",
+      "description": "Find portfolio projects, design inspiration and Journal articles at The Luxury Look.",
+      "section": "page"
+    },
+    "/business-planning-workshops": {
+      "title": "Design Business Planning Workshops | The Luxury Look",
+      "description": "Explore business planning and educational workshop concepts for design professionals at The Luxury Look.",
+      "section": "page"
+    },
+    "/digital-products": {
+      "title": "Design Resources & Digital Products | The Luxury Look",
+      "description": "Explore proposed design resources, digital products and future educational materials from The Luxury Look.",
+      "section": "page"
+    },
+    "/yacht-interior-design-outfitting": {
+      "title": "Yacht Interior Design & Outfitting | The Luxury Look",
+      "description": "Explore the proposed yacht interior design and outfitting service from The Luxury Look.",
+      "section": "service"
+    },
+    "/the-luxury-look-business-planning-workshop": {
+      "title": "Business Planning Workshop | The Luxury Look",
+      "description": "Explore The Luxury Look's proposed business planning workshop for design and staging professionals.",
+      "section": "page"
+    }
+  }
+}
