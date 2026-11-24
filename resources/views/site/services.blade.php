@@ -6,4 +6,5 @@
 <section class="x-services-paths x-wrap x-section"><div><span class="x-eyebrow">BEYOND THE DESIGN PROJECT</span><h2>Two more ways<br><em>to experience the studio.</em></h2></div><div class="x-services-path-links"><a href="{{ route('buying') }}"><span>CURATED SOURCING</span><strong>Buying Trips &amp; Market Experiences</strong><b>↗</b></a><a href="{{ route('education') }}"><span>KNOWLEDGE &amp; MENTORING</span><strong>Education &amp; Workshops</strong><b>↗</b></a></div></section>
 <section class="x-next-cta x-wrap x-section"><div><span class="x-eyebrow">LET'S MAKE A PLAN</span><h2>Every beautiful space<br><em>starts somewhere.</em></h2></div><div><p>Tell us what you're imagining and where you are in the process. We'll help shape the right conversation.</p><a class="x-pill" href="{{ route('contact') }}">Begin Your Project <span>↗</span></a></div></section>
 @include('site.partials.youtube-feature',['video'=>$featuredVideo??null])
+@include('site.partials.video-gallery',['filmCollection'=>$filmCollection??collect()])
 @endsection

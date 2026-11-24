@@ -33,6 +33,7 @@ class SiteController extends Controller
             'categories' => PortfolioCategory::visibleOnSite()->withCount('projects')->orderBy('sort_order')->get(),
             'services' => Service::visibleOnSite()->orderBy('sort_order')->get(),
             'featuredVideo' => StudioVideo::visibleOnSite()->whereIn('placement',['home','services'])->orderBy('sort_order')->first(),
+            'filmCollection' => StudioVideo::visibleOnSite()->where('placement','gallery')->orderBy('sort_order')->get(),
         ], ['path'=>'/', 'description'=>'The Luxury Look is an award-winning interior design and home staging firm in Scottsdale, Arizona. Explore our projects and services.']);
     }
 
@@ -132,7 +133,8 @@ class SiteController extends Controller
     {
         return $this->view('site.services', [
             'services'=>Service::visibleOnSite()->orderBy('sort_order')->get(),
-            'featuredVideo'=>StudioVideo::visibleOnSite()->whereIn('placement',['services','home'])->orderBy('sort_order')->first(),
+            'featuredVideo'=>StudioVideo::visibleOnSite()->whereIn('placement',['home','services'])->orderBy('sort_order')->first(),
+            'filmCollection'=>StudioVideo::visibleOnSite()->where('placement','gallery')->orderBy('sort_order')->get(),
         ], ['title'=>'Services - The Luxury Look | Interior Design, Scottsdale, AZ','description'=>'Explore interior design, interior styling, home staging, Airbnb staging, commercial staging and corporate branding services in Scottsdale.']);
     }
 

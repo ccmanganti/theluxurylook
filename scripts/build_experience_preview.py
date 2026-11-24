@@ -54,25 +54,37 @@ def video_frame():
             f'<img class="x-ambient-fade x-ambient-fade--2" src="{E(two)}" alt="" width="1500" height="1000" loading="lazy">'
             f'<div class="x-ambient-tone" aria-hidden="true"></div></div>')
 
-def film_button(video, extra=''):
-    """Source is The Luxury Look's existing public video embed; click activates iframe."""
+def film_button(video, extra='', label='Watch film'):
+    """No iframe until visitor clicks; Vimeo hash is retained intact."""
     if not video:return ''
-    title=E(video['title']);url=E(video['youtube_url'])
-    return (f'<button type="button" class="x-film-cta {extra}" data-youtube-url="{url}" '
-            f'data-video-title="{title}" aria-label="Play video {title}">'
-            '<span class="x-play-icon">▶</span> Watch the Studio Film</button>')
+    heading=E(video['title']);source=E(video.get('video_url') or video.get('youtube_url'))
+    return (f'<button type="button" class="x-film-cta {extra}" data-video-url="{source}" '
+            f'data-video-title="{heading}" aria-label="Play {heading}">'
+            f'<span class="x-play-icon">▶</span> {E(label)}</button>')
 
 def film_feature():
-    if not VIDEOS:return ''
-    v=VIDEOS[0]
-    if not v.get('is_published',False):return ''
-    img=E(v['poster_url']);title=E(v['title'])
-    return (f'<section class="x-film-feature x-wrap" aria-label="Studio film">'
-            f'<div class="x-film-feature__copy">{eyebrow("AN INSIDE LOOK / THE STUDIO")}<h2>See the work<br><em>in motion.</em></h2>'
-            '<p>Watch the studio film featured on The Luxury Look’s original Services page. The player loads only after you select Play.</p>'
-            '<a class="x-underlink" target="_blank" rel="noopener noreferrer" href="https://www.youtube.com/channel/UCqPsB5QK-XuPWmksTDGoDrQ">Explore the YouTube channel ↗</a></div>'
-            f'<div class="x-film-feature__visual"><img src="{img}" loading="lazy" width="1280" height="720" alt="{title} video thumbnail">'
-            f'{film_button(v)}</div></section>')
+    featured=next((v for v in sorted(VIDEOS,key=lambda x:x['sort_order']) if v['placement']=='home' and v['is_published']),None)
+    if not featured:return ''
+    poster=E(featured['poster_url']);heading=E(featured['title'])
+    return (f'<section class="x-film-feature x-wrap" aria-label="Latest studio film">'
+            f'<div class="x-film-feature__copy">{eyebrow("AN INSIDE LOOK / THE LUXURY LOOK")}<h2>See the vision<br><em>in motion.</em></h2>'
+            '<p>Watch the latest The Luxury Look studio film. The player opens only when you choose Play, without background zooming or autoplay.</p>'
+            f'<span class="x-film-provider">FEATURED FILM / VIMEO</span></div>'
+            f'<div class="x-film-feature__visual"><img src="{poster}" loading="lazy" width="1280" height="720" alt="{heading} video poster">'
+            f'{film_button(featured,label="Watch the latest film")}</div></section>')
+
+def film_gallery():
+    films=sorted((v for v in VIDEOS if v['placement']=='gallery' and v['is_published']),key=lambda v:v['sort_order'])
+    if not films:return ''
+    cards=[]
+    for i,film in enumerate(films):
+        cover=E(film['poster_url']);heading=E(film['title']);caption=E(film.get('caption',''))
+        cards.append(f'<article class="x-film-library__card"><div class="x-film-library__image"><img src="{cover}" loading="lazy" decoding="async" width="960" height="540" alt="{heading} video cover">{film_button(film,label="Play film")}</div>'
+                     f'<div class="x-film-library__meta"><span>YOUTUBE / {i+1:02d}</span><h3>{heading}</h3><p>{caption}</p></div></article>')
+    return (f'<section class="x-film-library x-section" aria-label="More studio films"><div class="x-wrap"><header class="x-film-library__heading">'
+            f'<div>{eyebrow("FROM THE FILM ARCHIVE")}<h2>The studio,<br><em>on film.</em></h2></div>'
+            '<p>Step inside selected spaces and conversations with Kristine. Choose a film to watch.</p></header>'
+            f'<div class="x-film-library__grid">{"".join(cards)}</div></div></section>')
 
 def buying_trips():
     cards=''.join('<article>'+eyebrow(E(o['audience']))+f'<h3>{E(o["title"])}</h3><p>{E(o["summary"])}</p>'+
@@ -98,7 +110,7 @@ def buying_trips():
 def shell(title_text,body,description='The Luxury Look — portfolio-led design review with temporary photography and preserved legacy routes.'):
     nav=[('design','Design'),('portfolio','Portfolio'),('builders-and-agents','For Builders'),('buying-trips','Buying Trips'),('education','Education'),('collection','Collection'),('blog','Journal')]
     links=''.join(f'<a href="{U(path)}">{label}</a>' for path,label in nav)
-    return f'''<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#eceae5"><title>{E(title_text)} | The Luxury Look — Design Review</title><meta name="description" content="{E(description)}"><meta name="robots" content="noindex,nofollow,noarchive"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap" rel="stylesheet"><link rel="stylesheet" href="{U('assets/site.css').rstrip('/')}"><link rel="stylesheet" href="{U('assets/editorial.css').rstrip('/')}"><link rel="stylesheet" href="{U('assets/revamp.css').rstrip('/')}"><link rel="stylesheet" href="{U('assets/experience.css').rstrip('/')}"><link rel="stylesheet" href="{U('assets/media-stable.css').rstrip('/')}?v=20261124-stationary-v3"><script defer src="{U('assets/site.js').rstrip('/')}"></script><script defer src="{U('assets/revamp.js').rstrip('/')}"></script><script defer src="{U('assets/experience.js').rstrip('/')}"></script><script defer src="{U('assets/media-stable.js').rstrip('/')}?v=20261124-stationary-v3"></script></head>
+    return f'''<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#eceae5"><title>{E(title_text)} | The Luxury Look — Design Review</title><meta name="description" content="{E(description)}"><meta name="robots" content="noindex,nofollow,noarchive"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap" rel="stylesheet"><link rel="stylesheet" href="{U('assets/site.css').rstrip('/')}"><link rel="stylesheet" href="{U('assets/editorial.css').rstrip('/')}"><link rel="stylesheet" href="{U('assets/revamp.css').rstrip('/')}"><link rel="stylesheet" href="{U('assets/experience.css').rstrip('/')}"><link rel="stylesheet" href="{U('assets/media-stable.css').rstrip('/')}?v=20261124-films-v4"><script defer src="{U('assets/site.js').rstrip('/')}"></script><script defer src="{U('assets/revamp.js').rstrip('/')}"></script><script defer src="{U('assets/experience.js').rstrip('/')}"></script><script defer src="{U('assets/media-stable.js').rstrip('/')}?v=20261124-films-v4"></script></head>
 <body class="x-site"><a class="skip-link" href="#main">Skip to content</a><div class="preview-ribbon">PRIVATE DESIGN REVIEW <span>/</span> TEMPORARY IMAGES &amp; VIDEO <span>/</span> NOT INDEXED</div>
 <header class="x-header masthead" id="top"><div class="x-topline x-wrap"><span>THE LUXURY LOOK &nbsp; / &nbsp; INTERIOR DESIGN HOUSE</span><a href="{U('contact')}">PROJECT INQUIRIES ↗</a></div><div class="x-nav-shell x-wrap"><a class="x-wordmark" href="{U()}"><span>THE</span><b>LUXURY LOOK</b><small>DESIGN HOUSE</small></a><button class="nav-toggle x-menu-toggle" type="button" aria-label="Open navigation" aria-controls="primary-nav" aria-expanded="false"><span></span><span></span></button><nav id="primary-nav" class="primary-nav x-nav" aria-label="Primary navigation">{links}<details class="x-more"><summary>More</summary><div class="x-more-panel"><a href="{U('about')}">The Studio</a><a href="{U('curated-circle')}">The Curated Circle</a><a href="{U('awards')}">Recognition</a></div></details><a class="x-nav-cta" href="{U('contact')}">Begin Your Project <span>↗</span></a></nav></div></header>
 <main id="main">{body}</main><footer class="x-footer"><div class="x-footer-top x-wrap">{eyebrow('A NEW CHAPTER STARTS HERE')}<div class="x-footer-hero"><h2>Ready for a home that<br><em>feels like yours?</em></h2>{pill('contact','Begin Your Project',True)}</div></div><div class="x-footer-bottom x-wrap"><div><a class="x-footer-logo" href="{U()}">THE LUXURY LOOK</a><p>Design with intention. Furnished for living.</p></div><nav aria-label="Footer"><a href="{U('portfolio')}">Portfolio</a><a href="{U('buying-trips')}">Buying Trips</a><a href="{U('education')}">Education</a><a href="{U('contact')}">Work with us</a></nav><div><p>4343 N Scottsdale Rd, Suite 150<br>Scottsdale, AZ 85251</p><a href="mailto:kristine@theluxurylook.com">kristine@theluxurylook.com</a><a href="tel:+16025786707">+1 (602) 578-6707</a></div></div><div class="x-footer-legal x-wrap"><small>© 2026 The Luxury Look</small><small>Image and moving-media placeholders in this private review are illustrative</small><a href="#top">Back to top ↑</a></div></footer></body></html>'''
@@ -115,13 +127,13 @@ def row_cta(title='Inspired by what you see?',desc='Tell us about the property, 
 def home():
     featured=[p for p in PROJECTS if p.get('featured')][:6] or PROJECTS[:6]
     cover=photourl(featured[0]);cat=photourl(featured[1])
-    return f'''<section class="x-home-hero x-wrap"><div class="x-home-copy">{eyebrow('THE LUXURY LOOK / DESIGN HOUSE')}<h1>Designed for<br><em>the way luxury</em><br>is lived.</h1><p class="x-lead">Distinctive interiors for primary residences, second homes and homes with a story to tell. Guided by Kristine Vowles and a considered point of view.</p><div class="x-actions">{pill('contact','Begin Your Project')}{A('portfolio','Explore the work')}</div><span class="x-home-index">INTERIORS, FURNISHINGS &amp; MARKET-READY SPACES</span></div><div class="x-home-frame">{video_frame()}{film_button(VIDEOS[0] if VIDEOS else None)}<div class="x-film-caption">A STUDY IN CALM, COLLECTED LIVING <span>01 / 04</span></div></div></section>
+    return f'''<section class="x-home-hero x-wrap"><div class="x-home-copy">{eyebrow('THE LUXURY LOOK / DESIGN HOUSE')}<h1>Designed for<br><em>the way luxury</em><br>is lived.</h1><p class="x-lead">Distinctive interiors for primary residences, second homes and homes with a story to tell. Guided by Kristine Vowles and a considered point of view.</p><div class="x-actions">{pill('contact','Begin Your Project')}{A('portfolio','Explore the work')}</div><span class="x-home-index">INTERIORS, FURNISHINGS &amp; MARKET-READY SPACES</span></div><div class="x-home-frame">{video_frame()}{film_button(next((v for v in VIDEOS if v["placement"]=="home"),None),label="Watch the latest film")}<div class="x-film-caption">A STUDY IN CALM, COLLECTED LIVING <span>01 / 04</span></div></div></section>
 <section class="x-introduction x-wrap x-section"><div>{eyebrow('01 / AN APPROACH')}<span class="x-rule"></span></div><div class="x-reveal">{h2('Beautiful is the beginning.<br><em>Feeling at home is the point.</em>')}<div class="x-intro-bottom"><p>The most compelling spaces balance proportion, material and personality. Every vision begins with how the space needs to live.</p>{A('design','Meet our design approach')}</div></div></section>
 <section class="x-selected x-section"><div class="x-wrap"><div class="x-heading"><div>{eyebrow('02 / THE PORTFOLIO')}{h2('Work worth<br><em>exploring.</em>')}</div><p>Each room is different. Each decision is intentional. Step inside the projects.</p></div>{mosaic(featured,'home')}<div class="x-selection-end"><span>HOMES / TRANSFORMATIONS / MARKET-READY SPACES</span>{A('portfolio','Discover the complete portfolio')}</div></div></section>
 <section class="x-dark-story"><div class="x-story-img x-media x-media--cinema"><img src="{E(cat)}" alt="Interior photography temporary visual" loading="lazy" width="1200" height="900"></div><div class="x-story-text x-reveal">{eyebrow('03 / THE DESIGN HOUSE')}{h2('Experience matters.<br><em>So does every detail.</em>')}<p>Interior design meets practical experience in real estate, renovations and furnishings. Decisions made for how a home is enjoyed, not simply a passing trend.</p><a class="x-underlink x-underlink--light" href="{U('about')}">Meet Kristine &amp; the studio ↗</a></div></section>
 <section class="x-pathways x-wrap x-section"><div class="x-heading"><div>{eyebrow('04 / FIND YOUR PATH')}{h2('What brings<br><em>you here?</em>')}</div></div><div class="x-pathway-grid"><a class="x-pathway" href="{U('design')}"><span>01 / FOR HOMEOWNERS</span><h3>Design a home<br>to call your own.</h3><p>From concept and renovation to furnishings.</p><b>EXPLORE DESIGN ↗</b></a><a class="x-pathway x-pathway--accent" href="{U('builders-and-agents')}"><span>02 / BUILDERS &amp; AGENTS</span><h3>Make the right<br>first impression.</h3><p>Luxury specifications and market-ready staging.</p><b>VIEW MARKET-READY ↗</b></a><a class="x-pathway" href="{U('collection')}"><span>03 / FURNISHINGS &amp; MORE</span><h3>Furnish it<br>beautifully.</h3><p>Considered furniture and housewares.</p><b>THE COLLECTION ↗</b></a></div></section>
 <section class="x-dallas-teaser x-section"><div class="x-wrap x-dallas-teaser-inner">{media(U('media/atelier-motion-poster.jpg').rstrip('/'),'Temporary Dallas Market illustration','portrait')}<div class="x-dallas-teaser-copy x-reveal">{eyebrow('05 / BUYING TRIPS & MARKET EXPERIENCES')}{h2('A more considered<br><em>way to source.</em>')}<p>Dallas Market is one destination in a broader collection of buying trips and custom sourcing journeys.</p>{pill('buying-trips','Explore Buying Trips')}<small>DATES, SCOPE &amp; PRICING CONFIRMED BY INQUIRY.</small></div></div></section>
-<section class="x-education-teaser x-wrap x-section"><div>{eyebrow('06 / EDUCATION &amp; WORKSHOPS')}{h2('Knowledge should<br><em>be shared.</em>')}</div><div class="x-education-teaser-right"><p>Learning in interiors, home staging, business strategy and property presentation, informed by Kristine's real-world experience.</p>{A('education','Explore education')}</div></section>{film_feature()}{row_cta('Your home deserves<br><em>a point of view.</em>','Share what you are imagining. A compelling space starts with the right conversation.')}'''
+<section class="x-education-teaser x-wrap x-section"><div>{eyebrow('06 / EDUCATION &amp; WORKSHOPS')}{h2('Knowledge should<br><em>be shared.</em>')}</div><div class="x-education-teaser-right"><p>Learning in interiors, home staging, business strategy and property presentation, informed by Kristine's real-world experience.</p>{A('education','Explore education')}</div></section>{film_feature()}{film_gallery()}{row_cta('Your home deserves<br><em>a point of view.</em>','Share what you are imagining. A compelling space starts with the right conversation.')}'''
 
 def portfolio():
     counts={c['slug']:sum(p['category_slug']==c['slug'] for p in PROJECTS) for c in CATEGORIES}
@@ -228,7 +240,7 @@ def main():
     output('buying-trips','Buying Trips',buying_trips())
     for cat in CATEGORIES:output('portfolio/'+cat['slug'],cat['title'],category(cat))
     for item in PROJECTS:output('portfolios/'+item['slug'],title(item),project(item))
-    output('services','Services',services()+film_feature())
+    output('services','Services',services()+film_feature()+film_gallery())
     for item in SERVICES:output('services/'+item['slug'],item['title'],service(item))
     for k in ['dallas','education']:
         slug='dallas-market' if k=='dallas' else 'education'

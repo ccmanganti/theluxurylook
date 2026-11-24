@@ -29,18 +29,18 @@
      @if(!empty($section['body']))<div class="x-prose">{{ $section['body'] }}</div>@endif
      @if(!empty($section['cta_text']) && !empty($section['cta_url']))<a class="x-underlink" href="{{ $section['cta_url'] }}">{{ $section['cta_text'] }} ↗</a>@endif</div>
    @if(!empty($section['image_url']) && empty($section['youtube_url']))<div class="x-media x-media--landscape"><img loading="lazy" width="960" height="720" src="{{ $section['image_url'] }}" alt="{{ $section['heading']??'Editorial photograph' }}"></div>@endif
-   @php $inlineId=\App\Models\StudioVideo::youtubeId($section['youtube_url']??null); @endphp
-   @if($inlineId)
-      <div class="x-film-feature__visual"><img loading="lazy" width="1280" height="720" src="{{ $section['image_url']??('https://i.ytimg.com/vi/'.$inlineId.'/hqdefault.jpg') }}" alt="Video poster for {{ $section['heading']??'The Luxury Look' }}">
-       <button type="button" class="x-film-cta" data-youtube-url="{{ $section['youtube_url'] }}" data-video-title="{{ $section['heading']??'The Luxury Look video' }}"><span class="x-play-icon">▶</span> Watch film</button></div>
+   @php $inlineInfo=\App\Models\StudioVideo::sourceInfo($section['youtube_url']??null); @endphp
+   @if($inlineInfo)
+      <div class="x-film-feature__visual"><img loading="lazy" width="1280" height="720" src="{{ $section['image_url']??(($inlineInfo['provider']==='youtube'?'https://i.ytimg.com/vi/'.$inlineInfo['id'].'/hqdefault.jpg':asset('media/atelier-motion-poster.jpg'))) }}" alt="Video poster for {{ $section['heading']??'The Luxury Look' }}">
+       <button type="button" class="x-film-cta" data-video-url="{{ $section['youtube_url'] }}" data-video-title="{{ $section['heading']??'The Luxury Look video' }}"><span class="x-play-icon">▶</span> Watch film</button></div>
    @endif
   </article>
  @endforeach
 </section>
 @endif
-@php $heroVideoId=\App\Models\StudioVideo::youtubeId($page->youtube_url); @endphp
-@if($heroVideoId)
-<section class="x-film-feature x-wrap" aria-label="Page video"><div class="x-film-feature__copy"><span class="x-eyebrow">THE LUXURY LOOK / ON FILM</span><h2>A closer look<br><em>at the work.</em></h2><p>Choose play to open this studio video.</p></div><div class="x-film-feature__visual"><img src="{{ $page->hero_video_poster ?: ('https://i.ytimg.com/vi/'.$heroVideoId.'/hqdefault.jpg') }}" width="1280" height="720" loading="lazy" alt="Video preview"><button type="button" class="x-film-cta" data-youtube-url="{{ $page->youtube_url }}" data-video-title="{{ $page->title }}"><span class="x-play-icon">▶</span> Play film</button></div></section>
+@php $heroVideoInfo=\App\Models\StudioVideo::sourceInfo($page->youtube_url); @endphp
+@if($heroVideoInfo)
+<section class="x-film-feature x-wrap" aria-label="Page video"><div class="x-film-feature__copy"><span class="x-eyebrow">THE LUXURY LOOK / ON FILM</span><h2>A closer look<br><em>at the work.</em></h2><p>Choose play to open this studio video.</p></div><div class="x-film-feature__visual"><img src="{{ $page->hero_video_poster ?: (($heroVideoInfo['provider']==='youtube'?'https://i.ytimg.com/vi/'.$heroVideoInfo['id'].'/hqdefault.jpg':asset('media/atelier-motion-poster.jpg'))) }}" width="1280" height="720" loading="lazy" alt="Video preview"><button type="button" class="x-film-cta" data-video-url="{{ $page->youtube_url }}" data-video-title="{{ $page->title }}"><span class="x-play-icon">▶</span> Play film</button></div></section>
 @endif
 <section class="lux-conversion lux-wrap"><p class="lux-overline">Every great project begins somewhere</p><h2>Let's talk about yours.</h2><p>Whether you have a clear plan or an idea in progress, we'd love to understand the space you're considering.</p><a class="lux-btn" href="{{ route('contact') }}">Make an inquiry <span>&nearr;</span></a></section>
 @endsection

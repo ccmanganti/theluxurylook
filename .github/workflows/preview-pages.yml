@@ -12,6 +12,7 @@ on:
       - 'scripts/editorial_preview.py'
       - 'scripts/revamp_preview.py'
       - 'database/data/portfolio-seed.json'
+      - 'database/data/studio-videos.json'
       - 'public/assets/**'
       - '.github/workflows/preview-pages.yml'
   workflow_dispatch:

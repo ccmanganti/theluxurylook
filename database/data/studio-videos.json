@@ -1,12 +1,42 @@
 [
   {
-    "title":"The Luxury Look – Original Services Film",
-    "youtube_url":"https://www.youtube.com/watch?v=UuUu8FOKULQ",
-    "poster_url":"https://i.ytimg.com/vi/UuUu8FOKULQ/hqdefault.jpg",
-    "placement":"home",
-    "caption":"Previously embedded on the original The Luxury Look Services page. Click to watch; no video download until then.",
-    "sort_order":1,
-    "is_published":true,
-    "content_verified":true
+    "title": "The Luxury Look",
+    "video_url": "https://player.vimeo.com/video/1079407954?h=420926c7fc",
+    "poster_url": "https://i.vimeocdn.com/video/2009836928-e8590a2083c852fbbba08f314bce8e0c937e971065139b3554c3aa824f369a9c-d?f=webp&region=us",
+    "placement": "home",
+    "caption": "The latest studio film. Select play to watch the full video.",
+    "sort_order": 0,
+    "is_published": true,
+    "content_verified": false
+  },
+  {
+    "title": "Studio 3125 Tour",
+    "video_url": "https://youtu.be/gNeiecujx8Q",
+    "poster_url": "https://i.ytimg.com/vi/gNeiecujx8Q/hqdefault.jpg",
+    "placement": "gallery",
+    "caption": "A look at the Studio 3125 transformation with Kristine Vowles.",
+    "sort_order": 1,
+    "is_published": true,
+    "content_verified": false
+  },
+  {
+    "title": "From the Studio - Featured Video",
+    "video_url": "https://youtu.be/Jb8Ye_MFJjA",
+    "poster_url": "https://i.ytimg.com/vi/Jb8Ye_MFJjA/hqdefault.jpg",
+    "placement": "gallery",
+    "caption": "A studio video shared for the new website. Title pending confirmation.",
+    "sort_order": 2,
+    "is_published": true,
+    "content_verified": false
+  },
+  {
+    "title": "Staging Luxury Homes in Sedona with Kristine Vowles",
+    "video_url": "https://youtu.be/NnwE6poxV1c",
+    "poster_url": "https://i.ytimg.com/vi/NnwE6poxV1c/hqdefault.jpg",
+    "placement": "gallery",
+    "caption": "Kristine discusses luxury-home staging in Sedona.",
+    "sort_order": 3,
+    "is_published": true,
+    "content_verified": false
   }
 ]

@@ -27,7 +27,7 @@ class ExperienceOfferingResource extends Resource {
                 FileUpload::make('hero_video')->disk('public')->directory('offerings/video')->acceptedFileTypes(['video/mp4','video/webm'])->maxSize(12000)
                     ->helperText('Muted, short background loops only. Compress before upload; playback is lazy and skips reduced motion / data saving.'),
                 FileUpload::make('video_poster')->disk('public')->directory('offerings/posters')->image(),
-                TextInput::make('youtube_url')->label('Optional YouTube film URL')->url()->columnSpanFull()->helperText('Click-to-play YouTube overlay only. URLs must belong to approved company content.'),
+                TextInput::make('youtube_url')->label('Optional YouTube or Vimeo film URL')->url()->columnSpanFull()->helperText('Click-to-play film overlay only. Accepts approved YouTube/Vimeo links, including an unlisted Vimeo h= hash.'),
                 Repeater::make('gallery')->label('Editorial gallery')->schema([
                     TextInput::make('url')->label('Image URL')->url()->required(),TextInput::make('alt')->maxLength(250)
                 ])->reorderable()->columns(2)->columnSpanFull(),

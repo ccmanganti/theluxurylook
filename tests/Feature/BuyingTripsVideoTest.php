@@ -14,14 +14,23 @@ class BuyingTripsVideoTest extends TestCase {
     $this->get('/buying-trips')->assertOk()->assertSee('Dallas Market')->assertSee('Private Sourcing Journeys');
     $this->get('/buying-trips/dallas-market')->assertOk()->assertSee('Market Edit');
     $this->get('/dallas-market')->assertOk();
-    $this->get('/buying-trips/private-sourcing-journeys')->assertOk()->assertSee('Private Sourcing Journeys');
   }
-  public function test_studio_video_is_click_to_play_and_embed_domain_is_checked():void {
-    $video=StudioVideo::firstOrFail();
-    $this->assertSame('UuUu8FOKULQ',$video->youtube_id);
-    $this->assertSame(null,StudioVideo::youtubeId('https://notyoutube.com/watch?v=UuUu8FOKULQ'));
-    $this->get('/')->assertOk()->assertSee('data-youtube-url')->assertSee('UuUu8FOKULQ')->assertDontSee('atelier-motion.mp4')->assertDontSee('data-ambient-video');
-    $this->get('/services')->assertOk()->assertSee('data-youtube-url');
+  public function test_latest_vimeo_and_three_youtube_films_are_cms_editable_and_embeddable():void {
+    $this->assertSame(4,StudioVideo::count());
+    $featured=StudioVideo::orderBy('sort_order')->firstOrFail();
+    $this->assertSame('vimeo',$featured->provider);
+    $this->assertSame('420926c7fc',StudioVideo::sourceInfo($featured->playable_url)['hash']);
+    $this->assertSame('1079407954',StudioVideo::sourceInfo($featured->playable_url)['id']);
+    $this->assertSame(3,StudioVideo::where('placement','gallery')->count());
+    $this->assertSame('gNeiecujx8Q',StudioVideo::youtubeId('https://youtu.be/gNeiecujx8Q'));
+    $this->assertNull(StudioVideo::sourceInfo('https://fakevimeo.com/video/1079407954'));
+    $this->assertNull(StudioVideo::sourceInfo('javascript:alert(1)'));
+    $this->get('/')->assertOk()->assertSee('data-video-url')->assertSee('420926c7fc')
+      ->assertSee('Studio 3125 Tour')->assertSee('Jb8Ye_MFJjA')->assertSee('NnwE6poxV1c')
+      ->assertDontSee('atelier-motion.mp4')->assertDontSee('data-ambient-video');
+    $this->get('/services')->assertOk()->assertSee('data-video-url')->assertSee('420926c7fc');
+    Config::set('site.launch_ready',true);
+    $this->assertSame(0,StudioVideo::visibleOnSite()->count());
   }
   public function test_buying_pages_remain_noindex_until_migration_approval():void {
     foreach(['/buying-trips','/buying-trips/dallas-market','/buying-trips/private-sourcing-journeys'] as $url)
