@@ -23,13 +23,24 @@ class PostResource extends Resource
         TextInput::make('title')->required()->columnSpanFull(),TextInput::make('slug')->required()->unique(ignoreRecord: true)->columnSpanFull(),
         Textarea::make('excerpt')->rows(3)->columnSpanFull(),MarkdownEditor::make('body')->columnSpanFull(),
         DateTimePicker::make('published_at'),
+        Select::make('category')->options([
+            'Interior Design'=>'Interior Design','Home Staging'=>'Home Staging',
+            'Real Estate'=>'Real Estate','Travel & Living'=>'Travel & Living',
+            'Seasonal Living'=>'Seasonal Living'
+        ])->searchable(),
     ]),
     Section::make('Photography')->schema([
         TextInput::make('cover_image'),FileUpload::make('cover_upload')->disk('public')->directory('blog')->image(),
     ]),
     Section::make('SEO and launch readiness')->schema([
-        TextInput::make('meta_title'),Textarea::make('meta_description'),Toggle::make('is_published'),
-        Toggle::make('content_verified'),
+        TextInput::make('meta_title')->maxLength(255),
+        Textarea::make('meta_description')->rows(2),
+        TextInput::make('seo_locality')->label('Verified article locality')->helperText('Only add a city if the article actually concerns that location.'),
+        TextInput::make('seo_share_image')->label('Social sharing image URL')->url(),
+        TextInput::make('source_url')->label('Original published article URL')->url()->columnSpanFull(),
+        TextInput::make('source_attribution')->label('Guest contributor / attribution')->helperText('Preserve original third-party authorship.'),
+        Toggle::make('is_published'),
+        Toggle::make('content_verified')->label('Editorial copy and rights approved')->helperText('Imported text remains review-only until attribution, date and images have been checked.'),
     ]),
 
         ]);
@@ -37,7 +48,7 @@ class PostResource extends Resource
 
     public static function table(Table $table): Table
     {
-        return $table->columns([TextColumn::make('title')->searchable(),TextColumn::make('published_at')->dateTime()->sortable(),IconColumn::make('content_verified')->boolean(),IconColumn::make('is_published')->boolean()])->defaultSort('updated_at', 'desc');
+        return $table->columns([TextColumn::make('title')->searchable(),TextColumn::make('category'),TextColumn::make('published_at')->dateTime()->sortable(),IconColumn::make('content_verified')->boolean(),IconColumn::make('is_published')->boolean()])->defaultSort('updated_at', 'desc');
     }
 
     public static function getPages(): array

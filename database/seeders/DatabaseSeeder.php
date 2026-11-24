@@ -55,6 +55,7 @@ class DatabaseSeeder extends Seeder
                 'body'=>null,'is_published'=>true,'content_verified'=>false,
             ]);
         }
+        $this->call(BlogArchiveSeeder::class);
         // Staging-only photo and working-title backfill is non-destructive.
         $this->call(PreviewPhotographySeeder::class);
         $this->call(ExperienceOfferingSeeder::class);
