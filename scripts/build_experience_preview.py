@@ -15,9 +15,9 @@ BASE='/theluxurylook/'
 load=lambda filename:json.loads((ROOT/'database/data'/filename).read_text('utf-8'))
 PORT=load('portfolio-seed.json')
 PROJECTS=PORT['projects'];CATEGORIES=PORT['categories'];SERVICES=load('services-seed.json')
-OFFERINGS=load('experience-offerings.json');PAGES=load('pages-seed.json');LEGACY=load('legacy-sitemap.json')
+OFFERINGS=load('experience-offerings.json');PAGES=load('pages-seed.json');LEGACY=load('legacy-sitemap.json');VIDEOS=load('studio-videos.json')
 CATS={c['slug']:c for c in CATEGORIES}
-EDU=[o for o in OFFERINGS if o['kind']=='education'];DALLAS=[o for o in OFFERINGS if o['kind']=='dallas']
+EDU=[o for o in OFFERINGS if o['kind']=='education'];DALLAS=[o for o in OFFERINGS if o['kind']=='dallas'];BUYING=[o for o in OFFERINGS if o['kind']=='buying-trip']
 STOCK=[
 'https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&w=1350&q=78',
 'https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?auto=format&fit=crop&w=1350&q=78',
@@ -45,15 +45,63 @@ def eyebrow(s):return f'<span class="x-eyebrow">{E(s)}</span>'
 def actions(p,label):return pill(p,label)
 
 def video_frame():
-    return f'<div class="x-ambient" data-ambient-container><img class="x-ambient-poster" src="{U("media/atelier-motion-poster.jpg").rstrip("/")}" alt="" width="960" height="661"><video class="x-ambient-video" data-ambient-video muted loop playsinline preload="none" poster="{U("media/atelier-motion-poster.jpg").rstrip("/")}" tabindex="-1" aria-hidden="true"><source data-src="{U("media/atelier-motion.mp4").rstrip("/")}" type="video/mp4"></video></div>'
+    """Three stationary stills, opacity fading only. NO MP4/YouTube autoplay or zoom."""
+    poster=U('media/atelier-motion-poster.jpg').rstrip('/')
+    one=STOCK[1];two=STOCK[3]
+    return (f'<div class="x-ambient x-ambient--still-fade" data-ambient-container>'
+            f'<img class="x-ambient-poster" src="{poster}" alt="" width="960" height="661">'
+            f'<img class="x-ambient-fade x-ambient-fade--1" src="{E(one)}" alt="" width="1500" height="1000" loading="lazy">'
+            f'<img class="x-ambient-fade x-ambient-fade--2" src="{E(two)}" alt="" width="1500" height="1000" loading="lazy">'
+            f'<div class="x-ambient-tone" aria-hidden="true"></div></div>')
+
+def film_button(video, extra=''):
+    """Source is The Luxury Look's existing public video embed; click activates iframe."""
+    if not video:return ''
+    title=E(video['title']);url=E(video['youtube_url'])
+    return (f'<button type="button" class="x-film-cta {extra}" data-youtube-url="{url}" '
+            f'data-video-title="{title}" aria-label="Play video {title}">'
+            '<span class="x-play-icon">▶</span> Watch the Studio Film</button>')
+
+def film_feature():
+    if not VIDEOS:return ''
+    v=VIDEOS[0]
+    if not v.get('is_published',False):return ''
+    img=E(v['poster_url']);title=E(v['title'])
+    return (f'<section class="x-film-feature x-wrap" aria-label="Studio film">'
+            f'<div class="x-film-feature__copy">{eyebrow("AN INSIDE LOOK / THE STUDIO")}<h2>See the work<br><em>in motion.</em></h2>'
+            '<p>Watch the studio film featured on The Luxury Look’s original Services page. The player loads only after you select Play.</p>'
+            '<a class="x-underlink" target="_blank" rel="noopener noreferrer" href="https://www.youtube.com/channel/UCqPsB5QK-XuPWmksTDGoDrQ">Explore the YouTube channel ↗</a></div>'
+            f'<div class="x-film-feature__visual"><img src="{img}" loading="lazy" width="1280" height="720" alt="{title} video thumbnail">'
+            f'{film_button(v)}</div></section>')
+
+def buying_trips():
+    cards=''.join('<article>'+eyebrow(E(o['audience']))+f'<h3>{E(o["title"])}</h3><p>{E(o["summary"])}</p>'+
+                  A('buying-trips/'+o['slug'],'Discuss this approach')+'</article>' for o in BUYING)
+    return (f'<section class="x-buying-hero x-wrap"><div>{eyebrow("THE LUXURY LOOK / BUYING TRIPS")}'
+            '<h1>Travel with<br><em>a purpose.</em><br>Return with a point of view.</h1>'
+            '<p>Design-led buying journeys, from Dallas Market to other sourcing experiences shaped around your project. Dallas is one destination within a wider Buying Trips offering.</p>'
+            f'<div class="x-actions">{pill("contact","Discuss a Buying Trip")}<a class="x-underlink" href="#experiences">Explore the experiences ↓</a></div>'
+            '<p class="x-preview-disclaimer">Destinations, dates, availability, market access and fees are confirmed individually.</p></div>'
+            f'<div class="x-buying-hero__art">{video_frame()}</div></section>'
+            f'<section class="x-section x-wrap" id="experiences"><div class="x-heading"><div>{eyebrow("01 / DESTINATION & DISCOVERY")}'
+            '<h2>Buying with<br><em>intention.</em></h2></div><p>Choose where to begin.</p></div><div class="x-buying-paths">'
+            f'<article class="x-buying-path"><img src="{E(STOCK[1])}" alt="Illustrative furniture sourcing" loading="lazy" width="1200" height="900">'
+            f'{eyebrow("FEATURED MARKET / DALLAS")}<h2>Dallas Market<br><em>Experiences</em></h2>'
+            f'<p>Dallas is one market destination in the broader buying trips collection.</p><a href="{U("buying-trips/dallas-market")}">Explore Dallas Market ↗</a></article>'
+            f'<article class="x-buying-path"><img src="{E(STOCK[5])}" alt="Illustrative interior sourcing" loading="lazy" width="1200" height="900">'
+            f'{eyebrow("BESPOKE / OTHER DESTINATIONS")}<h2>Beyond<br><em>the Market</em></h2>'
+            f'<p>Ask the studio about other markets and possible design journeys shaped around your goals. No fixed itinerary is promised.</p><a href="{U("contact")}">Discuss other destinations ↗</a></article>'
+            f'</div></section><section class="x-section x-wrap"><div class="x-heading"><div>{eyebrow("02 / WAYS TO WORK TOGETHER")}'
+            f'<h2>Choose your<br><em>approach.</em></h2></div></div><div class="x-buying-grid">{cards}</div></section>'
+            +row_cta('Bring the brief.<br><em>Find the direction.</em>','The journey begins with what you want to source and the places you are considering.','Discuss Buying Trips'))
 
 def shell(title_text,body,description='The Luxury Look — portfolio-led design review with temporary photography and preserved legacy routes.'):
-    nav=[('design','Design'),('portfolio','Portfolio'),('builders-and-agents','For Builders'),('dallas-market','Dallas Market'),('education','Education'),('collection','Collection'),('blog','Journal')]
+    nav=[('design','Design'),('portfolio','Portfolio'),('builders-and-agents','For Builders'),('buying-trips','Buying Trips'),('education','Education'),('collection','Collection'),('blog','Journal')]
     links=''.join(f'<a href="{U(path)}">{label}</a>' for path,label in nav)
-    return f'''<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#eceae5"><title>{E(title_text)} | The Luxury Look — Design Review</title><meta name="description" content="{E(description)}"><meta name="robots" content="noindex,nofollow,noarchive"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap" rel="stylesheet"><link rel="stylesheet" href="{U('assets/site.css').rstrip('/')}"><link rel="stylesheet" href="{U('assets/editorial.css').rstrip('/')}"><link rel="stylesheet" href="{U('assets/revamp.css').rstrip('/')}"><link rel="stylesheet" href="{U('assets/experience.css').rstrip('/')}"><script defer src="{U('assets/site.js').rstrip('/')}"></script><script defer src="{U('assets/revamp.js').rstrip('/')}"></script><script defer src="{U('assets/experience.js').rstrip('/')}"></script></head>
+    return f'''<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#eceae5"><title>{E(title_text)} | The Luxury Look — Design Review</title><meta name="description" content="{E(description)}"><meta name="robots" content="noindex,nofollow,noarchive"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap" rel="stylesheet"><link rel="stylesheet" href="{U('assets/site.css').rstrip('/')}"><link rel="stylesheet" href="{U('assets/editorial.css').rstrip('/')}"><link rel="stylesheet" href="{U('assets/revamp.css').rstrip('/')}"><link rel="stylesheet" href="{U('assets/experience.css').rstrip('/')}"><link rel="stylesheet" href="{U('assets/media-stable.css').rstrip('/')}?v=20261124-stationary-v3"><script defer src="{U('assets/site.js').rstrip('/')}"></script><script defer src="{U('assets/revamp.js').rstrip('/')}"></script><script defer src="{U('assets/experience.js').rstrip('/')}"></script><script defer src="{U('assets/media-stable.js').rstrip('/')}?v=20261124-stationary-v3"></script></head>
 <body class="x-site"><a class="skip-link" href="#main">Skip to content</a><div class="preview-ribbon">PRIVATE DESIGN REVIEW <span>/</span> TEMPORARY IMAGES &amp; VIDEO <span>/</span> NOT INDEXED</div>
 <header class="x-header masthead" id="top"><div class="x-topline x-wrap"><span>THE LUXURY LOOK &nbsp; / &nbsp; INTERIOR DESIGN HOUSE</span><a href="{U('contact')}">PROJECT INQUIRIES ↗</a></div><div class="x-nav-shell x-wrap"><a class="x-wordmark" href="{U()}"><span>THE</span><b>LUXURY LOOK</b><small>DESIGN HOUSE</small></a><button class="nav-toggle x-menu-toggle" type="button" aria-label="Open navigation" aria-controls="primary-nav" aria-expanded="false"><span></span><span></span></button><nav id="primary-nav" class="primary-nav x-nav" aria-label="Primary navigation">{links}<details class="x-more"><summary>More</summary><div class="x-more-panel"><a href="{U('about')}">The Studio</a><a href="{U('curated-circle')}">The Curated Circle</a><a href="{U('awards')}">Recognition</a></div></details><a class="x-nav-cta" href="{U('contact')}">Begin Your Project <span>↗</span></a></nav></div></header>
-<main id="main">{body}</main><footer class="x-footer"><div class="x-footer-top x-wrap">{eyebrow('A NEW CHAPTER STARTS HERE')}<div class="x-footer-hero"><h2>Ready for a home that<br><em>feels like yours?</em></h2>{pill('contact','Begin Your Project',True)}</div></div><div class="x-footer-bottom x-wrap"><div><a class="x-footer-logo" href="{U()}">THE LUXURY LOOK</a><p>Design with intention. Furnished for living.</p></div><nav aria-label="Footer"><a href="{U('portfolio')}">Portfolio</a><a href="{U('dallas-market')}">Dallas Market</a><a href="{U('education')}">Education</a><a href="{U('contact')}">Work with us</a></nav><div><p>4343 N Scottsdale Rd, Suite 150<br>Scottsdale, AZ 85251</p><a href="mailto:kristine@theluxurylook.com">kristine@theluxurylook.com</a><a href="tel:+16025786707">+1 (602) 578-6707</a></div></div><div class="x-footer-legal x-wrap"><small>© 2026 The Luxury Look</small><small>Image and moving-media placeholders in this private review are illustrative</small><a href="#top">Back to top ↑</a></div></footer></body></html>'''
+<main id="main">{body}</main><footer class="x-footer"><div class="x-footer-top x-wrap">{eyebrow('A NEW CHAPTER STARTS HERE')}<div class="x-footer-hero"><h2>Ready for a home that<br><em>feels like yours?</em></h2>{pill('contact','Begin Your Project',True)}</div></div><div class="x-footer-bottom x-wrap"><div><a class="x-footer-logo" href="{U()}">THE LUXURY LOOK</a><p>Design with intention. Furnished for living.</p></div><nav aria-label="Footer"><a href="{U('portfolio')}">Portfolio</a><a href="{U('buying-trips')}">Buying Trips</a><a href="{U('education')}">Education</a><a href="{U('contact')}">Work with us</a></nav><div><p>4343 N Scottsdale Rd, Suite 150<br>Scottsdale, AZ 85251</p><a href="mailto:kristine@theluxurylook.com">kristine@theluxurylook.com</a><a href="tel:+16025786707">+1 (602) 578-6707</a></div></div><div class="x-footer-legal x-wrap"><small>© 2026 The Luxury Look</small><small>Image and moving-media placeholders in this private review are illustrative</small><a href="#top">Back to top ↑</a></div></footer></body></html>'''
 
 def card(p,i=0):
     cls=('wide' if i%6==0 else ('portrait' if i%3==1 else 'landscape'))
@@ -67,13 +115,13 @@ def row_cta(title='Inspired by what you see?',desc='Tell us about the property, 
 def home():
     featured=[p for p in PROJECTS if p.get('featured')][:6] or PROJECTS[:6]
     cover=photourl(featured[0]);cat=photourl(featured[1])
-    return f'''<section class="x-home-hero x-wrap"><div class="x-home-copy">{eyebrow('THE LUXURY LOOK / DESIGN HOUSE')}<h1>Designed for<br><em>the way luxury</em><br>is lived.</h1><p class="x-lead">Distinctive interiors for primary residences, second homes and homes with a story to tell. Guided by Kristine Vowles and a considered point of view.</p><div class="x-actions">{pill('contact','Begin Your Project')}{A('portfolio','Explore the work')}</div><span class="x-home-index">INTERIORS, FURNISHINGS &amp; MARKET-READY SPACES</span></div><div class="x-home-frame">{video_frame()}<div class="x-film-caption">A STUDY IN CALM, COLLECTED LIVING <span>01 / 04</span></div></div></section>
+    return f'''<section class="x-home-hero x-wrap"><div class="x-home-copy">{eyebrow('THE LUXURY LOOK / DESIGN HOUSE')}<h1>Designed for<br><em>the way luxury</em><br>is lived.</h1><p class="x-lead">Distinctive interiors for primary residences, second homes and homes with a story to tell. Guided by Kristine Vowles and a considered point of view.</p><div class="x-actions">{pill('contact','Begin Your Project')}{A('portfolio','Explore the work')}</div><span class="x-home-index">INTERIORS, FURNISHINGS &amp; MARKET-READY SPACES</span></div><div class="x-home-frame">{video_frame()}{film_button(VIDEOS[0] if VIDEOS else None)}<div class="x-film-caption">A STUDY IN CALM, COLLECTED LIVING <span>01 / 04</span></div></div></section>
 <section class="x-introduction x-wrap x-section"><div>{eyebrow('01 / AN APPROACH')}<span class="x-rule"></span></div><div class="x-reveal">{h2('Beautiful is the beginning.<br><em>Feeling at home is the point.</em>')}<div class="x-intro-bottom"><p>The most compelling spaces balance proportion, material and personality. Every vision begins with how the space needs to live.</p>{A('design','Meet our design approach')}</div></div></section>
 <section class="x-selected x-section"><div class="x-wrap"><div class="x-heading"><div>{eyebrow('02 / THE PORTFOLIO')}{h2('Work worth<br><em>exploring.</em>')}</div><p>Each room is different. Each decision is intentional. Step inside the projects.</p></div>{mosaic(featured,'home')}<div class="x-selection-end"><span>HOMES / TRANSFORMATIONS / MARKET-READY SPACES</span>{A('portfolio','Discover the complete portfolio')}</div></div></section>
 <section class="x-dark-story"><div class="x-story-img x-media x-media--cinema"><img src="{E(cat)}" alt="Interior photography temporary visual" loading="lazy" width="1200" height="900"></div><div class="x-story-text x-reveal">{eyebrow('03 / THE DESIGN HOUSE')}{h2('Experience matters.<br><em>So does every detail.</em>')}<p>Interior design meets practical experience in real estate, renovations and furnishings. Decisions made for how a home is enjoyed, not simply a passing trend.</p><a class="x-underlink x-underlink--light" href="{U('about')}">Meet Kristine &amp; the studio ↗</a></div></section>
 <section class="x-pathways x-wrap x-section"><div class="x-heading"><div>{eyebrow('04 / FIND YOUR PATH')}{h2('What brings<br><em>you here?</em>')}</div></div><div class="x-pathway-grid"><a class="x-pathway" href="{U('design')}"><span>01 / FOR HOMEOWNERS</span><h3>Design a home<br>to call your own.</h3><p>From concept and renovation to furnishings.</p><b>EXPLORE DESIGN ↗</b></a><a class="x-pathway x-pathway--accent" href="{U('builders-and-agents')}"><span>02 / BUILDERS &amp; AGENTS</span><h3>Make the right<br>first impression.</h3><p>Luxury specifications and market-ready staging.</p><b>VIEW MARKET-READY ↗</b></a><a class="x-pathway" href="{U('collection')}"><span>03 / FURNISHINGS &amp; MORE</span><h3>Furnish it<br>beautifully.</h3><p>Considered furniture and housewares.</p><b>THE COLLECTION ↗</b></a></div></section>
-<section class="x-dallas-teaser x-section"><div class="x-wrap x-dallas-teaser-inner">{media(U('media/atelier-motion-poster.jpg').rstrip('/'),'Temporary Dallas Market illustration','portrait')}<div class="x-dallas-teaser-copy x-reveal">{eyebrow('05 / DALLAS MARKET')}{h2('A more considered<br><em>way to source.</em>')}<p>Explore private market buying conversations, sourcing strategy and curated selection support.</p>{pill('dallas-market','Discover Dallas Market')}<small>DATES, SCOPE &amp; PRICING CONFIRMED BY INQUIRY.</small></div></div></section>
-<section class="x-education-teaser x-wrap x-section"><div>{eyebrow('06 / EDUCATION &amp; WORKSHOPS')}{h2('Knowledge should<br><em>be shared.</em>')}</div><div class="x-education-teaser-right"><p>Learning in interiors, home staging, business strategy and property presentation, informed by Kristine's real-world experience.</p>{A('education','Explore education')}</div></section>{row_cta('Your home deserves<br><em>a point of view.</em>','Share what you are imagining. A compelling space starts with the right conversation.')}'''
+<section class="x-dallas-teaser x-section"><div class="x-wrap x-dallas-teaser-inner">{media(U('media/atelier-motion-poster.jpg').rstrip('/'),'Temporary Dallas Market illustration','portrait')}<div class="x-dallas-teaser-copy x-reveal">{eyebrow('05 / BUYING TRIPS & MARKET EXPERIENCES')}{h2('A more considered<br><em>way to source.</em>')}<p>Dallas Market is one destination in a broader collection of buying trips and custom sourcing journeys.</p>{pill('buying-trips','Explore Buying Trips')}<small>DATES, SCOPE &amp; PRICING CONFIRMED BY INQUIRY.</small></div></div></section>
+<section class="x-education-teaser x-wrap x-section"><div>{eyebrow('06 / EDUCATION &amp; WORKSHOPS')}{h2('Knowledge should<br><em>be shared.</em>')}</div><div class="x-education-teaser-right"><p>Learning in interiors, home staging, business strategy and property presentation, informed by Kristine's real-world experience.</p>{A('education','Explore education')}</div></section>{film_feature()}{row_cta('Your home deserves<br><em>a point of view.</em>','Share what you are imagining. A compelling space starts with the right conversation.')}'''
 
 def portfolio():
     counts={c['slug']:sum(p['category_slug']==c['slug'] for p in PROJECTS) for c in CATEGORIES}
@@ -129,7 +177,7 @@ def offering_index(kind):
     return top+faq+row_cta('Let’s make<br><em>something happen.</em>','Tell us what matters most. We will discuss the next suitable step.','Make an inquiry')
 
 def offering_detail(o):
-    kind=o['kind']; parent='dallas-market' if kind=='dallas' else 'education'
+    kind=o['kind']; parent='dallas-market' if kind=='dallas' else ('buying-trips' if kind=='buying-trip' else 'education')
     desc=E(o.get('body')).replace('\n\n','</p><p>').replace('\n','<br>')
     return f'<article class="x-offer-detail x-offer-detail--{kind}"><div class="x-wrap x-offer-top"><div class="x-offer-intro">{eyebrow(o["eyebrow"])}<h1>{E(o["title"])}</h1><p class="x-lead">{E(o["summary"])}</p><div class="x-actions">{pill("contact",o["cta"])}<a href="#details" class="x-underlink">Explore the details ↓</a></div></div><div class="x-offer-image x-media x-media--portrait"><img src="{E(o["cover_image"])}" alt="Temporary sourcing or education reference" width="900" height="1200"><span>{E(o["eyebrow"])}</span></div></div><section id="details" class="x-offer-story x-section"><div class="x-wrap">{eyebrow("01 / THE EXPERIENCE")}{h2("Tailored to<br><em>your goals.</em>")}<div class="x-offer-description x-prose"><p>{desc}</p></div></div></section><section class="x-offer-takeaway x-wrap x-section">{media(U("media/atelier-motion-poster.jpg").rstrip("/"),"Temporary illustrative design photography") }<div>{eyebrow("02 / THE RIGHT FIT")}{h2("Make every choice<br><em>count.</em>")}<p>{E(o["audience"])}</p>{A("contact","Start a conversation")}</div></section>'+row_cta('A good beginning<br><em>changes everything.</em>','Availability, scope, schedule and any fees are confirmed directly before engagement.',o['cta'])+'</article>'
 
@@ -170,22 +218,25 @@ def write(path,text):
 def main():
     if DEST.exists():shutil.rmtree(DEST)
     shutil.copytree(ROOT/'public/assets',DEST/'assets')
-    shutil.copytree(ROOT/'public/media',DEST/'media')
+    shutil.copytree(ROOT/'public/media',DEST/'media',ignore=shutil.ignore_patterns('atelier-motion.mp4'))
     write('.nojekyll','');write('robots.txt','User-agent: *\nDisallow: /\n')
     rendered=set()
     def output(path,heading,content):
         rel=path.strip('/');name=(rel+'/index.html') if rel else 'index.html'
         write(name,shell(heading,content));rendered.add('/'+rel if rel else '/')
     output('/','Home',home());output('portfolio','The Portfolio',portfolio())
+    output('buying-trips','Buying Trips',buying_trips())
     for cat in CATEGORIES:output('portfolio/'+cat['slug'],cat['title'],category(cat))
     for item in PROJECTS:output('portfolios/'+item['slug'],title(item),project(item))
-    output('services','Services',services())
+    output('services','Services',services()+film_feature())
     for item in SERVICES:output('services/'+item['slug'],item['title'],service(item))
     for k in ['dallas','education']:
         slug='dallas-market' if k=='dallas' else 'education'
         output(slug,'Dallas Market Buying Experiences' if k=='dallas' else 'Education & Workshops',offering_index(k))
+        if k=='dallas':output('buying-trips/dallas-market','Dallas Market / Buying Trips',offering_index(k))
         for o in OFFERINGS:
             if o['kind']==k:output(slug+'/'+o['slug'],o['title'],offering_detail(o))
+    for o in BUYING:output('buying-trips/'+o['slug'],o['title'],offering_detail(o))
     for k in ['design','builders-and-agents','collection','curated-circle']:output(k,k.replace('-',' ').title(),page_extra(k))
     for p in PAGES:
         if p['path']=='/contact':continue
@@ -206,6 +257,9 @@ def main():
         assert f'<h3>{name}</h3>' in archive, f'Working name missing in preview card: {p["slug"]}'
         if name!=old:assert f'<h3>{old}</h3>' not in archive, f'Stale project card: {p["slug"]}'
         assert (DEST/'portfolios'/p['slug']/'index.html').exists()
+    assert not any('atelier-motion.mp4' in f.read_text('utf-8') for f in DEST.rglob('*.html')), 'Zooming video source must not be rendered'
+    assert (DEST/'buying-trips/index.html').exists() and (DEST/'buying-trips/dallas-market/index.html').exists()
+    assert 'media-stable.css' in (DEST/'index.html').read_text('utf-8')
     print(f'Experience preview PASS: {len(rendered)} pages, {len(PROJECTS)} uniquely named projects, {len(DALLAS)} Dallas offerings, {len(EDU)} education tracks, all original paths reserved.')
 
 if __name__=='__main__':main()

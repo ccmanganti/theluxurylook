@@ -5,6 +5,7 @@ use App\Models\{Inquiry, LegacyUrl, Page, PortfolioCategory, Post, Project, Serv
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Log;
+use App\Models\StudioVideo;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Str;
 use Illuminate\Validation\Rule;
@@ -31,6 +32,7 @@ class SiteController extends Controller
             'projects' => Project::visibleOnSite()->with('category')->where('featured', true)->orderBy('sort_order')->take(6)->get(),
             'categories' => PortfolioCategory::visibleOnSite()->withCount('projects')->orderBy('sort_order')->get(),
             'services' => Service::visibleOnSite()->orderBy('sort_order')->get(),
+            'featuredVideo' => StudioVideo::visibleOnSite()->whereIn('placement',['home','services'])->orderBy('sort_order')->first(),
         ], ['path'=>'/', 'description'=>'The Luxury Look is an award-winning interior design and home staging firm in Scottsdale, Arizona. Explore our projects and services.']);
     }
 
@@ -83,6 +85,16 @@ class SiteController extends Controller
         ]);
     }
 
+    public function buyingTrips()
+    {
+        $offerings=ExperienceOffering::visibleOnSite()->where('kind','buying-trip')->orderBy('sort_order')->get();
+        return $this->view('site.buying-trips',compact('offerings'),[
+            'title'=>'Buying Trips & Curated Sourcing | The Luxury Look',
+            'description'=>'Buying trips and custom sourcing journeys, including Dallas Market, tailored to your design and furnishing goals.',
+            'noindex'=>true,
+        ]);
+    }
+
     /** New pages are excluded from the legacy XML sitemap until a launch review approves them. */
     public function dallas()
     {
@@ -106,7 +118,7 @@ class SiteController extends Controller
     }
     public function offering(string $kind,string $slug)
     {
-        abort_unless(in_array($kind,['dallas','education'],true),404);
+        abort_unless(in_array($kind,['dallas','education','buying-trip'],true),404);
         $offering=ExperienceOffering::visibleOnSite()->where('kind',$kind)->where('slug',$slug)->firstOrFail();
         return $this->view('site.offering-detail',compact('offering'),[
             'title'=>$offering->meta_title ?: $offering->title.' | The Luxury Look',
@@ -120,6 +132,7 @@ class SiteController extends Controller
     {
         return $this->view('site.services', [
             'services'=>Service::visibleOnSite()->orderBy('sort_order')->get(),
+            'featuredVideo'=>StudioVideo::visibleOnSite()->whereIn('placement',['services','home'])->orderBy('sort_order')->first(),
         ], ['title'=>'Services - The Luxury Look | Interior Design, Scottsdale, AZ','description'=>'Explore interior design, interior styling, home staging, Airbnb staging, commercial staging and corporate branding services in Scottsdale.']);
     }
 

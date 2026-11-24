@@ -9,12 +9,12 @@ use Filament\Tables\{Table,Columns\TextColumn,Columns\IconColumn};
 use App\Filament\Resources\ExperienceOfferingResource\Pages;
 class ExperienceOfferingResource extends Resource {
     protected static ?string $model=ExperienceOffering::class;
-    protected static ?string $navigationLabel='Dallas & Education';
+    protected static ?string $navigationLabel='Buying Trips, Dallas & Education';
     protected static ?int $navigationSort=4;
     public static function form(Schema $schema):Schema {
         return $schema->components([
             Section::make('Offering and audience')->schema([
-                Select::make('kind')->label('Section')->options(['dallas'=>'Dallas Market','education'=>'Education & Workshops'])->required(),
+                Select::make('kind')->label('Section')->options(['buying-trip'=>'Buying Trips (other journeys)','dallas'=>'Dallas Market (one destination)','education'=>'Education & Workshops'])->required(),
                 TextInput::make('title')->required()->maxLength(250),TextInput::make('slug')->required()->maxLength(110)
                     ->helperText('Use a stable URL slug; update redirects before changing an existing published path.'),
                 TextInput::make('eyebrow')->maxLength(160),TextInput::make('audience')->maxLength(255),
@@ -27,6 +27,7 @@ class ExperienceOfferingResource extends Resource {
                 FileUpload::make('hero_video')->disk('public')->directory('offerings/video')->acceptedFileTypes(['video/mp4','video/webm'])->maxSize(12000)
                     ->helperText('Muted, short background loops only. Compress before upload; playback is lazy and skips reduced motion / data saving.'),
                 FileUpload::make('video_poster')->disk('public')->directory('offerings/posters')->image(),
+                TextInput::make('youtube_url')->label('Optional YouTube film URL')->url()->columnSpanFull()->helperText('Click-to-play YouTube overlay only. URLs must belong to approved company content.'),
                 Repeater::make('gallery')->label('Editorial gallery')->schema([
                     TextInput::make('url')->label('Image URL')->url()->required(),TextInput::make('alt')->maxLength(250)
                 ])->reorderable()->columns(2)->columnSpanFull(),

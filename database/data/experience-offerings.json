@@ -1,26 +1,132 @@
 [
   {
-    "kind":"dallas", "slug":"private-market-buying-trips", "title":"Private Market Buying Trips", "eyebrow":"The Dallas Edit / 01", "audience":"Homeowners, designers & design-led clients", "summary":"A guided path through Dallas Market for those who would rather make confident decisions than spend days searching.", "body":"Begin with a conversation about your space, your vision and the decisions you need to make. We can discuss a tailored showroom approach, potential product categories and how selections will connect to the broader design.\n\nTrip format, market access, fees, dates and availability are confirmed individually. This is an inquiry-only offering, not a scheduled public event.", "cover_image":"https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?auto=format&fit=crop&w=1600&q=80", "cta":"Discuss a private buying trip", "featured":true, "sort_order":1
+    "kind": "dallas",
+    "slug": "private-market-buying-trips",
+    "title": "Private Market Buying Trips",
+    "eyebrow": "The Dallas Edit / 01",
+    "audience": "Homeowners, designers & design-led clients",
+    "summary": "A guided path through Dallas Market for those who would rather make confident decisions than spend days searching.",
+    "body": "Begin with a conversation about your space, your vision and the decisions you need to make. We can discuss a tailored showroom approach, potential product categories and how selections will connect to the broader design.\n\nTrip format, market access, fees, dates and availability are confirmed individually. This is an inquiry-only offering, not a scheduled public event.",
+    "cover_image": "https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?auto=format&fit=crop&w=1600&q=80",
+    "cta": "Discuss a private buying trip",
+    "featured": true,
+    "sort_order": 1
   },
   {
-    "kind":"dallas", "slug":"showroom-sourcing-strategy", "title":"Showroom & Sourcing Strategy", "eyebrow":"The Dallas Edit / 02", "audience":"Designers, new projects & furnishing plans", "summary":"A considered sourcing brief before you buy. Define the pieces, finishes and relationships that matter most.", "body":"We work through your goals, style direction, priorities and decision list. The resulting conversation can shape your approach to showrooms, furnishings, lighting and finishing pieces.\n\nContact the studio to discuss the scope and whether a guided market session is the right fit.", "cover_image":"https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?auto=format&fit=crop&w=1600&q=80", "cta":"Plan a sourcing session", "featured":true, "sort_order":2
+    "kind": "dallas",
+    "slug": "showroom-sourcing-strategy",
+    "title": "Showroom & Sourcing Strategy",
+    "eyebrow": "The Dallas Edit / 02",
+    "audience": "Designers, new projects & furnishing plans",
+    "summary": "A considered sourcing brief before you buy. Define the pieces, finishes and relationships that matter most.",
+    "body": "We work through your goals, style direction, priorities and decision list. The resulting conversation can shape your approach to showrooms, furnishings, lighting and finishing pieces.\n\nContact the studio to discuss the scope and whether a guided market session is the right fit.",
+    "cover_image": "https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?auto=format&fit=crop&w=1600&q=80",
+    "cta": "Plan a sourcing session",
+    "featured": true,
+    "sort_order": 2
   },
   {
-    "kind":"dallas", "slug":"post-market-procurement", "title":"Selection & Procurement Planning", "eyebrow":"The Dallas Edit / 03", "audience":"Clients managing a furnished home or project", "summary":"Bring choices into focus after the inspiration: selections, priorities and a clear plan for what comes next.", "body":"Once favorites are identified, we can help discuss the next stage of selections and project coordination, including priorities, budgets and lead-time questions to address with vendors.\n\nPurchasing, trade terms and logistics depend on the agreed scope and are confirmed before engagement.", "cover_image":"https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=1600&q=80", "cta":"Ask about sourcing support", "featured":false, "sort_order":3
+    "kind": "dallas",
+    "slug": "post-market-procurement",
+    "title": "Selection & Procurement Planning",
+    "eyebrow": "The Dallas Edit / 03",
+    "audience": "Clients managing a furnished home or project",
+    "summary": "Bring choices into focus after the inspiration: selections, priorities and a clear plan for what comes next.",
+    "body": "Once favorites are identified, we can help discuss the next stage of selections and project coordination, including priorities, budgets and lead-time questions to address with vendors.\n\nPurchasing, trade terms and logistics depend on the agreed scope and are confirmed before engagement.",
+    "cover_image": "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=1600&q=80",
+    "cta": "Ask about sourcing support",
+    "featured": false,
+    "sort_order": 3
   },
   {
-    "kind":"dallas", "slug":"group-market-experiences", "title":"Small-Group Market Experiences", "eyebrow":"The Dallas Edit / 04", "audience":"Design professionals & creative entrepreneurs", "summary":"A more personal way to explore industry sourcing alongside other design-minded people.", "body":"Interested in joining a future buying or learning experience? Tell us about your work and the experience you're looking for.\n\nNo specific dates, group sizes, itineraries or registration fees are currently confirmed on this preview.", "cover_image":"https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=1600&q=80", "cta":"Join the interest list", "featured":false, "sort_order":4
+    "kind": "dallas",
+    "slug": "group-market-experiences",
+    "title": "Small-Group Market Experiences",
+    "eyebrow": "The Dallas Edit / 04",
+    "audience": "Design professionals & creative entrepreneurs",
+    "summary": "A more personal way to explore industry sourcing alongside other design-minded people.",
+    "body": "Interested in joining a future buying or learning experience? Tell us about your work and the experience you're looking for.\n\nNo specific dates, group sizes, itineraries or registration fees are currently confirmed on this preview.",
+    "cover_image": "https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=1600&q=80",
+    "cta": "Join the interest list",
+    "featured": false,
+    "sort_order": 4
   },
   {
-    "kind":"education", "slug":"design-and-staging", "title":"Interior Design & Home Staging Education", "eyebrow":"Studio Education / 01", "audience":"Designers, home stagers & ambitious beginners", "summary":"Learn the design decisions that make spaces appealing, livable and ready for their next chapter.", "body":"Foundational and advanced learning focused on interiors, spatial presentation and contemporary staging practices. Explore how to shape visual priorities, communicate a design direction and translate an idea into a finished space.\n\nWorkshop schedules, curriculum depth and delivery format will be confirmed directly with the studio.", "cover_image":"https://images.unsplash.com/photo-1600566752355-35792bedcfea?auto=format&fit=crop&w=1600&q=80", "cta":"Request program information", "featured":true, "sort_order":1
+    "kind": "education",
+    "slug": "design-and-staging",
+    "title": "Interior Design & Home Staging Education",
+    "eyebrow": "Studio Education / 01",
+    "audience": "Designers, home stagers & ambitious beginners",
+    "summary": "Learn the design decisions that make spaces appealing, livable and ready for their next chapter.",
+    "body": "Foundational and advanced learning focused on interiors, spatial presentation and contemporary staging practices. Explore how to shape visual priorities, communicate a design direction and translate an idea into a finished space.\n\nWorkshop schedules, curriculum depth and delivery format will be confirmed directly with the studio.",
+    "cover_image": "https://images.unsplash.com/photo-1600566752355-35792bedcfea?auto=format&fit=crop&w=1600&q=80",
+    "cta": "Request program information",
+    "featured": true,
+    "sort_order": 1
   },
   {
-    "kind":"education", "slug":"business-growth", "title":"Business Growth & Strategy", "eyebrow":"Studio Education / 02", "audience":"Design and staging business owners", "summary":"Move beyond the mood board: sharpen pricing, positioning, client acquisition and business direction.", "body":"Work through practical questions about positioning a creative service, packaging your offer, building client relationships and making deliberate growth decisions.\n\nThis page is an inquiry preview; class dates, instructor availability and fees are not yet published.", "cover_image":"https://images.unsplash.com/photo-1497366811353-6870744d04b2?auto=format&fit=crop&w=1600&q=80", "cta":"Explore business training", "featured":true, "sort_order":2
+    "kind": "education",
+    "slug": "business-growth",
+    "title": "Business Growth & Strategy",
+    "eyebrow": "Studio Education / 02",
+    "audience": "Design and staging business owners",
+    "summary": "Move beyond the mood board: sharpen pricing, positioning, client acquisition and business direction.",
+    "body": "Work through practical questions about positioning a creative service, packaging your offer, building client relationships and making deliberate growth decisions.\n\nThis page is an inquiry preview; class dates, instructor availability and fees are not yet published.",
+    "cover_image": "https://images.unsplash.com/photo-1497366811353-6870744d04b2?auto=format&fit=crop&w=1600&q=80",
+    "cta": "Explore business training",
+    "featured": true,
+    "sort_order": 2
   },
   {
-    "kind":"education", "slug":"events-and-workshops", "title":"Events & Workshop Development", "eyebrow":"Studio Education / 03", "audience":"Creative entrepreneurs and brand leaders", "summary":"Design engaging events and education experiences that feel intentional and support a stronger business.", "body":"Explore the elements behind planning an audience-focused workshop or branded experience, from the initial idea to the flow of the day and the invitation to participate.\n\nFormats are discussed individually; no future dates are confirmed here.", "cover_image":"https://images.unsplash.com/photo-1497366858526-0766cadbe8fa?auto=format&fit=crop&w=1600&q=80", "cta":"Discuss a workshop", "featured":false, "sort_order":3
+    "kind": "education",
+    "slug": "events-and-workshops",
+    "title": "Events & Workshop Development",
+    "eyebrow": "Studio Education / 03",
+    "audience": "Creative entrepreneurs and brand leaders",
+    "summary": "Design engaging events and education experiences that feel intentional and support a stronger business.",
+    "body": "Explore the elements behind planning an audience-focused workshop or branded experience, from the initial idea to the flow of the day and the invitation to participate.\n\nFormats are discussed individually; no future dates are confirmed here.",
+    "cover_image": "https://images.unsplash.com/photo-1497366858526-0766cadbe8fa?auto=format&fit=crop&w=1600&q=80",
+    "cta": "Discuss a workshop",
+    "featured": false,
+    "sort_order": 3
   },
   {
-    "kind":"education", "slug":"real-estate-airbnb", "title":"Real Estate & Airbnb Optimization", "eyebrow":"Studio Education / 04", "audience":"Agents, hosts, investors & stagers", "summary":"Understand how styling decisions and guest-ready spaces contribute to better property presentation.", "body":"Training explores the practical decisions behind preparing properties for sale or short-term stays, from visual presentation to guest experience and operating priorities.\n\nTraining availability and scope are confirmed after an inquiry.", "cover_image":"https://images.unsplash.com/photo-1600573472591-ee6b68d14c68?auto=format&fit=crop&w=1600&q=80", "cta":"Request training details", "featured":false, "sort_order":4
+    "kind": "education",
+    "slug": "real-estate-airbnb",
+    "title": "Real Estate & Airbnb Optimization",
+    "eyebrow": "Studio Education / 04",
+    "audience": "Agents, hosts, investors & stagers",
+    "summary": "Understand how styling decisions and guest-ready spaces contribute to better property presentation.",
+    "body": "Training explores the practical decisions behind preparing properties for sale or short-term stays, from visual presentation to guest experience and operating priorities.\n\nTraining availability and scope are confirmed after an inquiry.",
+    "cover_image": "https://images.unsplash.com/photo-1600573472591-ee6b68d14c68?auto=format&fit=crop&w=1600&q=80",
+    "cta": "Request training details",
+    "featured": false,
+    "sort_order": 4
+  },
+  {
+    "kind": "buying-trip",
+    "slug": "private-sourcing-journeys",
+    "title": "Private Sourcing Journeys",
+    "eyebrow": "Buying Trips / By Inquiry",
+    "audience": "Homeowners and design-led clients",
+    "summary": "A one-to-one buying journey shaped around furnishings, materials and the spaces you are creating.",
+    "body": "Start with your project, the items you are sourcing and the type of design experience you prefer. Possible markets and destinations are discussed individually, based on fit, access and availability.\n\nNo departure dates, trade access or destination commitments are confirmed in this development preview.",
+    "cover_image": "https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?auto=format&fit=crop&w=1600&q=80",
+    "cta": "Plan a Sourcing Journey",
+    "featured": true,
+    "sort_order": 1
+  },
+  {
+    "kind": "buying-trip",
+    "slug": "trade-show-and-market-discovery",
+    "title": "Trade Show & Market Discovery",
+    "eyebrow": "Buying Trips / By Inquiry",
+    "audience": "Design enthusiasts, professionals and returning clients",
+    "summary": "Explore whether a guided market or showroom experience could help you make stronger, more intentional choices.",
+    "body": "This is an exploratory buying-trip format for clients seeking a guided eye on furniture, lighting, finishes or décor. Location and participation are subject to confirmation by the studio. Dallas Market is one specific destination, not the complete program.\n\nOther destinations, market passes, scheduling, travel and fees are not published or guaranteed.",
+    "cover_image": "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=1600&q=80",
+    "cta": "Discuss Market Discovery",
+    "featured": false,
+    "sort_order": 2
   }
 ]

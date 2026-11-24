@@ -5,6 +5,8 @@ on:
     paths:
       - 'scripts/build_experience_preview.py'
       - 'scripts/check_motion_policy.py'
+      - 'scripts/check_stable_media.py'
+      - 'database/data/studio-videos.json'
       - 'database/data/experience-offerings.json'
       - 'public/media/**'
       - 'scripts/editorial_preview.py'
@@ -30,6 +32,8 @@ jobs:
         run: python3 scripts/build_experience_preview.py
       - name: Enforce fade-only motion policy
         run: python3 scripts/check_motion_policy.py
+      - name: Verify stationary media, Buying Trips, and YouTube embeds
+        run: python3 scripts/check_stable_media.py
       # Mirror the review-only HTML into main's root because this Pages site
       # is also configured to serve / (branch) using Jekyll.
       # No production app files in public/ or Laravel internals are modified.
@@ -38,7 +42,7 @@ jobs:
           cp -a preview-dist/. .
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add -A -- .nojekyll index.html robots.txt assets media portfolio portfolios services about blog contact design builders-and-agents collection curated-circle dallas-market education
+          git add -A -- .nojekyll index.html robots.txt assets media portfolio portfolios services about blog contact design builders-and-agents collection curated-circle dallas-market buying-trips education
           if ! git diff --cached --quiet; then
             git commit -m "build(preview): add site pages for temporary Pages preview [skip ci]"
             git push origin HEAD:main
