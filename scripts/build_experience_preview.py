@@ -115,10 +115,89 @@ def buying_trips():
             f'<h2>Choose your<br><em>approach.</em></h2></div></div><div class="x-buying-grid">{cards}</div></section>'
             +row_cta('Bring the brief.<br><em>Find the direction.</em>','The journey begins with what you want to source and the places you are considering.','Discuss Buying Trips'))
 
+def seo_preview(path,title,description):
+    """Distinctive page metadata; staging is always noindex."""
+    normalized='/' + path.strip('/') if path.strip('/') else '/'
+    canonical='https://www.theluxurylook.com'+normalized
+    approved=LOCAL_META.get('routes',{}).get(normalized,{})
+    title=approved.get('title') or title+' | The Luxury Look'
+    description=approved.get('description') or description
+    image=None
+    market=None
+    article=None
+    if normalized.startswith('/blog/'):
+        article=JOURNAL_BY_SLUG.get(normalized.rsplit('/',1)[-1])
+        if article:
+            title=article['title']+' | The Luxury Look Journal'
+            description=article.get('excerpt','')
+            image=article.get('cover_image')
+    elif normalized.startswith('/portfolios/'):
+        p=next((x for x in PROJECTS if normalized=='/portfolios/'+x['slug']),None)
+        if p:
+            title=(p.get('preview_title') or p['title'])+' | The Luxury Look Portfolio'
+            description=p.get('summary') or 'Selected portfolio project from The Luxury Look.'
+            image=photourl(p)
+            market=p.get('location') or None
+    elif normalized.startswith('/services/'):
+        item=next((x for x in SERVICES if normalized=='/services/'+x['slug']),None)
+        if item:
+            title=(item.get('meta_title') or item['title']+' | The Luxury Look')
+            description=item.get('meta_description') or item.get('summary') or description
+            image=item.get('preview_cover_image') or item.get('cover_image')
+            market='Scottsdale, Arizona'
+    elif normalized.startswith('/portfolio/'):
+        c=next((x for x in CATEGORIES if normalized=='/portfolio/'+x['slug']),None)
+        if c:
+            title=c.get('meta_title') or (c['title']+' | The Luxury Look Portfolio')
+            description=c.get('meta_description') or c.get('description') or description
+            image=c.get('hero_image')
+    elif normalized in ['/', '/design','/home-staging','/builders-and-agents','/services','/contact','/about','/the-studio']:
+        market='Scottsdale, Arizona'
+    if len(description)<30:description='Explore carefully considered design, interiors and projects from The Luxury Look.'
+    description=' '.join(description.split())[:165]
+    title=' '.join(title.split())[:80]
+    return {'path':normalized,'canonical':canonical,'title':title,'description':description,
+            'image':image,'market':market,'article':article}
+
+def seo_preview_head(meta):
+    title=E(meta['title']);description=E(meta['description']);url=E(meta['canonical'])
+    tags=f'<title>{title} — Design Review</title><meta name="description" content="{description}"><link rel="canonical" href="{url}">'
+    tags+=f'<meta property="og:site_name" content="The Luxury Look"><meta property="og:title" content="{title}"><meta property="og:description" content="{description}"><meta property="og:url" content="{url}">'
+    tags+='<meta name="twitter:card" content="summary_large_image">'
+    tags+=f'<meta name="twitter:title" content="{title}"><meta name="twitter:description" content="{description}">'
+    if meta['image']:
+        image=E(meta['image'])
+        tags+=f'<meta property="og:image" content="{image}"><meta name="twitter:image" content="{image}">'
+    if meta['market']:tags+=f'<meta name="geo.placename" content="{E(meta["market"])}"><meta name="geo.region" content="US-AZ">'
+    root='https://www.theluxurylook.com/'
+    business={'@type':'InteriorDesignBusiness','@id':root+'#studio','name':'The Luxury Look','url':root,
+       'address':{'@type':'PostalAddress','streetAddress':'4343 N Scottsdale Rd Suite 150',
+          'addressLocality':'Scottsdale','addressRegion':'AZ','postalCode':'85251','addressCountry':'US'}}
+    crumbs=[{'@type':'ListItem','position':1,'name':'Home','item':root}]
+    if meta['path']!='/':
+        first=meta['path'].strip('/').split('/')[0]
+        if '/' in meta['path'].strip('/') and first in ('blog','services','portfolios','portfolio','buying-trips'):
+            parent='portfolio' if first=='portfolios' else first
+            crumbs.append({'@type':'ListItem','position':2,'name':parent.replace('-',' ').title(),'item':root+parent})
+        crumbs.append({'@type':'ListItem','position':len(crumbs)+1,'name':meta['title'].split(' | ')[0],'item':meta['canonical']})
+    item={'@type':'BlogPosting' if meta['article'] else 'WebPage',
+        '@id':meta['canonical']+'#page','url':meta['canonical'],
+        'name':meta['title'],'description':meta['description'],
+        'breadcrumb':{'@id':meta['canonical']+'#breadcrumbs'},'publisher':{'@id':root+'#studio'}}
+    if meta['article']:
+        item['headline']=meta['article']['title']
+        if meta['article'].get('published_at'):item['datePublished']=meta['article']['published_at']
+    if meta['market']:item['spatialCoverage']={'@type':'Place','name':meta['market']}
+    data={'@context':'https://schema.org','@graph':[business,item,{'@type':'BreadcrumbList','@id':meta['canonical']+'#breadcrumbs','itemListElement':crumbs}]}
+    data_json=json.dumps(data,ensure_ascii=False).replace('<','\\u003c')
+    return tags+'<script type="application/ld+json">'+data_json+'</script>'
+
 def shell(title_text,body,description='The Luxury Look — portfolio-led design review with temporary photography and preserved legacy routes.'):
+    meta=seo_preview(CURRENT_PATH,title_text,description)
+    seo_head=seo_preview_head(meta)
     nav=[('design','Design'),('portfolio','Portfolio'),('buying-trips','Buying Trips'),('collection','Collection'),('blog','Journal')]
     links=''.join(f'<a href="{U(path)}">{label}</a>' for path,label in nav)
-    return f'''<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#eceae5"><title>{E(title_text)} | The Luxury Look — Design Review</title><meta name="description" content="{E(description)}"><meta name="robots" content="noindex,nofollow,noarchive"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap" rel="stylesheet"><link rel="stylesheet" href="{U('assets/site.css').rstrip('/')}"><link rel="stylesheet" href="{U('assets/editorial.css').rstrip('/')}"><link rel="stylesheet" href="{U('assets/revamp.css').rstrip('/')}"><link rel="stylesheet" href="{U('assets/experience.css').rstrip('/')}"><link rel="stylesheet" href="{U('assets/media-stable.css').rstrip('/')}?v=20261124-films-v4"><link rel="stylesheet" href="{U('assets/founder.css').rstrip('/')}?v=20261124-kristine-v1"><link rel="stylesheet" href="{U('assets/revamp8.css').rstrip('/')}?v=20261125-8workstreams"><link rel="stylesheet" href="{U('assets/grand-edition.css').rstrip('/')}?v=20261125-grand1"><script defer src="{U('assets/site.js').rstrip('/')}"></script><script defer src="{U('assets/revamp.js').rstrip('/')}"></script><script defer src="{U('assets/experience.js').rstrip('/')}"></script><script defer src="{U('assets/media-stable.js').rstrip('/')}?v=20261124-films-v4"></script></head>
+    return f'''<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#eceae5">{seo_head}<meta name="robots" content="noindex,nofollow,noarchive"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap" rel="stylesheet"><link rel="stylesheet" href="{U('assets/site.css').rstrip('/')}"><link rel="stylesheet" href="{U('assets/editorial.css').rstrip('/')}"><link rel="stylesheet" href="{U('assets/revamp.css').rstrip('/')}"><link rel="stylesheet" href="{U('assets/experience.css').rstrip('/')}"><link rel="stylesheet" href="{U('assets/media-stable.css').rstrip('/')}?v=20261124-films-v4"><link rel="stylesheet" href="{U('assets/founder.css').rstrip('/')}?v=20261124-kristine-v1"><link rel="stylesheet" href="{U('assets/revamp8.css').rstrip('/')}?v=20261125-8workstreams"><link rel="stylesheet" href="{U('assets/grand-edition.css').rstrip('/')}?v=20261125-grand1"><script defer src="{U('assets/site.js').rstrip('/')}"></script><script defer src="{U('assets/revamp.js').rstrip('/')}"></script><script defer src="{U('assets/experience.js').rstrip('/')}"></script><script defer src="{U('assets/media-stable.js').rstrip('/')}?v=20261124-films-v4"></script></head>
 <body class="x-site"><a class="skip-link" href="#main">Skip to content</a><div class="preview-ribbon">PRIVATE DESIGN REVIEW <span>/</span> TEMPORARY IMAGES &amp; VIDEO <span>/</span> NOT INDEXED</div>
 <header class="x-header masthead" id="top"><div class="x-topline x-wrap"><span>THE LUXURY LOOK &nbsp; / &nbsp; INTERIOR DESIGN HOUSE</span><a href="{U('contact')}">PROJECT INQUIRIES ↗</a></div><div class="x-nav-shell x-wrap"><a class="x-wordmark" href="{U()}"><span>THE</span><b>LUXURY LOOK</b><small>DESIGN HOUSE</small></a><button class="nav-toggle x-menu-toggle" type="button" aria-label="Open navigation" aria-controls="primary-nav" aria-expanded="false"><span></span><span></span></button><nav id="primary-nav" class="primary-nav x-nav" aria-label="Primary navigation">{links}<details class="x-more"><summary>Explore</summary><div class="x-more-panel"><a href="{U('builders-and-agents')}">For Builders &amp; Agents</a><a href="{U('home-staging')}">Luxury Home Staging</a><a href="{U('education')}">Education</a><a href="{U('curated-circle')}">The Curated Circle</a><a href="{U('about')}">Meet Kristine</a></div></details><a class="x-nav-cta" href="{U('contact')}">Work With Us <span>↗</span></a></nav></div></header>
 <main id="main">{body}</main><footer class="x-footer"><div class="x-footer-top x-wrap">{eyebrow('A NEW CHAPTER STARTS HERE')}<div class="x-footer-hero"><h2>Ready for a home that<br><em>feels like yours?</em></h2>{pill('contact','Begin Your Project',True)}</div></div><div class="x-footer-bottom x-wrap"><div><a class="x-footer-logo" href="{U()}">THE LUXURY LOOK</a><p>Design with intention. Furnished for living.</p></div><nav aria-label="Footer"><a href="{U('portfolio')}">Portfolio</a><a href="{U('buying-trips')}">Buying Trips</a><a href="{U('education')}">Education</a><a href="{U('contact')}">Work with us</a></nav><div><p>4343 N Scottsdale Rd, Suite 150<br>Scottsdale, AZ 85251</p><a href="mailto:kristine@theluxurylook.com">kristine@theluxurylook.com</a><a href="tel:+16025786707">+1 (602) 578-6707</a></div></div><div class="x-footer-legal x-wrap"><small>© 2026 The Luxury Look</small><small>Image and moving-media placeholders in this private review are illustrative</small><a href="#top">Back to top ↑</a></div></footer></body></html>'''
@@ -290,6 +369,8 @@ def main():
     rendered=set()
     def output(path,heading,content):
         rel=path.strip('/');name=(rel+'/index.html') if rel else 'index.html'
+        global CURRENT_PATH
+        CURRENT_PATH='/' + rel if rel else '/'
         write(name,shell(heading,content));rendered.add('/'+rel if rel else '/')
     output('/','Home',home());output('portfolio','The Portfolio',portfolio())
     output('buying-trips','Buying Trips',buying_trips())
