@@ -29,9 +29,12 @@
   document.querySelectorAll('[data-compare-slider]').forEach(input=>{const parent=input.closest('[data-compare]');if(parent){input.addEventListener('input',()=>parent.style.setProperty('--reveal',`${input.value}%`));}});
   const filters=[...document.querySelectorAll('.x-filter-rail [data-portfolio-filter]')];
   if(filters.length){const cards=[...document.querySelectorAll('.x-mosaic-cell[data-project-wrapper]')];const empty=document.querySelector('.empty-filter');
-    const apply=value=>{let count=0;filters.forEach(b=>{let active=b.dataset.portfolioFilter===value;b.classList.toggle('is-active',active);b.setAttribute('aria-pressed',String(active))});
-      cards.forEach(el=>{const card=el.querySelector('[data-category-slug]');let visible=value==='all'||card?.dataset.categorySlug===value;el.hidden=!visible;if(visible)count++});if(empty)empty.hidden=count>0;};
-    filters.forEach(b=>b.addEventListener('click',()=>apply(b.dataset.portfolioFilter)));const query=new URLSearchParams(location.search).get('category');if(query&&filters.some(b=>b.dataset.portfolioFilter===query))apply(query);
+    const search=document.querySelector('[data-portfolio-search]');
+    let currentCategory='all';
+    const apply=value=>{currentCategory=value;let count=0;filters.forEach(b=>{let active=b.dataset.portfolioFilter===value;b.classList.toggle('is-active',active);b.setAttribute('aria-pressed',String(active))});
+      cards.forEach(el=>{const card=el.querySelector('[data-category-slug]');let visible=(value==='all'||card?.dataset.categorySlug===value)&&(!search?.value.trim()||(el.dataset.projectSearch||'').includes(search.value.toLowerCase().trim()));el.hidden=!visible;if(visible)count++});if(empty)empty.hidden=count>0;};
+    filters.forEach(b=>b.addEventListener('click',()=>apply(b.dataset.portfolioFilter)));
+    search?.addEventListener('input',()=>apply(currentCategory));const query=new URLSearchParams(location.search).get('category');if(query&&filters.some(b=>b.dataset.portfolioFilter===query))apply(query);
   }
   document.querySelectorAll('[data-accordion]').forEach(list=>{list.querySelectorAll('details').forEach(detail=>detail.addEventListener('toggle',()=>{
     if(!detail.open)return;list.querySelectorAll('details').forEach(other=>{if(other!==detail)other.open=false});
