@@ -29,7 +29,7 @@ class PreviewPortfolioTest extends TestCase {
  public function test_project_gallery_is_editable_and_result_metrics_are_guarded():void {
   $p=Project::where('slug','mockingbird-paradise-valley')->firstOrFail();
   $this->assertCount(8,$p->gallery_items);
-  $this->get('/portfolios/mockingbird-paradise-valley')->assertOk()->assertSee('The preview image set is illustrative');
+  $this->get('/portfolios/mockingbird-paradise-valley')->assertOk()->assertSee('Imagery offers design inspiration.');
   $p->metrics=[['label'=>'Days on market','value'=>'11','source'=>'Not yet verified']];
   $p->result_statement='Example result pending approval';$p->save();
   $this->get('/portfolios/mockingbird-paradise-valley')->assertDontSee('Days on market');
@@ -49,6 +49,6 @@ class PreviewPortfolioTest extends TestCase {
   $this->assertSame($service->cover_image,$service->fresh()->hero_url);
  }
  public function test_original_url_inventory_and_staging_indexing_guards():void {
-  $this->get('/portfolio')->assertOk()->assertSee('noindex,nofollow,noarchive');
+  $this->get('/portfolio')->assertOk()->assertSee('noindex,nofollow,noarchive')->assertDontSee('PRIVATE DESIGN REVIEW');
  }
 }

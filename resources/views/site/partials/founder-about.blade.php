@@ -17,5 +17,5 @@
  <section class="x-founder-next x-wrap x-section"><div><span class="x-eyebrow">WHAT COULD THIS LOOK LIKE FOR YOU?</span><h2>Experience worth<br><em>inviting into your home.</em></h2></div><div><p>Whether you are building, renovating, furnishing a second home or preparing a property for market, your project deserves someone who takes the time to understand it.</p><a class="x-pill" href="{{ route('contact') }}">Start a conversation <span>↗</span></a></div></section>
 </article>
 @else
-<section class="x-founder-pending x-wrap x-section"><h1>Meet the founder</h1><p>Kristine Vowles established The Luxury Look in 2013. Her full profile is being reviewed for publication.</p><a class="x-pill" href="{{ route('contact') }}">Contact the studio <span>↗</span></a></section>
+<section class="x-founder-pending x-wrap x-section"><h1>Meet the founder</h1><p>Kristine Vowles established The Luxury Look in 2013. Explore the design studio and connect with our team to learn more.</p><a class="x-pill" href="{{ route('contact') }}">Contact the studio <span>↗</span></a></section>
 @endif
