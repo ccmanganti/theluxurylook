@@ -14,7 +14,7 @@ class BuilderCaseStudySeeder extends Seeder {
             'prof-sports-client-featured-on-nbc'=>'Property presentation',
         ] as $slug=>$type) {
             $project=Project::where('slug',$slug)->first();
-            if ($project && !$project->builder_featured) {
+            if ($project && $project->case_study_type === null) {
                 $project->builder_featured=true;
                 $project->case_study_type=$type;
                 $project->save();
