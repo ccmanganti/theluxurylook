@@ -25,7 +25,6 @@ class SiteController extends Controller
         ];
         $urlDecision = LegacyUrl::where('path', $seo['path'])->value('status');
         if ($urlDecision && $urlDecision !== 'ready') $seo['noindex'] = true;
-        $seo = \App\Support\SiteSeo::prepare($seo, $data);
         $seo = LocalSeo::enrich($seo, $data);
         return view($template, $data + compact('seo'));
 
