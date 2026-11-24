@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Log;
 use App\Models\StudioVideo;
+use App\Models\FounderProfile;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Str;
 use Illuminate\Validation\Rule;
@@ -33,6 +34,7 @@ class SiteController extends Controller
             'categories' => PortfolioCategory::visibleOnSite()->withCount('projects')->orderBy('sort_order')->get(),
             'services' => Service::visibleOnSite()->orderBy('sort_order')->get(),
             'featuredVideo' => StudioVideo::visibleOnSite()->whereIn('placement',['home','services'])->orderBy('sort_order')->first(),
+            'founder' => FounderProfile::visibleOnSite()->first(),
             'filmCollection' => StudioVideo::visibleOnSite()->where('placement','gallery')->orderBy('sort_order')->get(),
         ], ['path'=>'/', 'description'=>'The Luxury Look is an award-winning interior design and home staging firm in Scottsdale, Arizona. Explore our projects and services.']);
     }
@@ -209,7 +211,9 @@ class SiteController extends Controller
             $legacy = LegacyUrl::where('path',$path)->firstOrFail();
             return $this->view('site.pending',compact('legacy'),['title'=>Str::headline(basename($path)).' | The Luxury Look','noindex'=>true]);
         }
-        return $this->view($path==='/contact'?'site.contact':'site.page',compact('page'),[
+        $founder = $path==='/about' ? FounderProfile::visibleOnSite()->first() : null;
+        $founderFilms = $path==='/about' ? StudioVideo::visibleOnSite()->where('video_url','like','%gNeiecujx8Q%')->orderBy('sort_order')->get() : collect();
+        return $this->view($path==='/contact'?'site.contact':'site.page',compact('page','founder','founderFilms'),[
             'title'=>$page->meta_title ?: $page->title.' | The Luxury Look',
             'description'=>$page->meta_description ?: $page->intro,
             'image'=>$page->hero_image,

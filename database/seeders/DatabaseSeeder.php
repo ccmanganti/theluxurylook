@@ -60,6 +60,7 @@ class DatabaseSeeder extends Seeder
         $this->call(ExperienceOfferingSeeder::class);
         $this->call(PreviewTitlesSeeder::class);
         $this->call(StudioVideoSeeder::class);
+        $this->call(FounderProfileSeeder::class);
         // Every original path requires an explicit content and SEO review.
         // This migration preview deliberately approves no URL automatically.
     }

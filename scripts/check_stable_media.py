@@ -33,3 +33,12 @@ assert 'translateX(' not in css and 'translateY(' not in css
 assert not re.search(r'transform\s*:\s*scale\s*\(',css)
 assert 'transform: none !important' in css
 print('PASS: 122-page preview is free of animated zoom video; opacity-only fades; Buying Trips parent; deferred Vimeo and YouTube film gallery.')
+
+about=(public/'about/index.html').read_text(encoding='utf-8')
+home=(public/'index.html').read_text(encoding='utf-8')
+assert 'Kristine Vowles' in about and 'IMG_4393_Enhanced' in about and '376382748_' in about
+assert 'NnwE6poxV1c' in about and 'gNeiecujx8Q' in about
+assert 'Meet Kristine' in home and 'Kristine-Vowles-Headshot.jpg' in home
+assert 'founder.css?v=20261124-kristine-v1' in about and 'founder.css?v=20261124-kristine-v1' in home
+assert '<video ' not in about and 'atelier-motion.mp4' not in about
+print('PASS: founder profile, source portraits, authentic films, optimized fade-only layout.')
