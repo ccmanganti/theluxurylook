@@ -61,7 +61,20 @@ class ProjectResource extends Resource
     ])->collapsed(),
     Section::make('SEO and launch readiness')->schema([
         TextInput::make('meta_title')->maxLength(255),Textarea::make('meta_description')->rows(2),
-        Toggle::make('featured'),Toggle::make('is_published'),Toggle::make('content_verified')->helperText('Approve only after copy, gallery, OG tags, and media ownership have been reviewed.'),
+        Toggle::make('featured')->label('Feature on homepage'),
+        Toggle::make('builder_featured')->label('Candidate for Builders & Agents')->helperText('Select 4-6 compelling examples for the builder page; verify the story and permission before launch.'),
+        Select::make('case_study_type')->label('Case-study category')->options([
+            'Residential design'=>'Residential design',
+            'Interior design / renovation'=>'Renovation / design',
+            'Luxury home staging'=>'Luxury home staging',
+            'Occupied staging'=>'Occupied seller refresh',
+            'Luxury property'=>'Luxury property',
+            'Property presentation'=>'Property presentation',
+            'Spec home'=>'New construction spec home',
+            'Model home'=>'Builder model / showcase',
+            'Turnkey second home'=>'Turnkey second home'
+        ]),
+        Toggle::make('is_published'),Toggle::make('content_verified')->helperText('Approve only after copy, gallery, OG tags, and media ownership have been reviewed.'),
         TextInput::make('sort_order')->numeric()->default(0),
     ])->columns(2),
 
@@ -70,7 +83,7 @@ class ProjectResource extends Resource
 
     public static function table(Table $table): Table
     {
-        return $table->columns([TextColumn::make('preview_title')->label('Working title')->searchable(),TextColumn::make('title')->label('Original title / SEO')->searchable()->sortable(),TextColumn::make('category.title')->label('Category'),IconColumn::make('featured')->boolean(),IconColumn::make('content_verified')->boolean()->label('Verified'),TextColumn::make('updated_at')->dateTime()->sortable()])->defaultSort('updated_at', 'desc');
+        return $table->columns([TextColumn::make('preview_title')->label('Working title')->searchable(),TextColumn::make('title')->label('Original title / SEO')->searchable()->sortable(),TextColumn::make('category.title')->label('Category'),IconColumn::make('featured')->boolean(),IconColumn::make('builder_featured')->boolean()->label('Builder feature'),IconColumn::make('content_verified')->boolean()->label('Verified'),TextColumn::make('updated_at')->dateTime()->sortable()])->defaultSort('updated_at', 'desc');
     }
 
     public static function getPages(): array

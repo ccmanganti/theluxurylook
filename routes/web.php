@@ -6,6 +6,7 @@ Route::get('/', [SiteController::class,'home'])->name('home');
 Route::get('/robots.txt',[SiteController::class,'robots']);
 Route::get('/sitemap.xml',[SiteController::class,'sitemap']);
 Route::get('/design', [SiteController::class, 'design'])->name('design');
+Route::get('/home-staging', [SiteController::class, 'homeStaging'])->name('staging');
 Route::get('/builders-and-agents', [SiteController::class, 'builders'])->name('builders');
 Route::get('/collection', [SiteController::class, 'collection'])->name('collection');
 Route::get('/curated-circle', [SiteController::class, 'circle'])->name('circle');

@@ -6,8 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 class Project extends Model
 {
     protected $table = 'projects';
-    protected $fillable = ['portfolio_category_id', 'slug', 'title', 'preview_title', 'location', 'summary', 'story', 'cover_image', 'cover_upload', 'preview_cover_image', 'gallery', 'gallery_uploads', 'preview_gallery', 'meta_title', 'meta_description', 'project_brief', 'design_approach', 'scope_of_work', 'result_statement', 'results_verified', 'metrics', 'before_gallery', 'client_quote', 'quote_attribution', 'featured', 'is_published', 'content_verified', 'sort_order'];
-    protected function casts(): array { return ['featured' => 'boolean', 'is_published' => 'boolean', 'content_verified' => 'boolean', 'gallery' => 'array', 'gallery_uploads' => 'array', 'preview_gallery' => 'array', 'metrics' => 'array', 'before_gallery' => 'array', 'results_verified' => 'boolean']; }
+    protected $fillable = ['portfolio_category_id', 'slug', 'title', 'preview_title', 'location', 'summary', 'story', 'cover_image', 'cover_upload', 'preview_cover_image', 'gallery', 'gallery_uploads', 'preview_gallery', 'meta_title', 'meta_description', 'project_brief', 'design_approach', 'scope_of_work', 'result_statement', 'results_verified', 'metrics', 'before_gallery', 'client_quote', 'quote_attribution', 'featured', 'builder_featured', 'case_study_type', 'is_published', 'content_verified', 'sort_order'];
+    protected function casts(): array { return ['featured' => 'boolean', 'builder_featured' => 'boolean', 'is_published' => 'boolean', 'content_verified' => 'boolean', 'gallery' => 'array', 'gallery_uploads' => 'array', 'preview_gallery' => 'array', 'metrics' => 'array', 'before_gallery' => 'array', 'results_verified' => 'boolean']; }
 
     public function getDisplayTitleAttribute(): string
     {

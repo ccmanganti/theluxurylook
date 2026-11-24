@@ -36,6 +36,7 @@ class SiteController extends Controller
             'featuredVideo' => StudioVideo::visibleOnSite()->whereIn('placement',['home','services'])->orderBy('sort_order')->first(),
             'founder' => FounderProfile::visibleOnSite()->first(),
             'filmCollection' => StudioVideo::visibleOnSite()->where('placement','gallery')->orderBy('sort_order')->get(),
+            'journal' => Post::visibleOnSite()->where('content_verified',true)->orderByDesc('published_at')->take(3)->get(),
         ], ['path'=>'/', 'description'=>'The Luxury Look is an award-winning interior design and home staging firm in Scottsdale, Arizona. Explore our projects and services.']);
     }
 
@@ -53,7 +54,10 @@ class SiteController extends Controller
 
     public function design()
     {
-        return $this->view('site.design', [], [
+        $page=Page::where('path','/design')->first();
+        $projects=Project::visibleOnSite()->with('category')->whereHas('category',fn($query)=>$query->where('slug','interior-design-projects'))->orderBy('sort_order')->take(3)->get();
+        $founder=FounderProfile::visibleOnSite()->first();
+        return $this->view('site.design',compact('page','projects','founder'), [
             'title'=>'Luxury Interior Design | The Luxury Look',
             'description'=>'Full-service luxury residential design, renovation and second-home interiors led by Kristine Vowles.',
             'noindex'=>true,
@@ -62,17 +66,33 @@ class SiteController extends Controller
 
     public function builders()
     {
-        $projects=Project::visibleOnSite()->with('category')->orderBy('sort_order')->take(6)->get();
-        return $this->view('site.builders',compact('projects'),[
+        $page=Page::where('path','/builders-and-agents')->first();
+        $projects=Project::visibleOnSite()->with('category')->where('builder_featured',true)->orderBy('sort_order')->take(6)->get();
+        return $this->view('site.builders',compact('page','projects'),[
             'title'=>'For Builders & Agents | The Luxury Look',
             'description'=>'Luxury specifications, market-ready design and premium home staging for builders and real estate professionals.',
             'noindex'=>true,
         ]);
     }
 
+    public function homeStaging()
+    {
+        $page=Page::where('path','/home-staging')->first();
+        $projects=Project::visibleOnSite()->with('category')
+            ->whereHas('category',fn($query)=>$query->where('slug','home-staging-projects-the-luxury-look'))
+            ->orderBy('sort_order')->take(4)->get();
+        return $this->view('site.home-staging',compact('page','projects'),[
+            'title'=>'Luxury Home Staging | The Luxury Look',
+            'description'=>'Vacant and occupied luxury home staging, property presentation, and styling for listing photography.',
+            'noindex'=>true,
+        ]);
+    }
+
     public function collection()
     {
-        return $this->view('site.collection', [], [
+        $page=Page::where('path','/collection')->first();
+        $projects=Project::visibleOnSite()->with('category')->where('featured',true)->orderBy('sort_order')->take(3)->get();
+        return $this->view('site.collection',compact('page','projects'), [
             'title'=>'The Collection | The Luxury Look',
             'description'=>'Furniture and housewares lookbook curated by The Luxury Look.',
             'noindex'=>true,
@@ -90,8 +110,9 @@ class SiteController extends Controller
 
     public function buyingTrips()
     {
+        $page=Page::where('path','/buying-trips')->first();
         $offerings=ExperienceOffering::visibleOnSite()->where('kind','buying-trip')->orderBy('sort_order')->get();
-        return $this->view('site.buying-trips',compact('offerings'),[
+        return $this->view('site.buying-trips',compact('page','offerings'),[
             'title'=>'Buying Trips & Curated Sourcing | The Luxury Look',
             'description'=>'Buying trips and custom sourcing journeys, including Dallas Market, tailored to your design and furnishing goals.',
             'noindex'=>true,

@@ -59,6 +59,7 @@ class DatabaseSeeder extends Seeder
         $this->call(PreviewPhotographySeeder::class);
         $this->call(ExperienceOfferingSeeder::class);
         $this->call(PreviewTitlesSeeder::class);
+        $this->call(BuilderCaseStudySeeder::class);
         $this->call(StudioVideoSeeder::class);
         $this->call(FounderProfileSeeder::class);
         // Every original path requires an explicit content and SEO review.

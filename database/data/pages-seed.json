@@ -74,5 +74,65 @@
     "meta_title": "Contact Us - The Luxury Look | Interior Design, Scottsdale, AZ",
     "is_published": true,
     "content_verified": true
+  },
+  {
+    "path": "/design",
+    "title": "Luxury Residential Interior Design",
+    "eyebrow": "Design / The Luxury Look",
+    "intro": "Every home has its own character. Kristine leads a thoughtful, personal design process from the first conversation through the finishing details.",
+    "body": "A design house for high-end and second homes, with thoughtful guidance in layout, materials, furnishings and details.",
+    "cta_text": "Begin Your Project",
+    "cta_url": "/contact?service=Custom%20Home%20Design",
+    "is_published": true,
+    "content_verified": false,
+    "sections": []
+  },
+  {
+    "path": "/builders-and-agents",
+    "title": "Luxury Specs & Market-Ready",
+    "eyebrow": "For builders, developers & agents",
+    "intro": "A strategic design partner for luxury properties that need to be remembered, from custom and spec homes to occupied and vacant listings.",
+    "body": "We combine an understanding of real estate presentation with thoughtful interiors, careful project coordination and purposeful finishing details.",
+    "cta_text": "Discuss Your Property",
+    "cta_url": "/contact?service=Builder%20or%20Developer%20Design%20Partnership",
+    "is_published": true,
+    "content_verified": false,
+    "sections": []
+  },
+  {
+    "path": "/home-staging",
+    "title": "Luxury Home Staging",
+    "eyebrow": "Market-ready / The Luxury Look",
+    "intro": "The right presentation invites buyers to picture the life that could unfold in a home. Our staging approach is tailored to the property, its audience and its timeline.",
+    "body": "Vacant and occupied staging, select-room refreshes, and styling for real-estate photography. Scope and pricing are discussed after a property review.",
+    "cta_text": "Request a Staging Consultation",
+    "cta_url": "/contact?service=Luxury%20Home%20Staging",
+    "is_published": true,
+    "content_verified": false,
+    "sections": []
+  },
+  {
+    "path": "/collection",
+    "title": "The Luxury Look Collection",
+    "eyebrow": "Furniture & housewares",
+    "intro": "Furnishings, art and housewares selected to feel cohesive and personal, whether you're finishing a primary residence or making a second home ready to enjoy.",
+    "body": "Turnkey furnishing and sourcing support by inquiry. Product availability, trade terms and purchasing arrangements depend on the selected scope.",
+    "cta_text": "View the Lookbook",
+    "cta_url": "https://heyzine.com/flip-book/a228d0b91d.html#page/78",
+    "is_published": true,
+    "content_verified": false,
+    "sections": []
+  },
+  {
+    "path": "/buying-trips",
+    "title": "Buying Trips & Curated Sourcing",
+    "eyebrow": "Buying trips",
+    "intro": "Design-led sourcing journeys for clients who value clarity, access and considered selections. Dallas Market is one possible destination, not the entire offering.",
+    "body": "Choose a guided market experience or a custom sourcing conversation tailored to your project. Dates, travel arrangements, eligibility, access and fees are discussed individually.",
+    "cta_text": "Discuss a Buying Trip",
+    "cta_url": "/contact?service=Buying%20Trips",
+    "is_published": true,
+    "content_verified": false,
+    "sections": []
   }
 ]
