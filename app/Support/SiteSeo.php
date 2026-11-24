@@ -1,117 +1,104 @@
 <?php
 namespace App\Support;
+
 use Illuminate\Support\Str;
-use Illuminate\Support\Arr;
 
 final class SiteSeo
 {
-    private static function definitions(): array
+    // Only Scottsdale is a verified office. Other names describe markets in actual work.
+    public const ALLOWED_MARKETS=['Scottsdale','Paradise Valley','Phoenix','Cave Creek','Sedona'];
+
+    public static function market(?string $location): ?string
     {
-        static $config;
-        return $config ??= json_decode(file_get_contents(database_path('data/local-seo-pages.json')), true, 512, JSON_THROW_ON_ERROR);
-    }
-    public static function prepare(array $seo, array $data=[]): array
-    {
-        $config=self::definitions();
-        $path=$seo['path'] ?? ('/'.ltrim((string)request()->path(), '/'));
-        $path=($path==='/'||$path==='')?'/':'/'.trim($path,'/');
-        $siteUrl='https://'.config('site.canonical_host');
-        $route=$config['routes'][$path]??null;
-        $content=($data['post']??$data['project']??$data['category']??$data['service']??$data['offering']??$data['page']??null);
-        $providedTitle=$seo['title']??'';
-        $defaultTitle='The Luxury Look | Interior Design & Home Staging Scottsdale';
-        $seo['title']=$content?->meta_title ?: ($route['title']??($providedTitle?:$defaultTitle));
-        $seo['description']=trim((string)($content?->meta_description ?: ($route['description']??($seo['description']??''))));
-        // Original project/article metadata has priority over a location keyword template.
-        if(!$route && $content && $providedTitle && $providedTitle!==$defaultTitle){
-            $seo['title']=$content->meta_title ?: $providedTitle;
+        if (!$location) return null;
+        foreach(self::ALLOWED_MARKETS as $market) {
+            if (preg_match('/\b'.preg_quote($market,'/').'\b/i',$location)) return $market;
         }
-        $seo['title']=Str::limit(strip_tags($seo['title']),110,'');
-        $seo['description']=Str::limit(preg_replace('/\s+/u',' ',strip_tags($seo['description'])),320,'');
-        $seo['path']=$path;
-        $seo['canonical']=$siteUrl.$path;
-        $seo['image']=$content?->seo_share_image ?: ($seo['image']??config('site.default_og_image'));
-        $seo['type']=str_starts_with($path,'/blog/')?'article':'website';
-        $seo['breadcrumbs']=self::breadcrumbs($path,$data,$siteUrl);
-        $seo['locality']=$content?->seo_locality ?: ($route && in_array($route['section'],['home','service'],true) ? 'Scottsdale' : null);
-        $seo['local_section']=in_array($path,['/','/design','/home-staging','/builders-and-agents','/services','/contact','/the-studio'],true);
-        $seo['graph']=self::graph($seo,$data,$config,$siteUrl,$route['section']??null);
+        return null;
+    }
+
+    public static function canonical(string $path): string
+    {
+        $path='/'.ltrim($path,'/');
+        if($path!=='/')$path=rtrim($path,'/');
+        return 'https://'.config('site.canonical_host').$path;
+    }
+
+    public static function defaultTitle(string $path): ?string
+    {
+        return [
+            '/'=>'Luxury Interior Design in Scottsdale, Arizona | The Luxury Look',
+            '/design'=>'Luxury Interior Design in Scottsdale, AZ | The Luxury Look',
+            '/services'=>'Scottsdale Interior Design & Staging Services | The Luxury Look',
+            '/home-staging'=>'Luxury Home Staging in Scottsdale, AZ | The Luxury Look',
+            '/builders-and-agents'=>'Luxury Spec Home Design & Staging | Scottsdale, AZ',
+            '/portfolio'=>'Luxury Interior Design Portfolio | The Luxury Look',
+            '/contact'=>'Interior Design Consultation | Scottsdale, Arizona',
+            '/blog'=>'The Journal | Interior Design, Staging & Inspired Living',
+            '/about'=>'Meet Kristine Vowles | The Luxury Look',
+            '/the-studio'=>'The Luxury Look Interior Design Studio | Scottsdale, AZ',
+            '/buying-trips'=>'Curated Furniture Buying Trips | The Luxury Look',
+            '/buying-trips/dallas-market'=>'Dallas Market Buying Experiences | The Luxury Look',
+            '/collection'=>'Curated Furniture & Housewares | The Luxury Look',
+        ][$path]??null;
+    }
+
+    public static function enrich(array $seo, array $data=[]): array
+    {
+        $path=$seo['path']??'/';
+        $entity=$data['post']??$data['project']??$data['service']??$data['category']??$data['page']??null;
+        $market=self::market($entity?->seo_focus_location??null);
+        if (!$market && isset($data['project'])) $market=self::market($data['project']->location);
+        if (!$market && (in_array($path,['/','/design','/home-staging','/builders-and-agents','/portfolio','/contact','/services','/the-studio'],true) || Str::startsWith($path,'/services/'))) $market='Scottsdale';
+        $seo['market']=$market;
+        if (self::defaultTitle($path) && (empty($seo['title']) || Str::startsWith($seo['title'],'The Luxury Look |'))) $seo['title']=self::defaultTitle($path);
+        $description=trim(strip_tags((string)($seo['description']??'')));
+        if(strlen($description)<40)$description='Explore thoughtfully designed interiors, projects, and perspectives from The Luxury Look.';
+        if($market && !Str::contains(Str::lower($description),Str::lower($market)) && Str::startsWith($path,['/services','/design','/home-staging','/portfolio','/portfolios','/builders-and-agents','/contact'])) {
+            $description=rtrim($description,'. ').'. Explore The Luxury Look in '.$market.', Arizona.';
+        }
+        $seo['description']=Str::limit(preg_replace('/\s+/',' ',$description),165,'');
+        $seo['canonical']=self::canonical($path);
+        $seo['type']=isset($data['post'])?'article':'website';
+        $seo['published_at']=isset($data['post'])&&$data['post']->published_at?$data['post']->published_at->toAtomString():null;
+        $seo['modified_at']=$entity?->updated_at?->toAtomString();
+        $seo['image_alt']=$entity?->seo_image_alt??null;
+        $seo['schema']=self::schema($seo,$data);
         return $seo;
     }
-    private static function breadcrumbs(string $path,array $data,string $base): array
+
+    public static function schema(array $seo,array $data=[]): array
     {
-        if($path==='/')return [];
-        $parts=array_values(array_filter(explode('/',$path)));
-        $labels=['portfolio'=>'Portfolio','portfolios'=>'Portfolio','blog'=>'The Journal',
-            'services'=>'Services','collection'=>'The Collection','buying-trips'=>'Buying Trips',
-            'dallas-market'=>'Dallas Market','education'=>'Education','the-studio'=>'The Studio',
-            'home-staging'=>'Home Staging','builders-and-agents'=>'Builders & Agents',
-            'curated-circle'=>'The Curated Circle','about'=>'About','contact'=>'Contact'];
-        $all=[['name'=>'Home','url'=>$base.'/']];
-        if(count($parts)>1&&$parts[0]==='portfolios') {
-            $all[]=['name'=>'Portfolio','url'=>$base.'/portfolio'];
-        } else {
-            for($i=0;$i<count($parts)-1;$i++){
-                $prefix='/'.implode('/',array_slice($parts,0,$i+1));
-                $all[]=['name'=>$labels[$parts[$i]]??Str::headline($parts[$i]),'url'=>$base.$prefix];
-            }
+        $url=$seo['canonical'];$root='https://'.config('site.canonical_host');
+        $business=['@type'=>['LocalBusiness','InteriorDesignBusiness'],'@id'=>$root.'/#business','name'=>'The Luxury Look','url'=>$root.'/',
+            'telephone'=>config('site.company.phone'),'email'=>config('site.company.email'),
+            'address'=>['@type'=>'PostalAddress','streetAddress'=>'4343 N Scottsdale Rd, Suite 150','addressLocality'=>'Scottsdale','addressRegion'=>'AZ','postalCode'=>'85251','addressCountry'=>'US']];
+        $crumbs=[['@type'=>'ListItem','position'=>1,'name'=>'Home','item'=>$root.'/']];
+        $segments=array_values(array_filter(explode('/',trim($seo['path']??'/','/'))));$progress='';
+        foreach ($segments as $i=>$segment) {
+            $progress.='/'.$segment;
+            $name=match($segment){'portfolios'=>'Portfolio','portfolio'=>'Portfolio','blog'=>'Journal','services'=>'Services','buying-trips'=>'Buying Trips',default=>Str::headline($segment)};
+            if($i===count($segments)-1)$name=$data['post']->title??$data['project']->title??$data['service']->title??$data['category']->title??$data['page']->title??$name;
+            $crumbs[]=['@type'=>'ListItem','position'=>count($crumbs)+1,'name'=>$name,'item'=>self::canonical($progress)];
         }
-        $name=$data['post']->title??$data['project']->display_title??$data['category']->title??
-            $data['service']->title??$data['offering']->title??$data['page']->title??$labels[end($parts)]??Str::headline(end($parts));
-        $all[]=['name'=>$name,'url'=>$base.$path];
-        return $all;
-    }
-    private static function graph(array $seo,array $data,array $config,string $base,?string $section): array
-    {
-        $business=$base.'/#business';
-        $office=$config['office'];
-        $graph=[];
-        if(in_array($seo['path'],['/','/about','/the-studio','/contact'],true)){
-            $graph[]=['@type'=>'LocalBusiness','@id'=>$business,'name'=>'The Luxury Look',
-                'url'=>$base.'/','telephone'=>$office['phone'],'email'=>$office['email'],
-                'address'=>['@type'=>'PostalAddress','streetAddress'=>$office['address'],
-                    'addressLocality'=>$office['city'],'addressRegion'=>$office['region'],
-                    'postalCode'=>$office['postal_code'],'addressCountry'=>$office['country']],
-                'areaServed'=>array_map(fn($n)=>['@type'=>'Place','name'=>$n],$config['approved_service_area'])];
+        $page=['@type'=>isset($data['post'])?'BlogPosting':(isset($data['project'])?'CreativeWork':'WebPage'),
+            '@id'=>$url.'#webpage','url'=>$url,'name'=>$seo['title'],'description'=>$seo['description'],
+            'inLanguage'=>'en-US','isPartOf'=>['@id'=>$root.'/#website'],'publisher'=>['@id'=>$root.'/#business']];
+        if(!empty($seo['image']))$page['image']=$seo['image'];
+        if(!empty($seo['published_at']))$page['datePublished']=$seo['published_at'];
+        if(!empty($seo['modified_at']))$page['dateModified']=$seo['modified_at'];
+        if(isset($data['post'])) {
+            $page['author']=['@type'=>'Organization','name'=>$data['post']->author_name?:'The Luxury Look'];
+            if(!empty($data['post']->category))$page['articleSection']=$data['post']->category;
         }
-        if($seo['path']==='/'){
-            $graph[]=['@type'=>'WebSite','@id'=>$base.'/#website','url'=>$base.'/','name'=>'The Luxury Look','inLanguage'=>'en-US'];
+        if(isset($data['service'])) {
+            $page['@type']='Service';$page['serviceType']=$data['service']->title;
+            $page['provider']=['@id'=>$root.'/#business'];
+            if(!empty($seo['market']))$page['areaServed']=['@type'=>'Place','name'=>$seo['market'].', Arizona'];
         }
-        $web=['@type'=>'WebPage','@id'=>$seo['canonical'].'#webpage','url'=>$seo['canonical'],
-            'name'=>$seo['title'],'description'=>$seo['description'],'inLanguage'=>'en-US',
-            'isPartOf'=>['@id'=>$base.'/#website']];
-        if($seo['image'])$web['primaryImageOfPage']=['@type'=>'ImageObject','url'=>$seo['image']];
-        if($seo['breadcrumbs'])$web['breadcrumb']=['@id'=>$seo['canonical'].'#breadcrumb'];
-        $graph[]=$web;
-        if($seo['breadcrumbs']){
-            $graph[]=['@type'=>'BreadcrumbList','@id'=>$seo['canonical'].'#breadcrumb',
-                'itemListElement'=>array_map(fn($x,$idx)=>['@type'=>'ListItem','position'=>$idx+1,'name'=>$x['name'],'item'=>$x['url']],$seo['breadcrumbs'],array_keys($seo['breadcrumbs']))];
-        }
-        $path=$seo['path'];
-        if($section==='service'||str_starts_with($path,'/services/')){
-            $name=$data['service']->title??$data['offering']->title??$seo['title'];
-            $graph[]=['@type'=>'Service','@id'=>$seo['canonical'].'#service','name'=>$name,
-                'description'=>$seo['description'],'url'=>$seo['canonical'],
-                'provider'=>['@id'=>$business],
-                'areaServed'=>array_map(fn($n)=>['@type'=>'Place','name'=>$n],$config['approved_service_area'])];
-        }
-        if(isset($data['post'])){
-            $post=$data['post'];
-            $article=['@type'=>'BlogPosting','@id'=>$seo['canonical'].'#article',
-                'headline'=>$post->title,'description'=>$seo['description'],'mainEntityOfPage'=>$seo['canonical'],
-                'publisher'=>['@id'=>$business]];
-            if($post->published_at)$article['datePublished']=$post->published_at->toIso8601String();
-            if($post->updated_at)$article['dateModified']=$post->updated_at->toIso8601String();
-            if($post->source_attribution)$article['author']=['@type'=>'Person','name'=>$post->source_attribution];
-            if($seo['image'])$article['image']=$seo['image'];
-            $graph[]=$article;
-        }
-        if(isset($data['project'])){
-            $project=$data['project'];
-            $graph[]=['@type'=>'CreativeWork','@id'=>$seo['canonical'].'#project',
-                'name'=>$project->display_title,'description'=>$seo['description'],'url'=>$seo['canonical'],
-                'about'=>['@type'=>'Thing','name'=>$project->category?->title??'Interior Design']];
-        }
-        return ['@context'=>'https://schema.org','@graph'=>$graph];
+        return ['@context'=>'https://schema.org','@graph'=>[
+            $business,['@type'=>'WebSite','@id'=>$root.'/#website','url'=>$root.'/','name'=>'The Luxury Look','publisher'=>['@id'=>$root.'/#business'],'inLanguage'=>'en-US'],
+            $page,['@type'=>'BreadcrumbList','@id'=>$url.'#breadcrumbs','itemListElement'=>$crumbs]
+        ]];
     }
 }
