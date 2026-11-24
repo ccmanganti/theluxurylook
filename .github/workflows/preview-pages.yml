@@ -1,4 +1,4 @@
-name: Publish safe visual-only preview to GitHub Pages
+name: Publish The Luxury Look website to GitHub Pages
 on:
   push:
     branches: [main]
@@ -36,7 +36,7 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
-      - name: Generate SEO-safe static design preview
+      - name: Generate client-facing website pages
         run: python3 scripts/build_experience_preview.py
       - name: Verify eight relaunch workstreams
         run: python3 scripts/check_revamp_eight.py
@@ -48,17 +48,17 @@ jobs:
         run: python3 scripts/check_motion_policy.py
       - name: Verify stationary media, Buying Trips, and YouTube embeds
         run: python3 scripts/check_stable_media.py
-      # Mirror the review-only HTML into main's root because this Pages site
+      # Mirror rendered HTML into main's root because this Pages site
       # is also configured to serve / (branch) using Jekyll.
-      # No production app files in public/ or Laravel internals are modified.
-      - name: Publish preview pages to root for branch-based GitHub Pages
+      # Do not change Laravel internals or the existing production domain.
+      - name: Publish website pages to root for branch-based GitHub Pages
         run: |
           cp -a preview-dist/. .
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add -A -- .nojekyll index.html robots.txt assets media portfolio portfolios services about blog contact design builders-and-agents collection curated-circle dallas-market buying-trips home-staging education
           if ! git diff --cached --quiet; then
-            git commit -m "build(preview): add site pages for temporary Pages preview [skip ci]"
+            git commit -m "build(site): publish client-facing pages [skip ci]"
             # Other source commits can arrive while this build runs. Rebase the
             # generated preview commit rather than force-pushing or losing work.
             for attempt in 1 2 3; do
@@ -67,8 +67,8 @@ jobs:
               if git push origin HEAD:main; then
                 exit 0
               fi
-              echo "Preview branch moved during publish; retrying safe fast-forward ($attempt)"
+              echo "Site branch moved during publish; retrying safe fast-forward ($attempt)"
             done
-            echo "Could not safely publish the preview after three attempts" >&2
+            echo "Could not safely publish the website after three attempts" >&2
             exit 1
           fi
