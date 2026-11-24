@@ -56,6 +56,8 @@ class DatabaseSeeder extends Seeder
             ]);
         }
         $this->call(BlogArchiveSeeder::class);
+        // Import authentic original Webflow article bodies, without overwriting edits.
+        $this->call(RestoreOriginalJournalSeeder::class);
         // Staging-only photo and working-title backfill is non-destructive.
         $this->call(PreviewPhotographySeeder::class);
         $this->call(ExperienceOfferingSeeder::class);
