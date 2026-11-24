@@ -393,6 +393,12 @@ def main():
     output('contact','Contact The Studio',contact());output('blog','The Journal',journal())
     for item in LEGACY:
         if item['path'].startswith('/blog/'):output(item['path'],item['path'].split('/')[-1].replace('-',' ').title(),journal_post(item))
+    # The November 2026 article exists on the public blog but was absent from the original XML inventory.
+    # Preserve its actual permalink without altering the 96-URL migration inventory.
+    for post in JOURNAL_ARCHIVE:
+        article_path='/blog/'+post['slug']
+        if article_path not in rendered:
+            output(article_path,post['title'],journal_post({'path':article_path}))
     for item in LEGACY:
         if item['path'] not in rendered:
             # Retain exact original paths for audit but never pretend commerce or old
