@@ -60,7 +60,8 @@ class ProjectResource extends Resource
         ])->reorderable()->columns(2)->columnSpanFull(),
     ])->collapsed(),
     Section::make('SEO and launch readiness')->schema([
-        TextInput::make('meta_title')->maxLength(255),Textarea::make('meta_description')->rows(2),
+        TextInput::make('meta_title')->maxLength(255),Textarea::make('meta_description')->rows(2),TextInput::make('seo_locality')->label('Verified locality (optional)')->helperText('Only specify a city genuinely relevant to this content; the studio is based in Scottsdale.'),
+        TextInput::make('seo_share_image')->label('Social preview image URL')->url()->helperText('Use approved imagery only.'),
         Toggle::make('featured')->label('Feature on homepage'),
         Toggle::make('builder_featured')->label('Candidate for Builders & Agents')->helperText('Select 4-6 compelling examples for the builder page; verify the story and permission before launch.'),
         Select::make('case_study_type')->label('Case-study category')->options([

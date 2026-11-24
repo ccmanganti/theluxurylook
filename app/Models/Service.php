@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 class Service extends Model
 {
     protected $table = 'services';
-    protected $fillable = ['slug', 'title', 'summary', 'body', 'cover_image', 'cover_upload', 'preview_cover_image', 'meta_title', 'meta_description', 'seo_location', 'seo_og_image', 'seo_noindex', 'seo_focus_location', 'seo_image_alt', 'sort_order', 'is_published', 'content_verified'];
+    protected $fillable = ['slug', 'title', 'summary', 'body', 'cover_image', 'cover_upload', 'preview_cover_image', 'meta_title', 'meta_description', 'seo_locality', 'seo_share_image', 'seo_location', 'seo_og_image', 'seo_noindex', 'seo_focus_location', 'seo_image_alt', 'sort_order', 'is_published', 'content_verified'];
     protected function casts(): array { return ['seo_noindex' => 'boolean', 'is_published' => 'boolean', 'content_verified' => 'boolean']; }
 
     public function getHeroUrlAttribute(): ?string

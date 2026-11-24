@@ -7,6 +7,7 @@ return [
     'contact_email' => env('SITE_CONTACT_EMAIL', 'kristine@theluxurylook.com'),
     'ga4_id' => env('SITE_ANALYTICS_GA4_ID', ''),
     'google_site_verification' => env('SITE_GOOGLE_SITE_VERIFICATION', ''),
+    'default_og_image' => env('SITE_DEFAULT_OG_IMAGE', ''),
     'company' => [
         'name' => 'The Luxury Look',
         'phone' => '+1 (602) 578-6707',

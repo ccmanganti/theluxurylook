@@ -39,7 +39,8 @@ class ExperienceOfferingResource extends Resource {
                 Toggle::make('featured'),Toggle::make('is_published')->default(true),
                 Toggle::make('content_verified')->default(false)->helperText('Do not approve until program dates, scope, instructors, pricing and claims are confirmed.'),
                 TextInput::make('sort_order')->numeric()->default(0),TextInput::make('meta_title')->maxLength(250),
-                Textarea::make('meta_description')->rows(2),
+                Textarea::make('meta_description')->rows(2),TextInput::make('seo_locality')->label('Verified locality (optional)')->helperText('Only specify a city genuinely relevant to this content; the studio is based in Scottsdale.'),
+        TextInput::make('seo_share_image')->label('Social preview image URL')->url()->helperText('Use approved imagery only.'),
             ])->columns(2),
         ]);
     }

@@ -27,7 +27,8 @@ class ServiceResource extends Resource
         TextInput::make('sort_order')->numeric()->default(0),Toggle::make('is_published'),Toggle::make('content_verified')->helperText('Approve original service details and imagery before go-live.'),
     ])->columns(2),
     Section::make('Temporary service image')->description('Visible only in the development preview, not after launch.')->schema([TextInput::make('preview_cover_image')->url()->label('Temporary cover URL')])->collapsed(),
-    Section::make('SEO')->schema([TextInput::make('meta_title'),Textarea::make('meta_description')]),
+    Section::make('SEO')->schema([TextInput::make('meta_title'),Textarea::make('meta_description'),TextInput::make('seo_locality')->label('Verified locality (optional)')->helperText('Only specify a city genuinely relevant to this content; the studio is based in Scottsdale.'),
+        TextInput::make('seo_share_image')->label('Social preview image URL')->url()->helperText('Use approved imagery only.')]),
 
         ]);
     }

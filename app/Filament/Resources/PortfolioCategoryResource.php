@@ -25,7 +25,8 @@ class PortfolioCategoryResource extends Resource
         TextInput::make('sort_order')->numeric()->default(0),Toggle::make('is_published'),Toggle::make('content_verified')->helperText('Confirm category imagery, copy, titles and every linked project.'),
     ])->columns(2),
     Section::make('Temporary staging hero')->description('Staging image only; never displayed after launch.')->schema([TextInput::make('preview_hero_image')->url()->label('Temporary cover URL')])->collapsed(),
-    Section::make('SEO')->schema([TextInput::make('meta_title'),Textarea::make('meta_description')]),
+    Section::make('SEO')->schema([TextInput::make('meta_title'),Textarea::make('meta_description'),TextInput::make('seo_locality')->label('Verified locality (optional)')->helperText('Only specify a city genuinely relevant to this content; the studio is based in Scottsdale.'),
+        TextInput::make('seo_share_image')->label('Social preview image URL')->url()->helperText('Use approved imagery only.')]),
 
         ]);
     }

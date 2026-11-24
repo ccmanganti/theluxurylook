@@ -24,7 +24,9 @@ class SiteController extends Controller
         ];
         $urlDecision = LegacyUrl::where('path', $seo['path'])->value('status');
         if ($urlDecision && $urlDecision !== 'ready') $seo['noindex'] = true;
+        $seo = \App\Support\SiteSeo::prepare($seo, $data);
         return view($template, $data + compact('seo'));
+
     }
 
     public function home()
@@ -36,7 +38,7 @@ class SiteController extends Controller
             'featuredVideo' => StudioVideo::visibleOnSite()->whereIn('placement',['home','services'])->orderBy('sort_order')->first(),
             'founder' => FounderProfile::visibleOnSite()->first(),
             'filmCollection' => StudioVideo::visibleOnSite()->where('placement','gallery')->orderBy('sort_order')->get(),
-            'journal' => Post::visibleOnSite()->where('content_verified',true)->orderByDesc('published_at')->take(3)->get(),
+            'journal' => Post::visibleOnSite()->orderByDesc('published_at')->take(3)->get(),
         ], ['path'=>'/', 'description'=>'The Luxury Look is an award-winning interior design and home staging firm in Scottsdale, Arizona. Explore our projects and services.']);
     }
 
@@ -216,10 +218,12 @@ class SiteController extends Controller
     public function post(string $slug)
     {
         $post = Post::visibleOnSite()->where('slug',$slug)->firstOrFail();
-        return $this->view('site.post',compact('post'),[
+        $relatedPosts=Post::visibleOnSite()->where('id','!=',$post->id)->where('category',$post->category)->limit(3)->get();
+        return $this->view('site.post',compact('post','relatedPosts'),[
             'title'=>$post->meta_title ?: $post->title.' | The Luxury Look',
             'description'=>$post->meta_description ?: $post->excerpt,
             'image'=>$post->hero_url,
+            'noindex'=>!$post->content_verified,
         ]);
     }
 

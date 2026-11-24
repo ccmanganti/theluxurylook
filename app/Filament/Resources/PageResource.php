@@ -40,7 +40,8 @@ class PageResource extends Resource
         ])->reorderable()->columns(2)->columnSpanFull(),
     ])->columns(2),
     Section::make('SEO and launch readiness')->schema([
-        TextInput::make('meta_title'),Textarea::make('meta_description'),
+        TextInput::make('meta_title')->maxLength(255),Textarea::make('meta_description'),TextInput::make('seo_locality')->label('Verified locality (optional)')->helperText('Only specify a city genuinely relevant to this content; the studio is based in Scottsdale.'),
+        TextInput::make('seo_share_image')->label('Social preview image URL')->url()->helperText('Use approved imagery only.'),
         Toggle::make('is_published'),Toggle::make('content_verified'),
     ]),
 
