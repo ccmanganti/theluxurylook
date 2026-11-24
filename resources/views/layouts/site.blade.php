@@ -32,6 +32,10 @@
   </div></details>
   <a class="x-nav-cta" href="{{ route('contact') }}">Work With Us <span aria-hidden="true">↗</span></a>
  </nav></div></header>
-<main id="main">@yield('content')</main><nav class="seo-breadcrumbs x-wrap" aria-label="Breadcrumb">@foreach(($seo['breadcrumbs'] ?? []) as $item)<a href="{{ $item['url'] }}">{{ $item['name'] }}</a>@if(!$loop->last)<span aria-hidden="true">/</span>@endif @endforeach</nav>
+<main id="main">@yield('content')
+@if(in_array($seo['path']??'', ['/','/design','/home-staging','/builders-and-agents','/services','/contact','/the-studio'], true))
+@include('site.partials.location-context')
+@endif
+</main><nav class="seo-breadcrumbs x-wrap" aria-label="Breadcrumb">@foreach(($seo['breadcrumbs'] ?? []) as $item)<a href="{{ $item['url'] }}">{{ $item['name'] }}</a>@if(!$loop->last)<span aria-hidden="true">/</span>@endif @endforeach</nav>
 <footer class="x-footer"><div class="x-footer-top x-wrap"><span class="x-eyebrow">A NEW CHAPTER STARTS HERE</span><div class="x-footer-hero"><h2>Ready for a home that<br><em>feels like yours?</em></h2><a class="x-pill x-pill--light" href="{{ route('contact') }}">Begin Your Project <span>↗</span></a></div></div><div class="x-footer-bottom x-wrap"><div><a class="x-footer-logo" href="{{ route('home') }}">THE LUXURY LOOK</a><p>Design with intention. Furnished for living.</p></div><nav aria-label="Footer"><a href="{{ route('portfolio.index') }}">Portfolio</a><a href="{{ route('buying') }}">Buying Trips</a><a href="{{ route('education') }}">Education</a><a href="{{ route('contact') }}">Work with us</a></nav><div><p>4343 N Scottsdale Rd, Suite 150<br>Scottsdale, AZ 85251</p><a href="mailto:kristine@theluxurylook.com">kristine@theluxurylook.com</a><a href="tel:+16025786707">+1 (602) 578-6707</a></div></div><div class="x-footer-legal x-wrap"><small>© {{ date('Y') }} The Luxury Look</small><small>Photography and moving imagery in the staging preview are illustrative until approved</small><a href="#top">Back to top ↑</a></div></footer>
 </body></html>

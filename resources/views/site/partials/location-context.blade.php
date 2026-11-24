@@ -1,0 +1,7 @@
+<section class="seo-studio-local x-wrap x-section" aria-label="Local design studio details">
+<div class="seo-studio-local__head"><span class="x-eyebrow">OLD TOWN SCOTTSDALE / THE STUDIO</span><h2>Local perspective.<br><em>Personal design.</em></h2></div>
+<div><p>The Luxury Look is based at 4343 N Scottsdale Road, Suite 150, Scottsdale, Arizona 85251. Our portfolio includes work in communities such as Paradise Valley, Phoenix, Cave Creek and Sedona. Tell us where your project is located and we'll discuss availability, travel and the right scope.</p>
+<div class="seo-studio-links"><a href="{{ url('/the-studio') }}">Meet the Studio ↗</a><a href="{{ route('portfolio.index') }}">Browse the Portfolio ↗</a><a href="{{ route('contact') }}">Start a Project ↗</a></div>
+<details class="seo-studio-faq"><summary>Can I inquire about a property outside Scottsdale?</summary><p>Yes. Tell us the property's location and the services you are interested in. Availability and travel arrangements depend on the individual project.</p></details>
+<details class="seo-studio-faq"><summary>Where is the studio located?</summary><p>4343 N Scottsdale Road, Suite 150, Scottsdale, AZ 85251. Contact the studio before visiting to arrange an appointment.</p></details></div>
+</section>
