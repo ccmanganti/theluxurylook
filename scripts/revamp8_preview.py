@@ -37,12 +37,12 @@ def _offers(items):
 def home(base,d):
  proof='<section class="r8-journey-proof"><div class="x-wrap"><div class="r8-section-heading"><span class="x-eyebrow">DESIGN / REAL ESTATE / INTENTION</span><h2>Design that starts with<br><em>understanding you.</em></h2></div><div class="r8-journey-proof-grid"><div><strong>Design House</strong><p>Full-service residential interior design.</p></div><div><strong>Built for living</strong><p>Thoughtful layout, furnishing and finishing details.</p></div><div><strong>Led by Kristine</strong><p>Experience in both design and real estate.</p></div></div></div></section>'
  base=base.replace('<section class="x-introduction',proof+'<section class="x-introduction',1)
- base=base.replace('Explore the work ↗','Explore The Curated Circle ↗',1)
+ base=base.replace('Explore the work','Explore The Curated Circle',1)
  base=base.replace('href="'+d['U']('portfolio')+'">Explore The Curated Circle','href="'+d['U']('curated-circle')+'">Explore The Curated Circle',1)
  links=f'<section class="r8-home-nav x-wrap">{d["A"]("home-staging","Luxury Home Staging")} {d["A"]("builders-and-agents","For Builders & Agents")} {d["A"]("collection","Explore The Collection")}</section>'
  base=base.replace('<section class="x-dallas-teaser',links+'<section class="x-dallas-teaser',1)
  journal='<section class="r8-home-journal"><div class="x-wrap"><div class="r8-section-heading"><span class="x-eyebrow">THE JOURNAL / DESIGN & LIVING</span><h2>Ideas worth<br><em>living with.</em></h2></div><div class="r8-journal-grid"><article><span class="x-eyebrow">DESIGN</span><h3>Thoughts on home and the way we live.</h3><a href="'+d["U"]("blog")+'">Explore the Journal ↗</a></article><article><span class="x-eyebrow">TRAVEL</span><h3>Where considered discoveries begin.</h3><a href="'+d["U"]("buying-trips")+'">Buying Trips ↗</a></article><article><span class="x-eyebrow">THE STUDIO</span><h3>Meet the person behind the work.</h3><a href="'+d["U"]("about")+'">Meet Kristine ↗</a></article></div></div></section>'
- return base.replace('<section class="x-final-conversion',journal+'<section class="x-final-conversion',1)
+ return base.replace('<section class="x-next-cta',journal+'<section class="x-next-cta',1)
 
 def buying(base,d):
  add='<section class="r8-manifesto x-wrap x-section"><span class="x-eyebrow">BUYING TRIPS / PERSONALLY CURATED</span><div><h2>Know what you are looking for.<br><em>Discover what is possible.</em></h2><p>Dallas Market is one destination within a wider experience. Every journey starts with the project and the selections that matter.</p></div></section>'
