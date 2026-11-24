@@ -6,6 +6,7 @@ on:
       - 'scripts/build_experience_preview.py'
       - 'scripts/check_motion_policy.py'
       - 'scripts/check_geo_journal.py'
+      - 'scripts/check_public_copy.py'
       - 'database/data/blog-archive.json'
       - 'scripts/revamp8_preview.py'
       - 'scripts/check_revamp_eight.py'
@@ -38,6 +39,8 @@ jobs:
           python-version: '3.12'
       - name: Generate client-facing website pages
         run: python3 scripts/build_experience_preview.py
+      - name: Verify no internal development copy appears in public pages
+        run: python3 scripts/check_public_copy.py
       - name: Verify eight relaunch workstreams
         run: python3 scripts/check_revamp_eight.py
       - name: Verify local SEO and restored Journal articles

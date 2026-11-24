@@ -303,7 +303,7 @@ class SiteController extends Controller
     {
         $path='/'.ltrim($request->path(),'/');
         $legacy=LegacyUrl::where('path',$path)->firstOrFail();
-        return response($this->view('site.pending',compact('legacy'),['title'=>'Page under migration | The Luxury Look','noindex'=>true]),503)
+        return response($this->view('site.pending',compact('legacy'),['title'=>'Explore The Luxury Look | Design & Staging','noindex'=>true]),503)
             ->header('Retry-After','86400');
     }
 

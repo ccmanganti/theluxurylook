@@ -19,6 +19,10 @@ jobs:
         run: composer install --no-interaction --prefer-dist --no-progress
       - name: Verify JSON route inventory and project mapping
         run: python3 scripts/check_manifest.py
+      - name: Generate public HTML and check customer-facing content
+        run: |
+          python3 scripts/build_experience_preview.py
+          python3 scripts/check_public_copy.py
       - name: Prepare app
         run: |
           cp .env.example .env
