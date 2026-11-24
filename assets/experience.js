@@ -6,7 +6,12 @@
   const reveal=[...document.querySelectorAll('.x-reveal')];
   if(!reduced.matches&&'IntersectionObserver' in window){
     const observer=new IntersectionObserver((entries,obs)=>{for(const entry of entries){if(entry.isIntersecting){entry.target.classList.add('is-visible');obs.unobserve(entry.target)}}},{rootMargin:'0px 0px -40px 0px',threshold:.04});
-    reveal.forEach(el=>{el.classList.add('is-observed');observer.observe(el)});
+    // Do not hide already visible content on load. Only fade sections as they first enter view.
+    reveal.forEach(el=>{
+      const bounds=el.getBoundingClientRect();
+      if(bounds.top<window.innerHeight*0.92&&bounds.bottom>0){el.classList.add('is-visible');return}
+      el.classList.add('is-observed');observer.observe(el);
+    });
   }
   const videos=[...document.querySelectorAll('[data-ambient-video]')];
   if(videos.length&&!reduced.matches&&!saveData&&'IntersectionObserver' in window){
