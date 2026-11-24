@@ -259,7 +259,7 @@ def main():
     for o in BUYING:output('buying-trips/'+o['slug'],o['title'],offering_detail(o))
     for k in ['design','builders-and-agents','collection','curated-circle']:output(k,k.replace('-',' ').title(),page_extra(k))
     for p in PAGES:
-        if p['path']=='/contact':continue
+        if p['path']=='/contact' or p['path'] in rendered:continue
         output(p['path'],p['title'],editorial_page(p))
     output('contact','Contact The Studio',contact());output('blog','The Journal',journal())
     for item in LEGACY:
