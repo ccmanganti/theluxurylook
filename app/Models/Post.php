@@ -6,8 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 class Post extends Model
 {
     protected $table = 'posts';
-    protected $fillable = ['slug', 'title', 'excerpt', 'body', 'cover_image', 'cover_upload', 'meta_title', 'meta_description', 'is_published', 'content_verified', 'published_at', 'category', 'source_url', 'source_attribution', 'seo_locality', 'seo_share_image'];
-    protected function casts(): array { return ['is_published' => 'boolean', 'content_verified' => 'boolean', 'published_at' => 'datetime']; }
+    protected $fillable = ['slug', 'title', 'excerpt', 'body', 'cover_image', 'cover_upload', 'category', 'source_url', 'seo_location', 'seo_og_image', 'seo_noindex', 'meta_title', 'meta_description', 'is_published', 'content_verified', 'published_at', 'category', 'source_url', 'source_attribution', 'seo_locality', 'seo_share_image'];
+    protected function casts(): array { return ['is_published' => 'boolean', 'content_verified' => 'boolean', 'published_at' => 'datetime', 'seo_noindex' => 'boolean']; }
 
     public function getHeroUrlAttribute(): ?string
     {
