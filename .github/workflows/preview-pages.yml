@@ -8,6 +8,8 @@ on:
       - 'scripts/revamp8_preview.py'
       - 'scripts/check_revamp_eight.py'
       - 'public/assets/revamp8.css'
+      - 'scripts/check_grand_edition.py'
+      - 'public/assets/grand-edition.css'
       - 'scripts/check_stable_media.py'
       - 'database/data/studio-videos.json'
       - 'database/data/experience-offerings.json'
@@ -36,6 +38,8 @@ jobs:
         run: python3 scripts/build_experience_preview.py
       - name: Verify eight relaunch workstreams
         run: python3 scripts/check_revamp_eight.py
+      - name: Verify Grand Edition visual upgrade
+        run: python3 scripts/check_grand_edition.py
       - name: Enforce fade-only motion policy
         run: python3 scripts/check_motion_policy.py
       - name: Verify stationary media, Buying Trips, and YouTube embeds
