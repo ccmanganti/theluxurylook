@@ -110,7 +110,7 @@ def buying_trips():
             f'<p>Dallas is one market destination in the broader buying trips collection.</p><a href="{U("buying-trips/dallas-market")}">Explore Dallas Market ↗</a></article>'
             f'<article class="x-buying-path"><img src="{E(STOCK[5])}" alt="Illustrative interior sourcing" loading="lazy" width="1200" height="900">'
             f'{eyebrow("BESPOKE / OTHER DESTINATIONS")}<h2>Beyond<br><em>the Market</em></h2>'
-            f'<p>Ask the studio about other markets and possible design journeys shaped around your goals. Every experience is shaped to the client's goals and agreed scope.</p><a href="{U("contact")}">Discuss other destinations ↗</a></article>'
+            f'<p>Ask the studio about other markets and possible design journeys shaped around your goals. Every experience is shaped around individual goals and an agreed scope.</p><a href="{U("contact")}">Discuss other destinations ↗</a></article>'
             f'</div></section><section class="x-section x-wrap"><div class="x-heading"><div>{eyebrow("02 / WAYS TO WORK TOGETHER")}'
             f'<h2>Choose your<br><em>approach.</em></h2></div></div><div class="x-buying-grid">{cards}</div></section>'
             +row_cta('Bring the brief.<br><em>Find the direction.</em>','The journey begins with what you want to source and the places you are considering.','Discuss Buying Trips'))
